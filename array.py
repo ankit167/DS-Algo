@@ -44,7 +44,8 @@ def minPlatforms(arr, dep):
 	return result
 
 #
-# Search a key in a row wise and column wise sorted matrix. O(m+n)
+# Search a key in a row wise and column wise sorted matrix.
+# T(n)- O(m+n)
 #
 def searchInaSortedMatrix(mat, m, n, key):
 	i,j = m-1, 0
@@ -59,7 +60,8 @@ def searchInaSortedMatrix(mat, m, n, key):
 
 #
 # A series of 0's is followed by 1's in an array. Find the start index of 1's.
-# T(n)- O(logn). Binary Search, since the array is sorted
+# T(n)- O(logn).
+# Hint: Use Binary Search, since the array is sorted.
 #
 def findStartOne(a,start,end):
 	if start > end:
@@ -79,6 +81,3 @@ def main():
 if __name__=='__main__':
 	main()
 
-#12 3 4 10 6 5
-# k =4
-# 12 10 10
