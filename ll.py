@@ -8,6 +8,9 @@ class LinkedList:
 	def __init__(self):
 		self.head = None
 
+    #
+    # Insert data at the end.
+    #
 	def insert(self,data):
 		if self.head is None:
 			self.head = node(data)
@@ -17,7 +20,11 @@ class LinkedList:
 			curr = curr.next
 		curr.next = node(data)
 
-	# reverse every k nodes
+	#
+	# Reverse every k nodes
+	# Input: 1->2->3->4->5, k = 2
+	# Output: 2->1->4->3->5
+	#
 	def reverseKNodes(self,head,k):
 		curr,prev,nextnode = head,None,None
 		i = 0
@@ -31,13 +38,20 @@ class LinkedList:
 			head.next = self.reverseKNodes(curr,k)
 		return prev
 
+	#
+	# Display elements from left to right
+	#
 	def display(self,head):
 		curr = head
 		while curr is not None:
 			print curr.data,
 			curr = curr.next
-		print
 
+    #
+    # Reverse the nodes.
+    # Input: 1->2->3
+    # Output: 3->2->1
+    #
 	def reverse(self,head):
 		if head is None or head.next is None:
 			return head
@@ -47,10 +61,13 @@ class LinkedList:
 		p.next = head
 		return revrest
 
-	# Add two numbers, each being represented as a Singly Linked List. T(n)- O(m+n)
-	# Reverse each list-->Add-->Reverse the resultant list. Here, we are modifying
-	# original list.
-	def sum(self,first,second):
+	#
+	# Add two numbers, each being represented as a Singly Linked List.
+	# T(n)- O(m+n)
+	# Reverse each list-->Add-->Reverse the resultant list.
+	# Note: The original lists are being modified.
+	#
+	def sumOfLL(self,first,second):
 		first = self.reverse(first)
 		second = self.reverse(second)
 		res,carry = None,0
@@ -72,9 +89,12 @@ class LinkedList:
 		res = self.reverse(res)
 		return res
 
+	#
     # Multiply two numbers represented as a Linked List. T(n)- O(m+n)
     # Consolidate the first list to a number-->Reverse second list-->Multiply-->Reverse resultant list
-	def multiply(self,first,second):
+	# Note: One the Linked List gets modified.
+	#
+	def multiplyLL(self,first,second):
 		curr,sum = first,0
 		while curr is not None:
 			sum = sum*10 + curr.data
@@ -100,7 +120,12 @@ class LinkedList:
 		res = self.reverse(res)
 		return res
 
-	def multiply2(self,first,second):
+    #
+    # Multiply two numbers represented as a Linked List. T(n)- O(m+n)
+    # Consolidate the first list to a number-->Multiply with second list recursively.
+	# Note: This solution works WITHOUT any modification to any of the Linked Lists.
+	#
+	def multiplyLLRecursive(self,first,second):
 		curr,sum = first,0
 		while curr is not None:
 			sum = sum*10 + curr.data
@@ -109,10 +134,13 @@ class LinkedList:
 		while self.carry != 0:
 			temp = node(self.carry%10)
 			temp.next = res
-			res = temp
+			res = temp.
 			self.carry = self.carry/10
 		return res
 
+	#
+	# Utility function to multiply a number with a linked list recursively.
+	#
 	def mul(self,n,second):
 		if second is None:
 			return None
@@ -124,6 +152,9 @@ class LinkedList:
 		res = temp
 		return res
 
+    #
+    # Return total number of nodes present.
+    #
 	def findLength(self,head):
 		if head is None:
 			return 0
@@ -187,17 +218,11 @@ class LinkedList:
 			res = temp
 		return res
 
-    # count number of nodes in a Linked List
-	def countNodes(self,head):
-		curr,c = head,0
-		while curr is not None:
-			c += 1
-			curr = curr.next
-		return c
-
+    #
     # Swap the kth element from the beginning and the end of a linked list
+	#
 	def swap_kth(self,head,k):
-		n = self.countNodes(head)
+		n = self.findLength(head):
 
 		if k > n:
 			print 'Less Number of nodes'

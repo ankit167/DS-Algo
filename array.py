@@ -4,7 +4,7 @@ from collections import deque
 
 #
 # Find minimum element in each 'k' sized window. (Deque approach)
-# T(n)- O(n), S(n) = O(n)
+# T(n)- O(n), S(n)- O(n)
 #
 def findMinInWindow(a,k):
 	n = len(a)
