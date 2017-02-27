@@ -3,9 +3,10 @@
 from collections import deque
 
 #
-# Find minimum in each 'k' sized window. (Deque approach)
+# Find minimum element in each 'k' sized window. (Deque approach)
+# T(n)- O(n), S(n) = O(n)
 #
-def func(a,k):
+def findMinInWindow(a,k):
 	n = len(a)
 	l = deque()
 
