@@ -1,7 +1,7 @@
 
 #
 # Returns the longest palindromic substring
-# T(n)- O(n), S(n)- O(n)
+# T(n)- O(n^2), S(n)- O(n^2)
 #
 def longestPalindromicSubstring(s):
 	n = len(s)
