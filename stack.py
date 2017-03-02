@@ -11,6 +11,10 @@ class Stack:
             return
         return self.st.pop()
 
+    def top(self):
+        if not self.isEmpty():
+            return self.st[-1]
+
     #
     # Checks whether stack is empty
     #
@@ -40,7 +44,8 @@ class Stack:
             self.push(d)
 
     #
-    # Reverses a stack recursively
+    # Reverses a stack recursively.
+    # T(n)- O(n^2)
     #
     def reverseStack(self):
         if self.isEmpty():
@@ -49,14 +54,39 @@ class Stack:
         self.reverseStack()
         self.insertBottom(data)
 
+    #
+    # Insert an element at its correct position
+    # in a sorted stack (The smallest element is at
+    # the bottom of the stack).
+    #
+    def sortedInsert(self,data):
+        if self.isEmpty() or data > self.top():
+            self.push(data)
+            return
+        d = self.pop()
+        self.sortedInsert(data)
+        self.push(d)
+
+    #
+    # Sorts a stack in Ascending order using recursion.
+    # The smallest element is at bottom, and
+    # the largest element is at the top of the stack.
+    # T(n)- O(n^2)
+    #
+    def sortStack(self):
+        if self.isEmpty():
+            return
+        data = self.pop()
+        self.sortStack()
+        self.sortedInsert(data)
 
 
 def main():
     s = Stack()
-    l = list(raw_input().split())
+    l = list(map(int,raw_input().split()))
     for i in l:
         s.push(i)
-    s.reverseStack()
+    s.sortStack()
     s.printStack()
 
 
