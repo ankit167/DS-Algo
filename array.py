@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import math
 from collections import deque
 
 #
@@ -75,9 +76,44 @@ def findStartOne(a,start,end):
 	else:
 		return findStartOne(a,mid+1,end)
 
+#
+# Returns the maximum element in the array
+#
+def findMax(a):
+	m = a[0]
+	for i in a:
+		if i > m:
+			m = i
+	return m
+
+#
+# In an array of positive integers (> 1),
+# find the minimum integer which is not present
+# in the array. T(n)- O(n)
+# Assume the elements are stored starting from index 1,
+# Input: 6 4 1 5 12
+# Output: 2
+#
+def minMissing(a):
+	a.insert(0,0)
+	m = findMax(a)
+	d = len(str(m))
+	y = int(math.pow(10,d))
+	n = len(a)
+	for i in range(1,n):
+		x = a[i]% y
+		if x >= n:
+			continue
+		a[x] += y
+	for i in range(1,n):
+		c = a[i]//y
+		if c == 0:
+			print i
+			return
+
 def main():
-	l = list(map(int,raw_input().split()))
-	print findStartOne(l,0,len(l)-1)
+	a = list(map(int,raw_input().split()))
+	minMissing(a)
 
 if __name__=='__main__':
 	main()
