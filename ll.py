@@ -134,7 +134,7 @@ class LinkedList:
 		while self.carry != 0:
 			temp = node(self.carry%10)
 			temp.next = res
-			res = temp.
+			res = temp
 			self.carry = self.carry/10
 		return res
 
@@ -222,8 +222,7 @@ class LinkedList:
     # Swap the kth element from the beginning and the end of a linked list
 	#
 	def swap_kth(self,head,k):
-		n = self.findLength(head):
-
+		n = self.findLength(head)
 		if k > n:
 			print 'Less Number of nodes'
 			return head
@@ -260,19 +259,44 @@ class LinkedList:
 			head = kthStart
 		return head
 
+    #
+    # This function removes duplicates entries from the linked list (unsorted).
+    # Input: 1->2->1->3->2, Output: 1->2->3
+    # Approaches:
+    # (a) Naive- for each element, traverse, check duplicates and adjust pointers
+    #            T(n)- O(n^2)
+    # (b) Use Hashset (Discussed below)- Hash each unique element in the list,
+    #                  and remove elements if they are already present in the
+    #                  Hashset. T(n)- O(n), S(n)- O(n)
+    # Note: In a sorted linked list, this can be done in O(n) time.
+    #       (No extra space)
+    #
+	def removeDuplicates(self, head):
+		if head is None or head.next is None:
+			return head
+		curr = head
+		hset = set()
+		hset.add(curr.data)
+		while curr is not None:
+			temp = curr.next
+			while temp is not None and temp.data in hset:
+			    temp = temp.next
+			if temp:
+				hset.add(temp.data)
+			curr.next = temp
+			curr = temp
+		return head
+
+
 
 
 def main():
 	first = list(map(int,raw_input().split()))
-	second = list(map(int,raw_input().split()))
 	f = LinkedList()
-	s = LinkedList()
 	for i in first:
 		f.insert(i)
-	for i in second:
-		s.insert(i)
-	res = f.multiply2(f.head,s.head)
-	f.display(res)
+	f.head = f.rem(f.head)
+	f.display(f.head)
 
 if __name__ == '__main__':
 	main()
