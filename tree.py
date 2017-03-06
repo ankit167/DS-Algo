@@ -58,6 +58,9 @@ class Tree:
             if temp.right is not None:
                 q.append(temp.right)
 
+    #
+    # Checks if a binary tree is a BST. (Inorder way)
+    #
     def isBst(self,root,prev=[-sys.maxint-1]):
         if root is None:
             return True
@@ -68,6 +71,18 @@ class Tree:
             return False
         prev[0] = root.data
         return self.isBst(root.right)
+
+    #
+    # Checks if a binary tree is a BST. (Preorder way)
+    #
+    def checkBst(self, root, minr=-sys.maxint-1, maxr=sys.maxint):
+        if root is None:
+            return True
+        if root.data < minr or root.data > maxr:
+            return False
+        return (self.checkBst(root.left, minr, root.data) and
+                self.checkBst(root.right, root.data, maxr))
+
 
     def leftView(self,root,level,maxlevel=[-1]):
         if root is None:
@@ -313,6 +328,46 @@ class Tree:
            return True
         return False
 
+    #
+    # Preorder traversal through iteration.
+    # T(n)- O(n), S(n)- O(h)
+    # Since traversal is in order- root->root.left->root.right,
+    # we first print the root, push root.right followed by
+    # root.left in stack.
+    #
+    def preorderIterative(self, root):
+        if root is None:
+            return
+        st = [root]
+        while len(st) > 0:
+            temp = st.pop()
+            print temp.data,
+            if temp.right:
+                st.append(temp.right)
+            if temp.left:
+                st.append(temp.left)
+
+    #
+    # Postorder traversal using iteration. (root.left->root.right->root)
+    # Idea: Use two stacks. In the end one of the stacks will contain
+    #       all the elements in postorder.
+    # T(n)- O(n), S(n)- O(n)
+    #
+    def postorderIterative(self, root):
+        if root is None:
+            return
+        st1, st2 = [root], []
+        while len(st1) > 0:
+            temp = st1.pop()
+            st2.append(temp)
+            if temp.left:
+                st1.append(temp.left)
+            if temp.right:
+                st1.append(temp.right)
+
+        while len(st2) > 0:
+            temp = st2.pop()
+            print temp.data,
 
 
 preindex = 0
@@ -357,4 +412,5 @@ if __name__=="__main__":
     for i in a:
         t.insert(i)
     #t.xyz()
+    print t.checkBst(t.root)
 
