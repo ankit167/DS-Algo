@@ -45,7 +45,7 @@ def prefixCompute(f, patt, m):
 #
 # Searches a pattern in a string using KMP algorithm.
 # Compute prefix array -> Compare string and pattern
-# T(n)- O(m+n), S(n)- O(m)
+# T(n)- O(n), S(n)- O(m)
 # n- length of string, m- length of pattern
 #
 def KMP(string, patt):

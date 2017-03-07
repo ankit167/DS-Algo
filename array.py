@@ -28,6 +28,7 @@ def findMinInWindow(a,k):
 #
 # Given arrival and departure times of trains. Find minimum number of platforms required
 # anytime, so that no arriving train is short of a platform.
+# T(n)- O(nlogn)
 #
 def minPlatforms(arr, dep):
 	result, platform, n = 1, 1, len(arr)
@@ -87,7 +88,7 @@ def findMax(a):
 	return m
 
 #
-# In an array of positive integers (> 1),
+# In an array of positive integers (>= 1),
 # find the minimum integer which is not present
 # in the array. T(n)- O(n)
 # Assume the elements are stored starting from index 1,

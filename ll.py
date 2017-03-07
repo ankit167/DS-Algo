@@ -288,8 +288,6 @@ class LinkedList:
         return head
 
 
-
-
 def main():
     first = list(map(int,raw_input().split()))
     f = LinkedList()

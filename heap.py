@@ -49,7 +49,7 @@ class Heap:
 
 	def heapSort(self):
 		size = self.currsize
-		while self.currsize-1 >=0:
+		while self.currsize-1 >= 0:
 			temp = self.h[0]
 			self.h[0] = self.h[self.currsize-1]
 			self.h[self.currsize-1] = temp
