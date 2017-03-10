@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import math
+import math, sys
 from collections import deque
 
 #
@@ -178,10 +178,32 @@ def largestSubarrayWithZeroSum(a):
 # Exercise: We can also keep a track of start and end index of max subarray
 #           and display them in the end.
 
+#
+# Approach: Kadane's Algorithm
+# Note: if 'sumsofar' is initialized to 0, the algo won't work for the case
+#       where all elements in the array are negative.
+# T(n)- O(n)
+#
+def largestSumContiguousSubarray(a):
+    sumsofar = -sys.maxint-1 # Case of all elements being negative gets handled
+    maxendinghere = 0
+    s = 0
+    for i in range(len(a)):
+        maxendinghere += a[i]
+        if sumsofar < maxendinghere:
+            sumsofar = maxendinghere
+            start,end = s,i
+        if maxendinghere < 0:
+            maxendinghere = 0
+            s = i+1
+    # print sum, start and end index of the max contiguous sum subarray.
+    print sumsofar, start, end
+
+
 
 def main():
     a = list(map(int, raw_input().split()))
-    print largestSubarrayWithZeroSum(a)
+    largestSumContiguousSubarray(a)
 
 if __name__=='__main__':
     main()
