@@ -236,11 +236,46 @@ def largestSumContiguousSubarray(a):
     # print sum, start and end index of the max contiguous sum subarray.
     print sumsofar, start, end
 
+#
+# Given an array of 0s and 1s. Find the 0s that can be flipped in order to
+# create max number of consecutive 1s in the array. A maximum of 'm' 0s can
+# be flipped.
+# Input: 1 0 0 1 1 0 1 0 1 1 1, m = 2
+# Output: 5 7 (Flip 0s at index 5 and 7)
+# Output Array: 1 0 0 1 1 1 1 1 1 1 1
+#
+# Approach: Maintain a window and work. T(n)- O(n)
+#
+def zerosFlipped(a, m):
+    wl, wr, n = 0, 0, len(a)
+    bestl, bestwindow = 0, 0
+    zerocount = 0
+
+    while wr < n:
+
+        if zerocount <= m:
+            if a[wr] == 0:
+                zerocount += 1
+            wr += 1
+
+        if zerocount > m:
+            if a[wl] == 0:
+                zerocount -= 1
+            wl += 1
+
+        if wr-wl > bestwindow:
+            bestwindow = wr-wl
+            bestl = wl
+
+    for i in range(bestwindow):
+        if a[bestl+i] == 0:
+            print bestl+i,
 
 
 def main():
     a = list(map(int, raw_input().split()))
-    largestSubarrayWithZeroSum(a)
+    m = int(raw_input())
+    zerosFlipped(a, m)
 
 if __name__=='__main__':
     main()
