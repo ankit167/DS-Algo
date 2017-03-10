@@ -163,7 +163,7 @@ def largestSubarrayWithZeroSum(a):
         s += a[i]
         if a[i] == 0 and maxlength == 0:
             maxlength = 1
-        # if is 0, then we have the largest current subarray
+        # if s is 0, then we have the largest current subarray
         # starting from index 0
         if s == 0:
             maxlength = i+1
@@ -177,6 +177,27 @@ def largestSubarrayWithZeroSum(a):
     return maxlength
 # Exercise: We can also keep a track of start and end index of max subarray
 #           and display them in the end.
+
+
+#
+# Find subarray in an array of integers, such that the sum of elements in the
+# subarray is equal to a given sum.
+# Approach: Hashing. Similar to technique used in largestSubarrayWithZeroSum()
+# T(n)- O(n), S(n)- O(n)
+#
+def subarrayWithGivenSum(a,s):
+    currsum, start, end, hmap = 0, -1, -1, {}
+    for i in range(len(a)):
+        currsum += a[i]
+        if currsum == s:
+            start, end = 0, i
+            break
+        elif currsum-s in hmap:
+            start, end = hmap[currsum-s]+1, i
+            break
+        hmap[currsum] = i
+    print start,end
+
 
 #
 # Approach: Kadane's Algorithm
@@ -203,7 +224,8 @@ def largestSumContiguousSubarray(a):
 
 def main():
     a = list(map(int, raw_input().split()))
-    largestSumContiguousSubarray(a)
+    s = int(raw_input())
+    subarrayWithGivenSum(a,s)
 
 if __name__=='__main__':
     main()
