@@ -159,24 +159,40 @@ def mergeOverlappingIntervals(l):
 #
 def largestSubarrayWithZeroSum(a):
     s, maxlength, hmap = 0, 0, {}
+    start, end = -1, -1
     for i in range(len(a)):
         s += a[i]
         if a[i] == 0 and maxlength == 0:
             maxlength = 1
+            start, end = i, i
         # if s is 0, then we have the largest current subarray
         # starting from index 0
         if s == 0:
             maxlength = i+1
+            start, end = 0, i
         if not s in hmap:
             hmap[s] = i
         else:
             # s has appeared before. finding length and comparing
             # with maxlength
             l = i-hmap[s]
-            maxlength = max(l, maxlength)
-    return maxlength
-# Exercise: We can also keep a track of start and end index of max subarray
-#           and display them in the end.
+            if l > maxlength:
+                maxlength = l
+                start, end = hmap[s]+1, i
+    # printing length, start and end index of the max subarray
+    print maxlength, start, end
+
+#
+# Find largest subarray with equal number of 0s and 1s
+# Approach: Replace all 0s with -1. Call largestSubarrayWithZeroSum().
+# T(n)- O(n), S(n)- O(n)
+# Note: We are modifying the contents of the array here.
+#
+def largestSubarrayWithEqualZerosAndOnes(a):
+    for i in range(len(a)):
+        if a[i] == 0:
+            a[i] = -1
+    largestSubarrayWithZeroSum(a)
 
 
 #
@@ -224,8 +240,7 @@ def largestSumContiguousSubarray(a):
 
 def main():
     a = list(map(int, raw_input().split()))
-    s = int(raw_input())
-    subarrayWithGivenSum(a,s)
+    largestSubarrayWithZeroSum(a)
 
 if __name__=='__main__':
     main()
