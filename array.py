@@ -149,14 +149,39 @@ def mergeOverlappingIntervals(l):
         print s[-1],
         s.pop()
 
+#
+# Given an array of integers, find the largest subarray with 0 sum.
+# Approach- Hashing. For each index i, keep a track of sum from 0th
+#           to ith index- sum+= a[i]. If this sum has appeared before,
+#           it means, we have a subarray of sum 0- Check length to keep
+#           a track of maxlength. If it is not so, hash the sum with i.
+# T(n)- O(n), S(n)- O(n)
+#
+def largestSubarrayWithZeroSum(a):
+    s, maxlength, hmap = 0, 0, {}
+    for i in range(len(a)):
+        s += a[i]
+        if a[i] == 0 and maxlength == 0:
+            maxlength = 1
+        # if is 0, then we have the largest current subarray
+        # starting from index 0
+        if s == 0:
+            maxlength = i+1
+        if not s in hmap:
+            hmap[s] = i
+        else:
+            # s has appeared before. finding length and comparing
+            # with maxlength
+            l = i-hmap[s]
+            maxlength = max(l, maxlength)
+    return maxlength
+# Exercise: We can also keep a track of start and end index of max subarray
+#           and display them in the end.
+
 
 def main():
-    l = []
-    n = int(raw_input())
-    for i in range(n):
-        a, b = map(int, raw_input().split())
-        l.append((a,b))
-    mergeOverlappingIntervals(l)
+    a = list(map(int, raw_input().split()))
+    print largestSubarrayWithZeroSum(a)
 
 if __name__=='__main__':
     main()
