@@ -287,13 +287,56 @@ class LinkedList:
             curr = temp
         return head
 
+    #
+    # Merge two linked lists alternately
+    # a: 1->2->3, b: 4->5->6
+    # Output: 1->4->2->5->3->6
+    # T(n)- O(m+n)
+    #
+    def mergeAlt(self, a, b, turn=0):
+        if a is None:
+            return b
+        if b is None:
+            return a
+        if turn == 0:
+            res = a
+            res.next = self.mergeAlt(a.next,b,1-turn)
+        else:
+            res = b
+            res.next = self.mergeAlt(a,b.next,1-turn)
+        return res
+
+    #
+    # Input: 1->3->2->7->4->9
+    # Output: 1->9->3->4->2->7
+    # Approach: (i) Reach the mid of the linked list (Use slow and fast method)
+    #           (ii) Reverse the second half of the linked list
+    #           (iii) Merge the two lists alternately
+    # T(n)- O(n)
+    #
+    def rearrangeStartEnd(self, head):
+        if head is None or head.next is None or head.next.next is None:
+            return head
+        slow, fast = head, head
+        while fast and fast.next:
+            prev = slow
+            slow = slow.next
+            fast = fast.next.next
+        if fast:
+            prev = slow
+            slow = slow.next
+        prev.next = None
+        res = self.reverse(slow)
+        head = self.mergeAlt(head,res)
+        return head
+
 
 def main():
     first = list(map(int,raw_input().split()))
     f = LinkedList()
     for i in first:
         f.insert(i)
-    f.head = f.rem(f.head)
+    f.head = f.rearrangeStartEnd(f.head)
     f.display(f.head)
 
 if __name__ == '__main__':
