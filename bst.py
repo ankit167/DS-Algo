@@ -19,7 +19,9 @@ class Bst:
         else:
             root.right = self.insert(root.right,data)
         return root
-
+    #
+    # T(n)- O(h). (Also refer to finding lca using parent pointers in gfg)
+    #
     def lca(self,root,n1,n2):
         if root is None:
             return None
