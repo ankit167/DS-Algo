@@ -369,6 +369,32 @@ class Tree:
             temp = st2.pop()
             print temp.data,
 
+    #
+    # Remove Half nodes from a tree. Half nodes are nodes that have only
+    # one child.
+    # T(n)- O(n)
+    #
+    def removeHalfNodes(self, root):
+        if root is None:
+            return None
+        if root.left is None and root.right is None:
+            return root
+        root.left = self.removeHalfNodes(root.left)
+        root.right = self.removeHalfNodes(root.right)
+        if root.left is None:
+            new_root = root.right
+            temp = root
+            root = None
+            del(temp)
+            return new_root
+        if root.right is None:
+            new_root = root.left
+            temp = root
+            root = None
+            del(temp)
+            return new_root
+        return root
+
 
 preindex = 0
 def build(preorder,inorder,instart,inend):
@@ -412,5 +438,6 @@ if __name__=="__main__":
     for i in a:
         t.insert(i)
     #t.xyz()
-    print t.checkBst(t.root)
+    t.root = t.removeHalfNodes(t.root)
+    t.display(t.root)
 
