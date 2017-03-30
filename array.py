@@ -271,11 +271,35 @@ def zerosFlipped(a, m):
         if a[bestl+i] == 0:
             print bestl+i,
 
+#
+# Given an array, where all numbers are repeated once,
+# except two numbers. Find the two numbers.
+# Input: 2 5 1 7 4 5 7 1
+# Output: 2 4
+# Approach: (i) Sort and compare adjacent numbers
+#           (ii) xor operation (discussed below)
+# T(n)- O(n)
+#
+def findTwoNonRepeatedNumbers(a):
+    xor, x, y = 0, 0, 0
+    for item in a:
+        xor = xor ^ item
+    # finds the rightmost set bit of xor. Idea is, out of
+    # the two elements, one will have this bit set as 1
+    # and the other will have this bit set as 0. Using this
+    # info, we can group elements and find the two elements.
+    rightsetbit = xor & ~(xor-1)
+    for item in a:
+        if item & rightsetbit:
+            x = x ^ item
+        else:
+            y = y ^ item
+
+    print x,y
 
 def main():
     a = list(map(int, raw_input().split()))
-    m = int(raw_input())
-    zerosFlipped(a, m)
+    findTwoNonRepeatedNumbers(a)
 
 if __name__=='__main__':
     main()
