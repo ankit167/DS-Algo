@@ -280,6 +280,7 @@ def zerosFlipped(a, m):
 #           (ii) xor operation (discussed below)
 # T(n)- O(n)
 #
+#
 def findTwoNonRepeatedNumbers(a):
     xor, x, y = 0, 0, 0
     for item in a:
@@ -296,6 +297,12 @@ def findTwoNonRepeatedNumbers(a):
             y = y ^ item
 
     print x,y
+    '''
+    Note:
+    This problem can be generalized. Given an array, where
+    two elements have odd occurances, and all the other elements
+    have even occurances. Find the two numbers. Same soln would work.
+    '''
 
 def main():
     a = list(map(int, raw_input().split()))
