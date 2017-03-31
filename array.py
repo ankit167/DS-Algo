@@ -304,9 +304,29 @@ def findTwoNonRepeatedNumbers(a):
     have even occurances. Find the two numbers. Same soln would work.
     '''
 
+'''
+Given an array, where every other element occurs 3 times and only one
+element occurs once. Find the element.
+Approach- We can sum the bits in the same positions for all the elements
+          and take modulo with 3. The bits for which the sum is not a
+          multiple of 3 are the bits of the number occuring once.
+T(n)- O(n*INT_SIZE)
+'''
+def findSingleNonRepeatedNumber(a):
+    n, result = len(a), 0
+    for i in range(0,32):
+        s = 0
+        x = 1 << i
+        for j in range(n):
+            if a[j] & x:
+                s += 1
+        if s%3:
+            result = result | x
+    print result
+
 def main():
     a = list(map(int, raw_input().split()))
-    findTwoNonRepeatedNumbers(a)
+    findSingleNonRepeating(a)
 
 if __name__=='__main__':
     main()
