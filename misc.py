@@ -1,9 +1,9 @@
 def addWithoutOperator(x, y):
-	while y != 0:
-		carry = x & y
-		x = x ^ y
-		y = carry << 1
-	print x
+    while y != 0:
+        carry = x & y
+        x = x ^ y
+        y = carry << 1
+    print x
 
 '''
 Implementing strip() in python through regex,
@@ -14,9 +14,9 @@ Input: '  Hey there '
 Output: 'Hey there'
 '''
 def strip(s,c=' '):
-	regex = '^' + re.escape(c) + '+|' + re.escape(c) + '+$'
-	s = re.sub(regex, '', s)
-	return s
+    regex = '^' + re.escape(c) + '+|' + re.escape(c) + '+$'
+    s = re.sub(regex, '', s)
+    return s
 
 def main():
     s = '   hey there  '
