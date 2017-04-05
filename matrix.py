@@ -35,6 +35,9 @@ Approach: (a) Layer by Layer rotation (Discussed below)
 T(n)- O(n^2)
 
 Note: To rotate anti-clockwise, find transpose and reverse all columns
+      To rotate a matrix by 180 degree (clockwise/anticlockwise),
+          (a) swap ith row with n-i-1th row
+          (b) reverse each row of the matrix
 '''
 def rotateClockwise(a, n):
     for layer in range(0,n//2):
@@ -79,8 +82,8 @@ def main():
     for i in range(row):
         l = list(map(int, raw_input().split()))
         a.append(l)
-    a = rotateClockwise(a,row)
-    display(a,row,row)
+    a = transpose(a,row,col)
+    display(a,row,col)
 
 if __name__ == "__main__":
     main()
