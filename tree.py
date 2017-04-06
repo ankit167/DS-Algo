@@ -395,6 +395,27 @@ class Tree:
             return new_root
         return root
 
+    '''
+    Check if a tree is height balanced.
+    A tree is height balanced if- for each node in the tree,
+    the difference in height of the left and the right subtree is <= 1
+
+    T(n)- O(n)
+    '''
+    def checkBalanced(self, root, height):
+        if root is None:
+            height.h = 0
+            return True
+        lh,rh = Height(), Height()
+        l = self.checkBalanced(root.left, lh)
+        r = self.checkBalanced(root.right, rh)
+        height.h = max(lh.h, rh.h) + 1
+        if l == False or r == False:
+            return False
+        if abs(lh.h - rh.h) >= 2:
+            return False
+        return True
+
 
 preindex = 0
 def build(preorder,inorder,instart,inend):
@@ -438,6 +459,5 @@ if __name__=="__main__":
     for i in a:
         t.insert(i)
     #t.xyz()
-    t.root = t.removeHalfNodes(t.root)
-    t.display(t.root)
+    print t.checkBalanced(t.root, Height())
 
