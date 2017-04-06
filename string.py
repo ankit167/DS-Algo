@@ -65,10 +65,45 @@ def KMP(string, patt):
 			i += 1
 	return -1
 
+#
+# Reverse a string
+#
+def reverse(s, start, end):
+	if start > end:
+		return
+	i, j = start, end
+	while i < j:
+		temp = s[i]
+		s[i] = s[j]
+		s[j] = temp
+		i += 1
+		j -= 1
+
+'''
+Reverse words of a string
+Input: the game is on
+Output: on is game the
+
+T(n)- O(n)
+'''
+def reverseWords(s):
+	i = 0
+	s = list(s)
+	while i < len(s):
+		while i < len(s) and s[i] == ' ':
+			i += 1
+		start = i
+		while i < len(s) and s[i] != ' ':
+			end = i
+			i += 1
+		reverse(s, start, end)
+	reverse(s,0,len(s)-1)
+	s = ''.join(x for x in s)
+	print s
+
 def main():
 	s = raw_input()
-	p = raw_input()
-	print KMP(s,p)
+	reverseWords(s)
 
 if __name__ == "__main__":
 	main()
