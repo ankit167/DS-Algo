@@ -236,6 +236,33 @@ def largestSumContiguousSubarray(a):
     # print sum, start and end index of the max contiguous sum subarray.
     print sumsofar, start, end
 
+'''
+Find largest sum of elements in an array, such that no two elements
+are adjacent.
+
+Approach- Use two variables- incl (include an element),
+                             excl (exclude an element) and work along
+
+T(n)- O(n)
+'''
+def largestSumNonAdjacent(a):
+    '''
+    incln- include current element
+    excln- exclude current elemment
+    inclp- previous element is included
+    exclp- previous element is excluded
+    s- sum of elements
+    '''
+    n,s = len(a), 0
+    inclp, exclp = a[0], 0
+    for i in range(1, n):
+        incln = exclp + a[i]
+        excln = inclp
+        s = max(incln, excln)
+        inclp = incln
+        exclp = max(excln, exclp)
+    print s
+
 #
 # Given an array of 0s and 1s. Find the 0s that can be flipped in order to
 # create max number of consecutive 1s in the array. A maximum of 'm' 0s can
@@ -347,8 +374,8 @@ def lis(a):
 
 def main():
     #a = list(map(int, raw_input().split()))
-    arr = [50, 3, 10, 7, 40, 80]
-    lis(arr)
+    arr = [5, 5, 10, 100, 10, 5]
+    largestSumNonAdjacent(arr)
 
 if __name__=='__main__':
     main()
