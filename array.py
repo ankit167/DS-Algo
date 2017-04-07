@@ -324,9 +324,31 @@ def findSingleNonRepeatedNumber(a):
             result = result | x
     print result
 
+'''
+Find the longest increasing subsequence of an array
+Approach- Dynamic Programming
+
+T(n)- O(n^2)
+
+Note: Refer to O(nlogn) solution from gfg
+'''
+def lis(a):
+    n = len(a)
+    l = [1]*n
+    m = 0
+    for i in range(1,n):
+        for j in range(i):
+            if a[i] > a[j] and l[i] < l[j] + 1:
+                l[i] = l[j] + 1
+    for i in range(n):
+        m = max(m,l[i])
+    # prints length of the LIS
+    print m
+
 def main():
-    a = list(map(int, raw_input().split()))
-    findSingleNonRepeating(a)
+    #a = list(map(int, raw_input().split()))
+    arr = [50, 3, 10, 7, 40, 80]
+    lis(arr)
 
 if __name__=='__main__':
     main()
