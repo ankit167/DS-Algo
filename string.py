@@ -101,9 +101,35 @@ def reverseWords(s):
     s = ''.join(x for x in s)
     print s
 
+'''
+Print the longest substring in a string, that does not contain any
+repeating characters.
+
+T(n)- O(n)
+S(n)- O(NO_OF_CHARS)
+'''
+def longestSubstringWithoutDuplicates(str):
+    NO_OF_CHARS = 256
+    visited = [-1] * NO_OF_CHARS
+    visited[ord(str[0])] = 0
+    curlen, maxlen, start, end = 1,1,0,0
+    for i in range(1, len(str)):
+        prev_index = visited[ord(str[i])]
+        if prev_index == -1 or prev_index < i - curlen:
+            curlen += 1
+            end += 1
+        else:
+            if curlen > maxlen:
+                maxlen = curlen
+                st, en = start, end
+            curlen = i - prev_index
+            start, end = prev_index+1, i
+        visited[ord(str[i])] = i
+    print maxlen, st, en
+
 def main():
     s = raw_input()
-    reverseWords(s)
+    longestSubstringWithoutDuplicates(s)
 
 if __name__ == "__main__":
     main()
