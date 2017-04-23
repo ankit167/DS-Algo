@@ -373,7 +373,7 @@ class Tree:
     # Inorder traversal using iteration.
     # T(n)- O(n), S(n)- O(n)
     #
-    def inorderIterative(self,root):
+    def inorderIterative(self, root):
         if not root:
             return None
         stack = []
