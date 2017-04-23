@@ -370,6 +370,22 @@ class Tree:
             print temp.data,
 
     #
+    # Inorder traversal using iteration.
+    # T(n)- O(n), S(n)- O(n)
+    #
+    def inorderIterative(self,root):
+        if not root:
+            return None
+        stack = []
+        while root or stack:
+            while root:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            print root.data,
+            root = root.right
+
+    #
     # Remove Half nodes from a tree. Half nodes are nodes that have only
     # one child.
     # T(n)- O(n)
@@ -417,6 +433,7 @@ class Tree:
         return True
 
 
+
 preindex = 0
 def build(preorder,inorder,instart,inend):
     global preindex
@@ -459,5 +476,4 @@ if __name__=="__main__":
     for i in a:
         t.insert(i)
     #t.xyz()
-    print t.checkBalanced(t.root, Height())
-
+    t.inorderIterative(t.root)
