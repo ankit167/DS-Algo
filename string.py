@@ -1,3 +1,5 @@
+import math
+
 
 #
 # Returns the longest palindromic substring
@@ -26,6 +28,7 @@ def longestPalindromicSubstring(s):
                     end = j
     return s[start:end+1]
 
+
 #
 # Computes prefix array for KMP
 #
@@ -42,6 +45,8 @@ def prefixCompute(f, patt, m):
         else:
             f[i] = 0
             i += 1
+
+
 #
 # Searches a pattern in a string using KMP algorithm.
 # Compute prefix array -> Compare string and pattern
@@ -65,6 +70,7 @@ def KMP(string, patt):
             i += 1
     return -1
 
+
 #
 # Reverse a string
 #
@@ -78,6 +84,7 @@ def reverse(s, start, end):
         s[j] = temp
         i += 1
         j -= 1
+
 
 '''
 Reverse words of a string
@@ -100,6 +107,7 @@ def reverseWords(s):
     reverse(s,0,len(s)-1)
     s = ''.join(x for x in s)
     print s
+
 
 '''
 Print the longest substring in a string, that does not contain any
@@ -127,9 +135,29 @@ def longestSubstringWithoutDuplicates(str):
         visited[ord(str[i])] = i
     print maxlen, st, en
 
+
+#
+# Input: aaabbccdee
+# Output: a3b2c2d1e2
+#
+def replace_character_count(s):
+    n = len(s)
+    i = 0
+    while i < n:
+        p = i
+        c = 1
+        while i < n-1 and s[i] == s[i+1]:
+            i += 1
+            c += 1
+        s = s[:p+1]+str(c)+s[i+1:]
+        i = p + int(math.log(c,10) + 1) + 1
+        n = len(s)
+    print s
+
+
 def main():
     s = raw_input()
-    longestSubstringWithoutDuplicates(s)
+    replace_character_count(s)
 
 if __name__ == "__main__":
     main()
