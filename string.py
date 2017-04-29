@@ -149,7 +149,7 @@ def replace_character_count(s):
         while i < n-1 and s[i] == s[i+1]:
             i += 1
             c += 1
-        s = s[:p+1]+str(c)+s[i+1:]
+        s = s[:p+1] + str(c) + s[i+1:]
         i = p + int(math.log(c,10) + 1) + 1
         n = len(s)
     print s
