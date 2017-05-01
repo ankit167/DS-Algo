@@ -112,18 +112,17 @@ def minMissing(a):
             print i
             return
 
+
 #
 # Merge given intervals
 # Input: [(1,3),(4,10),(20,25),(21,29),(2,5)]
 # Output: (1,10), (20,29)
 # Input list is a list of tuples, where for each tuple- t,
 # t[0]- starting time, t[1]- ending time of interval
-# Approach 1: Sort list in increasing order of start time. Use stack
+# Approach  : Sort list in increasing order of start time. Use stack
 #             T(n)- O(nlogn), S(n)- O(n)
-# Approach 2: Sort list in non-increasing order of start time, and
-#             maintain index. T(n)- O(nlogn) (Check gfg)
 #
-def mergeOverlappingIntervals(l):
+def merge_overlapping_intervals(l):
     n = len(l)
     if n <= 0:
         return
@@ -148,6 +147,43 @@ def mergeOverlappingIntervals(l):
     while len(s) > 0:
         print s[-1],
         s.pop()
+
+
+#
+# Merge given intervals
+# Input: [(1,3),(4,10),(20,25),(21,29),(2,5)]
+# Output: (1,10), (20,29)
+#
+# Approach  : Sort list in non-increasing order of start time. Keep
+#             merging current index with previous index, as long as
+#             there is an overlap, and then move to next index.
+#             T(n)- O(nlogn)
+#
+def merge_overlapping_intervals_optimized(l):
+    # sorting in non-increasing order of start time
+    l.sort(key=lambda x: x[0], reverse = True)
+    i,n = 1, len(l)
+    while i < n:
+        # if end time of current interval is less than start time of
+        # previous interval, it means there is no overlap.
+        if i == 0 or l[i][1] < l[i-1][0]:
+            i += 1
+            continue
+        # overlap. In case of partial overlap (below), create a merged
+        # interval, insert it in the current position, and delete the previous
+        # interval. In case of complete overlap (the previous interval is a
+        # complete subset of current interval), delete the previous interval.
+        # The current interval stays as is, and is the merged interval.
+        if l[i][1] < l[i-1][1]:
+            nt = (l[i][0],l[i-1][1])
+            l[i] = nt
+        # deleting previous index, reducing the current index by 1, and
+        # recalculating the length of the list.
+        del l[i-1]
+        i -= 1
+        n = len(l)
+    print l
+
 
 #
 # Given an array of integers, find the largest subarray with 0 sum.
