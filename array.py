@@ -387,6 +387,7 @@ def findSingleNonRepeatedNumber(a):
             result = result | x
     print result
 
+
 '''
 Find the longest increasing subsequence of an array
 Approach- Dynamic Programming
@@ -408,10 +409,47 @@ def lis(a):
     # prints length of the LIS
     print m
 
+
+'''
+Given two sorted arrays. We need to merge the arrays in such a way that,
+after complete sorting, the initial elements are present in the first
+array, and the remaining elements are present in the second array.
+
+Input: a1 = [1, 5, 9, 10, 15, 20]
+       a2 = [2, 3, 8, 13]
+
+Output: a1 = [1, 2, 3, 5, 8, 9]
+        a2 = [10, 13, 15, 20]
+
+Approach: Start with the last element of the second array iterating backwards.
+          For each element a2i, iterate first array backwards, until an
+          element a1j is found, such that a1j > a2i. Swap a1j and a2i.
+          Use insertion sort appreoach on a1 to find the correct position
+          of a1j.
+          T(n)- O(m*n) (m and n are the length of a1 and a2)
+
+'''
+def merge_without_extra_space(a1,a2):
+    m, n = len(a1), len(a2)
+    for i in range(n-1, -1, -1):
+        j = m-1
+        while j >= 0 and a1[j] <= a2[i]:
+            j -= 1
+        if j >= 0:
+            a1[j], a2[i] = a2[i], a1[j]
+            temp = a1[j]
+            # Insertion sort approach
+            while j >= 1 and a1[j-1] > temp:
+                a1[j] = a1[j-1]
+                j -= 1
+            a1[j] = temp
+    print '%s\n%s' % (a1, a2)
+
+
 def main():
-    #a = list(map(int, raw_input().split()))
-    arr = [5, 5, 10, 100, 10, 5]
-    largestSumNonAdjacent(arr)
+    a1 = list(map(int, raw_input().split()))
+    a2 = list(map(int, raw_input().split()))
+    merge_without_extra_space(a1, a2)
 
 if __name__=='__main__':
     main()
