@@ -394,7 +394,6 @@ Approach- Dynamic Programming
 
 T(n)- O(n^2)
 
-Note: Refer to O(nlogn) solution from gfg
 '''
 def lis(a):
     n = len(a)
@@ -408,6 +407,49 @@ def lis(a):
         m = max(m,l[i])
     # prints length of the LIS
     print m
+
+
+'''
+In a sorted array, for a given key, find the index of the
+next greater element.
+'''
+def ceil_index(a, l, r, key):
+    while r - l > 1:
+        m = l + (r-l)/2
+        if a[m] >= key:
+            r = m
+        else:
+            l = m
+
+    return r
+
+
+'''
+Optimized code for longest increasing subsequence of an array
+T(n)- O(nlogn)
+
+Approach- http://www.geeksforgeeks.org/
+          longest-monotonically-increasing-subsequence-size-n-log-n/
+'''
+def lis_optimized(a):
+    n = len(a)
+    tail_table = [-1 for x in range(n)]
+    tail_table[0] = a[0]
+    l = 1
+
+    for i in range(1,n):
+        if a[i] < tail_table[0]:
+            # new smallest value
+            tail_table[0] = a[0]
+
+        elif a[i] > tail_table[l-1]:
+            tail_table[l] = a[i]
+            l += 1
+
+        else:
+            tail_table[ceil_index(tail_table, -1, l-1, a[i])] = a[i]
+
+    print l
 
 
 '''
@@ -446,10 +488,33 @@ def merge_without_extra_space(a1,a2):
     print '%s\n%s' % (a1, a2)
 
 
+'''
+Given a digit sequence, count the number of possible decodings of the
+digit sequence.
+
+Input- digits = "121"
+Output- 3 (Possible decodings- ABA, AU, LA)
+
+Approach: Dynamic Programming
+          T(n)- O(n), S(n)- O(n)
+'''
+def count_decodings(s):
+    n = len(s)
+    count = [0 for x in range(n+1)]
+    count[0], count[1] = 1, 1
+
+    for i in range(2,n+1):
+        if s[i-1] > '0':
+            count[i] = count[i-1]
+        if s[i-2] < '2' or (s[i-2] == '2' and s[i-1] < '7'):
+            count[i] += count[i-2]
+
+    print count[n]
+
+
 def main():
-    a1 = list(map(int, raw_input().split()))
-    a2 = list(map(int, raw_input().split()))
-    merge_without_extra_space(a1, a2)
+    a = list(map(int, raw_input().split()))
+    lis_optimized(a)
 
 if __name__=='__main__':
     main()
