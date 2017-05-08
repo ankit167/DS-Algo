@@ -1,4 +1,5 @@
 import sys
+import os
 
 def addWithoutOperator(x, y):
     while y != 0:
@@ -6,6 +7,7 @@ def addWithoutOperator(x, y):
         x = x ^ y
         y = carry << 1
     print x
+
 
 '''
 Implementing strip() in python through regex,
@@ -19,6 +21,7 @@ def strip(s,c=' '):
     regex = '^' + re.escape(c) + '+|' + re.escape(c) + '+$'
     s = re.sub(regex, '', s)
     return s
+
 
 #
 # Find the next greater number with the same set of digits of a given number.
@@ -43,9 +46,25 @@ def nextGreater(n):
     ng = int(''.join(str(x) for x in l))
     print ng
 
-def main():
-    n = int(raw_input())
-    nextGreater(n)
 
+#
+# Recursively print the contents of a directory.
+# f.e.: s_path = '/etc/systemd'
+#       output: All the files present in the directories and subdirectories
+#               of s_path
+#
+def print_dir(s_path):
+    for s_child in os.listdir(s_path):
+        s_child_path = os.path.join(s_path, s_child)
+        if os.path.isdir(s_child_path):
+            print_dir(s_child_path)
+        else:
+            print s_child_path
+
+
+def main():
+    print_dir('/Users/ankit.agarwal/Documents/repo')
+
+    
 if __name__=='__main__':
     main()
