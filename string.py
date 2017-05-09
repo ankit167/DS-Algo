@@ -5,7 +5,7 @@ import math
 # Returns the longest palindromic substring
 # T(n)- O(n^2), S(n)- O(n^2)
 #
-def longestPalindromicSubstring(s):
+def longest_palindromic_substring(s):
     n = len(s)
     table = [[False for j in range(n)] for i in range(n)]
     for i in range(n):
@@ -17,8 +17,8 @@ def longestPalindromicSubstring(s):
             start = i
             end = i+1
             maxlen = 2
-    for k in range(3,n+1):
-        for i in range(0,n-k+1):
+    for k in range(3, n+1):
+        for i in range(0, n-k+1):
             j = i+k-1
             if s[i] == s[j] and table[i+1][j-1]:
                 table[i][j] = True
@@ -30,10 +30,38 @@ def longestPalindromicSubstring(s):
 
 
 #
+# Print all palindromic substrings in a given string.
+# T(n)- O(n^2), S(n)- O(n^2)
+#
+# The code is related to longest_palindromic_substring()
+#
+def all_palindromic_substrings(s):
+    n = len(s)
+    table = [[False for j in range(n)] for i in range(n)]
+    for i in range(n):
+        table[i][i] = True
+
+    for i in range(n-1):
+        if s[i] == s[i+1]:
+            table[i][i+1] = True
+
+    for k in range(3, n+1):
+        for i in range(0, n-k+1):
+            j = i+k-1
+            if s[i] == s[j] and table[i+1][j-1]:
+                table[i][j] = True
+
+    for i in range(n):
+        for j in range(i, n):
+            if table[i][j]:
+                print s[i:j+1]
+
+
+#
 # Computes prefix array for KMP
 #
 def prefixCompute(f, patt, m):
-    i,j = 1,0
+    i, j = 1, 0
     f[0] = 0
     while i < m:
         if patt[i] == patt[j]:
@@ -57,7 +85,7 @@ def KMP(string, patt):
     m, n = len(patt), len(string)
     f = [0 for i in range(m)]
     prefixCompute(f, patt, m)
-    i,j = 0,0
+    i, j = 0, 0
     while i < n:
         if string[i] == patt[j]:
             if j == m-1:
@@ -86,13 +114,13 @@ def reverse(s, start, end):
         j -= 1
 
 
-'''
-Reverse words of a string
-Input: the game is on
-Output: on is game the
-
-T(n)- O(n)
-'''
+#
+# Reverse words of a string
+# Input: the game is on
+# Output: on is game the
+#
+# T(n)- O(n)
+#
 def reverseWords(s):
     i = 0
     s = list(s)
@@ -104,23 +132,23 @@ def reverseWords(s):
             end = i
             i += 1
         reverse(s, start, end)
-    reverse(s,0,len(s)-1)
+    reverse(s, 0, len(s)-1)
     s = ''.join(x for x in s)
     print s
 
 
-'''
-Print the longest substring in a string, that does not contain any
-repeating characters.
-
-T(n)- O(n)
-S(n)- O(NO_OF_CHARS)
-'''
+#
+# Print the longest substring in a string, that does not contain any
+# repeating characters.
+#
+# T(n)- O(n)
+# S(n)- O(NO_OF_CHARS)
+#
 def longestSubstringWithoutDuplicates(str):
     NO_OF_CHARS = 256
     visited = [-1] * NO_OF_CHARS
     visited[ord(str[0])] = 0
-    curlen, maxlen, start, end = 1,1,0,0
+    curlen, maxlen, start, end = 1, 1, 0, 0
     for i in range(1, len(str)):
         prev_index = visited[ord(str[i])]
         if prev_index == -1 or prev_index < i - curlen:
@@ -150,14 +178,15 @@ def replace_character_count(s):
             i += 1
             c += 1
         s = s[:p+1] + str(c) + s[i+1:]
-        i = p + int(math.log(c,10) + 1) + 1
+        i = p + int(math.log(c, 10) + 1) + 1
         n = len(s)
     print s
 
 
 def main():
     s = raw_input()
-    replace_character_count(s)
+    all_palindromic_substrings(s)
+    # replace_character_count(s)
 
 if __name__ == "__main__":
     main()
