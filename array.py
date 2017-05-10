@@ -1,13 +1,15 @@
 #!/usr/bin/python
 
-import math, sys
+import math
+import sys
 from collections import deque
+
 
 #
 # Find minimum element in each 'k' sized window. (Deque approach)
 # T(n)- O(n), S(n)- O(n)
 #
-def findMinInWindow(a,k):
+def findMinInWindow(a, k):
     n = len(a)
     l = deque()
 
@@ -16,7 +18,7 @@ def findMinInWindow(a,k):
             l.pop()
         l.append(i)
 
-    for i in range(k,n):
+    for i in range(k, n):
         print a[l[0]]
         while len(l) > 0 and l[0] <= i-k:
             l.popleft()
@@ -25,16 +27,17 @@ def findMinInWindow(a,k):
         l.append(i)
     print a[l[0]]
 
+
 #
-# Given arrival and departure times of trains. Find minimum number of platforms required
-# anytime, so that no arriving train is short of a platform.
+# Given arrival and departure times of trains. Find minimum number of
+# platforms required anytime, so that no arriving train is short of a platform.
 # T(n)- O(nlogn)
 #
 def minPlatforms(arr, dep):
     result, platform, n = 1, 1, len(arr)
     arr.sort()
     dep.sort()
-    i,j = 1,0
+    i, j = 1, 0
     while i < n and j < n:
         if arr[i] < dep[j]:
             platform += 1
@@ -46,13 +49,14 @@ def minPlatforms(arr, dep):
             j += 1
     return result
 
+
 #
 # Search a key in a row wise and column wise sorted matrix.
 # T(n)- O(m+n)
 #
 def searchInaSortedMatrix(mat, m, n, key):
-    i,j = m-1, 0
-    while i >=0 and j < n:
+    i, j = m-1, 0
+    while i >= 0 and j < n:
         if key == mat[i][j]:
             return True
         if key < mat[i][j]:
@@ -61,21 +65,23 @@ def searchInaSortedMatrix(mat, m, n, key):
             j += 1
     return False
 
+
 #
 # A series of 0's is followed by 1's in an array. Find the start index of 1's.
 # T(n)- O(logn).
 # Hint: Use Binary Search, since the array is sorted.
 #
-def findStartOne(a,start,end):
+def findStartOne(a, start, end):
     if start > end:
         return None
     mid = start + (end-start)/2
     if a[mid] == 1:
         if mid == start or a[mid-1] == 0:
             return mid
-        return findStartOne(a,start,mid-1)
+        return findStartOne(a, start, mid-1)
     else:
-        return findStartOne(a,mid+1,end)
+        return findStartOne(a, mid+1, end)
+
 
 #
 # Returns the maximum element in the array
@@ -87,6 +93,7 @@ def findMax(a):
             m = i
     return m
 
+
 #
 # In an array of positive integers (>= 1),
 # find the minimum integer which is not present
@@ -96,17 +103,17 @@ def findMax(a):
 # Output: 2
 #
 def minMissing(a):
-    a.insert(0,0)
+    a.insert(0, 0)
     m = findMax(a)
     d = len(str(m))
-    y = int(math.pow(10,d))
+    y = int(math.pow(10, d))
     n = len(a)
-    for i in range(1,n):
-        x = a[i]% y
+    for i in range(1, n):
+        x = a[i] % y
         if x >= n:
             continue
         a[x] += y
-    for i in range(1,n):
+    for i in range(1, n):
         c = a[i]//y
         if c == 0:
             print i
@@ -139,7 +146,7 @@ def merge_overlapping_intervals(l):
         # Overlap. current end time > next start time and < next end time
         elif t[1] < l[i][1]:
             # Creating a new tuple with updated values
-            nt = (t[0],l[i][1])
+            nt = (t[0], l[i][1])
             # Removing previous tuple and pushing the merged tuple
             s.pop()
             s.append(nt)
@@ -161,8 +168,8 @@ def merge_overlapping_intervals(l):
 #
 def merge_overlapping_intervals_optimized(l):
     # sorting in non-increasing order of start time
-    l.sort(key=lambda x: x[0], reverse = True)
-    i,n = 1, len(l)
+    l.sort(key=lambda x: x[0], reverse=True)
+    i, n = 1, len(l)
     while i < n:
         # if end time of current interval is less than start time of
         # previous interval, it means there is no overlap.
@@ -175,7 +182,7 @@ def merge_overlapping_intervals_optimized(l):
         # complete subset of current interval), delete the previous interval.
         # The current interval stays as is, and is the merged interval.
         if l[i][1] < l[i-1][1]:
-            nt = (l[i][0],l[i-1][1])
+            nt = (l[i][0], l[i-1][1])
             l[i] = nt
         # deleting previous index, reducing the current index by 1, and
         # recalculating the length of the list.
@@ -206,7 +213,7 @@ def largestSubarrayWithZeroSum(a):
         if s == 0:
             maxlength = i+1
             start, end = 0, i
-        if not s in hmap:
+        if s not in hmap:
             hmap[s] = i
         else:
             # s has appeared before. finding length and comparing
@@ -217,6 +224,7 @@ def largestSubarrayWithZeroSum(a):
                 start, end = hmap[s]+1, i
     # printing length, start and end index of the max subarray
     print maxlength, start, end
+
 
 #
 # Find largest subarray with equal number of 0s and 1s
@@ -237,7 +245,7 @@ def largestSubarrayWithEqualZerosAndOnes(a):
 # Approach: Hashing. Similar to technique used in largestSubarrayWithZeroSum()
 # T(n)- O(n), S(n)- O(n)
 #
-def subarrayWithGivenSum(a,s):
+def subarrayWithGivenSum(a, s):
     currsum, start, end, hmap = 0, -1, -1, {}
     for i in range(len(a)):
         currsum += a[i]
@@ -248,7 +256,7 @@ def subarrayWithGivenSum(a,s):
             start, end = hmap[currsum-s]+1, i
             break
         hmap[currsum] = i
-    print start,end
+    print start, end
 
 
 #
@@ -258,29 +266,30 @@ def subarrayWithGivenSum(a,s):
 # T(n)- O(n)
 #
 def largestSumContiguousSubarray(a):
-    sumsofar = -sys.maxint-1 # Case of all elements being negative gets handled
+    sumsofar = -sys.maxint-1  # Case of all elements being negative handled
     maxendinghere = 0
     s = 0
     for i in range(len(a)):
         maxendinghere += a[i]
         if sumsofar < maxendinghere:
             sumsofar = maxendinghere
-            start,end = s,i
+            start, end = s, i
         if maxendinghere < 0:
             maxendinghere = 0
             s = i+1
     # print sum, start and end index of the max contiguous sum subarray.
     print sumsofar, start, end
 
-'''
-Find largest sum of elements in an array, such that no two elements
-are adjacent.
 
-Approach- Use two variables- incl (include an element),
-                             excl (exclude an element) and work along
-
-T(n)- O(n)
-'''
+#
+# Find largest sum of elements in an array, such that no two elements
+# are adjacent.
+#
+# Approach- Use two variables- incl (include an element),
+#                             excl (exclude an element) and work along
+#
+# T(n)- O(n)
+#
 def largestSumNonAdjacent(a):
     '''
     incln- include current element
@@ -289,7 +298,7 @@ def largestSumNonAdjacent(a):
     exclp- previous element is excluded
     s- sum of elements
     '''
-    n,s = len(a), 0
+    n, s = len(a), 0
     inclp, exclp = a[0], 0
     for i in range(1, n):
         incln = exclp + a[i]
@@ -298,6 +307,7 @@ def largestSumNonAdjacent(a):
         inclp = incln
         exclp = max(excln, exclp)
     print s
+
 
 #
 # Given an array of 0s and 1s. Find the 0s that can be flipped in order to
@@ -334,6 +344,7 @@ def zerosFlipped(a, m):
         if a[bestl+i] == 0:
             print bestl+i,
 
+
 #
 # Given an array, where all numbers are repeated once,
 # except two numbers. Find the two numbers.
@@ -359,7 +370,7 @@ def findTwoNonRepeatedNumbers(a):
         else:
             y = y ^ item
 
-    print x,y
+    print x, y
     '''
     Note:
     This problem can be generalized. Given an array, where
@@ -367,52 +378,52 @@ def findTwoNonRepeatedNumbers(a):
     have even occurances. Find the two numbers. Same soln would work.
     '''
 
-'''
-Given an array, where every other element occurs 3 times and only one
-element occurs once. Find the element.
-Approach- We can sum the bits in the same positions for all the elements
-          and take modulo with 3. The bits for which the sum is not a
-          multiple of 3 are the bits of the number occuring once.
-T(n)- O(n*INT_SIZE)
-'''
+
+#
+# Given an array, where every other element occurs 3 times and only one
+# element occurs once. Find the element.
+# Approach- We can sum the bits in the same positions for all the elements
+#           and take modulo with 3. The bits for which the sum is not a
+#           multiple of 3 are the bits of the number occuring once.
+# T(n)- O(n*INT_SIZE)
+#
 def findSingleNonRepeatedNumber(a):
     n, result = len(a), 0
-    for i in range(0,32):
+    for i in range(0, 32):
         s = 0
         x = 1 << i
         for j in range(n):
             if a[j] & x:
                 s += 1
-        if s%3:
+        if s % 3:
             result = result | x
     print result
 
 
-'''
-Find the longest increasing subsequence of an array
-Approach- Dynamic Programming
-
-T(n)- O(n^2)
-
-'''
+#
+# Find the longest increasing subsequence of an array
+# Approach- Dynamic Programming
+#
+# T(n)- O(n^2)
+#
 def lis(a):
     n = len(a)
     l = [1]*n
     m = 0
-    for i in range(1,n):
+    for i in range(1, n):
         for j in range(i):
             if a[i] > a[j] and l[i] < l[j] + 1:
                 l[i] = l[j] + 1
     for i in range(n):
-        m = max(m,l[i])
+        m = max(m, l[i])
     # prints length of the LIS
     print m
 
 
-'''
-In a sorted array, for a given key, find the index of the
-next greater element.
-'''
+#
+# In a sorted array, for a given key, find the index of the
+# next greater element.
+#
 def ceil_index(a, l, r, key):
     while r - l > 1:
         m = l + (r-l)/2
@@ -424,20 +435,20 @@ def ceil_index(a, l, r, key):
     return r
 
 
-'''
-Optimized code for longest increasing subsequence of an array
-T(n)- O(nlogn)
-
-Approach- http://www.geeksforgeeks.org/
-          longest-monotonically-increasing-subsequence-size-n-log-n/
-'''
+#
+# Optimized code for longest increasing subsequence of an array
+# T(n)- O(nlogn)
+#
+# Approach- http://www.geeksforgeeks.org/
+#           longest-monotonically-increasing-subsequence-size-n-log-n/
+#
 def lis_optimized(a):
     n = len(a)
     tail_table = [-1 for x in range(n)]
     tail_table[0] = a[0]
     l = 1
 
-    for i in range(1,n):
+    for i in range(1, n):
         if a[i] < tail_table[0]:
             # new smallest value
             tail_table[0] = a[0]
@@ -452,26 +463,25 @@ def lis_optimized(a):
     print l
 
 
-'''
-Given two sorted arrays. We need to merge the arrays in such a way that,
-after complete sorting, the initial elements are present in the first
-array, and the remaining elements are present in the second array.
-
-Input: a1 = [1, 5, 9, 10, 15, 20]
-       a2 = [2, 3, 8, 13]
-
-Output: a1 = [1, 2, 3, 5, 8, 9]
-        a2 = [10, 13, 15, 20]
-
-Approach: Start with the last element of the second array iterating backwards.
-          For each element a2i, iterate first array backwards, until an
-          element a1j is found, such that a1j > a2i. Swap a1j and a2i.
-          Use insertion sort appreoach on a1 to find the correct position
-          of a1j.
-          T(n)- O(m*n) (m and n are the length of a1 and a2)
-
-'''
-def merge_without_extra_space(a1,a2):
+#
+# Given two sorted arrays. We need to merge the arrays in such a way that,
+# after complete sorting, the initial elements are present in the first
+# array, and the remaining elements are present in the second array.
+#
+# Input: a1 = [1, 5, 9, 10, 15, 20]
+#        a2 = [2, 3, 8, 13]
+#
+# Output: a1 = [1, 2, 3, 5, 8, 9]
+#         a2 = [10, 13, 15, 20]
+#
+# Approach: Start with the last element of the second array iterating
+#           backwards. For each element a2i, iterate first array backwards,
+#           until an element a1j is found, such that a1j > a2i. Swap a1j and
+#           a2i. Use insertion sort appreoach on a1 to find the correct
+#           position of a1j.
+#           T(n)- O(m*n) (m and n are the length of a1 and a2)
+#
+def merge_without_extra_space(a1, a2):
     m, n = len(a1), len(a2)
     for i in range(n-1, -1, -1):
         j = m-1
@@ -488,22 +498,22 @@ def merge_without_extra_space(a1,a2):
     print '%s\n%s' % (a1, a2)
 
 
-'''
-Given a digit sequence, count the number of possible decodings of the
-digit sequence.
-
-Input- digits = "121"
-Output- 3 (Possible decodings- ABA, AU, LA)
-
-Approach: Dynamic Programming
-          T(n)- O(n), S(n)- O(n)
-'''
+#
+# Given a digit sequence, count the number of possible decodings of the
+# digit sequence.
+#
+# Input- digits = "121"
+# Output- 3 (Possible decodings- ABA, AU, LA)
+#
+# Approach: Dynamic Programming
+#           T(n)- O(n), S(n)- O(n)
+#
 def count_decodings(s):
     n = len(s)
     count = [0 for x in range(n+1)]
     count[0], count[1] = 1, 1
 
-    for i in range(2,n+1):
+    for i in range(2, n+1):
         if s[i-1] > '0':
             count[i] = count[i-1]
         if s[i-2] < '2' or (s[i-2] == '2' and s[i-1] < '7'):
@@ -512,10 +522,32 @@ def count_decodings(s):
     print count[n]
 
 
+#
+# Find all triplets in a array having sum equal to 0
+# Approach: Sorting and traversing the array from left and right
+# T(n)- O(n^2)
+#
+def triplets_sum_zero(a):
+    n = len(a)
+    a.sort()
+
+    for i in range(n):
+        j, k = i+1, n-1
+        while j < k:
+            s = a[i] + a[j] + a[k]
+            if s == 0:
+                print a[i], a[j], a[k]
+                j += 1
+                k -= 1
+            elif s < 0:
+                j += 1
+            else:
+                k -= 1
+
+
 def main():
     a = list(map(int, raw_input().split()))
-    lis_optimized(a)
+    triplets_sum_zero(a)
 
-if __name__=='__main__':
+if __name__ == '__main__':
     main()
-
