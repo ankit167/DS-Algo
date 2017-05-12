@@ -121,7 +121,7 @@ def reverse(s, start, end):
 #
 # T(n)- O(n)
 #
-def reverseWords(s):
+def reverse_words(s):
     i = 0
     s = list(s)
     while i < len(s):
@@ -144,7 +144,7 @@ def reverseWords(s):
 # T(n)- O(n)
 # S(n)- O(NO_OF_CHARS)
 #
-def longestSubstringWithoutDuplicates(str):
+def longest_substring_without_duplicates(str):
     NO_OF_CHARS = 256
     visited = [-1] * NO_OF_CHARS
     visited[ord(str[0])] = 0
