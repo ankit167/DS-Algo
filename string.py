@@ -146,6 +146,7 @@ def reverse_words(s):
 #
 def longest_substring_without_duplicates(str):
     NO_OF_CHARS = 256
+    # stores last visited index of a character
     visited = [-1] * NO_OF_CHARS
     visited[ord(str[0])] = 0
     curlen, maxlen, start, end = 1, 1, 0, 0
