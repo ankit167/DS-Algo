@@ -83,7 +83,6 @@ class Tree:
         return (self.checkBst(root.left, minr, root.data) and
                 self.checkBst(root.right, root.data, maxr))
 
-
     def leftView(self,root,level,maxlevel=[-1]):
         if root is None:
             return
@@ -292,13 +291,13 @@ class Tree:
     # Two nodes are said to be siblings of each other, if
     # they have the same parent.
     #
-    def isSibling(self, root, a, b):
+    def is_sibling(self, root, a, b):
         if root is None:
             return False
-        if (root.left == a and root.right == b) or (root.left == b and root.left == a):
+        if (root.left == a and root.right == b) or (root.left == b and root.right == a):
             return True
         return (self.isSibling(root.left, a, b) or
-                self.isSibling(root.left, b, a))
+                self.isSibling(root.right, a, b))
 
     #
     # Returns level number of a node
