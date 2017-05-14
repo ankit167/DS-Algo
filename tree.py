@@ -432,7 +432,6 @@ class Tree:
         return True
 
 
-
 preindex = 0
 def build(preorder,inorder,instart,inend):
     global preindex
@@ -447,17 +446,11 @@ def build(preorder,inorder,instart,inend):
     newnode.right = build(preorder,inorder,index+1,inend)
     return newnode
 
+
 def search(inorder,instart,inend,data):
     for i in range(instart,inend+1):
         if inorder[i] == data:
             return i
-
-def display(root):
-    if root is None:
-        return
-    display(root.left)
-    print root.data,
-    display(root.right)
 
 
 def toBst(a,start,end):
