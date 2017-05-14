@@ -90,6 +90,7 @@ class DisjointSet:
     #
     def printSets(self):
         for node in self.d.values():
+            # if node is root, print all children
             if node.parent == node:
                 for child in node.child:
                     print child.data,
