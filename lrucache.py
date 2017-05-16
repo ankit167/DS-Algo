@@ -55,7 +55,7 @@ class DLL:
             self.insertEnd(t)
             return
         # node is neither head nor tail
-        p,t = n.prev, n.next
+        p, t = n.prev, n.next
         n.prev, n.next = None, None
         if p:
             p.next = t
