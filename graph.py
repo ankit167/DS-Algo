@@ -25,8 +25,9 @@ class Graph:
     # list/matrix to  check indegree and outdegree values of all vertices
     # (ii) Divide and conquer (iii) Use stack. Refer gfg for these methods
     def celeb(self):
-        l = list(self.d.keys())
+        l = self.d.keys()
         i,j = 0,len(l)-1
+
         while i < j:
             if self.knows(l[i],l[j]) is True:
                 c = l[j]
@@ -34,6 +35,7 @@ class Graph:
             else:
                 c = l[i]
                 j -= 1
+                
         for i in l:
             if i == c:
                 continue
