@@ -2,6 +2,9 @@ import sys
 import os
 
 
+#
+# Add two positive integers without using the '+' operator
+#
 def add_without_operator(x, y):
     while y != 0:
         carry = x & y
