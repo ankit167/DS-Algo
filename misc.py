@@ -67,6 +67,7 @@ def print_dir(s_path):
         else:
             print s_child_path
 
+
 #
 # Print all prime numbers upto a given number using Sieve of Eratosthenes.
 # Input: 5
@@ -77,17 +78,16 @@ def print_dir(s_path):
 def print_primes(n):
     p = [0 for i in range(n+1)]
 
-    for i in range(2,int(math.sqrt(n))+1):
+    for i in range(2, int(math.sqrt(n))+1):
         if p[i] == 0:
             j = i+i
             while j < n+1:
                 p[j] = 1
                 j += i
-    
-    for i in range(2,n+1):
+
+    for i in range(2, n+1):
         if p[i] == 0:
             print i,
-
 
 
 def main():
