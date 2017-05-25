@@ -47,6 +47,7 @@ class Graph:
 
     #
     # Utility function to print all paths from a given source to a destination
+    # in a directed graph.
     #
     def print_paths_util(self, s, d, path, visited):
         visited[s] = True
@@ -65,7 +66,7 @@ class Graph:
         visited[s] = False
 
     #
-    # Print all paths from a given source to a destination.
+    # Print all paths from a given source to a destination in a directed graph.
     # Approach: Apply DFS and keep storing path nodes in a list.
     #           Display the list on reaching the destination.
     #
