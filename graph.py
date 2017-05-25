@@ -44,6 +44,35 @@ class Graph:
             return -1
         return c
 
+    #
+    # Utility function to print all paths from a given source to a destination
+    #
+    def print_paths_util(self, s, d, path, visited):
+        visited[s] = True
+
+        path.append(s)  # Append current node to path
+        if s == d:
+            print path  # print path when destination node is reached
+        else:
+            for i in self.d[s]:  # DFS on all adjacent nodes
+                if not visited[i]:
+                    self.print_paths_util(i, d, path, visited)
+        
+        # Remove current element from the path on completion of recursion
+        # and reset its visited state
+        path.pop()
+        visited[s] = False
+
+    #
+    # Print all paths from a given source to a destination.
+    # Approach: Apply DFS and keep storing path nodes in a list.
+    #           Display the list on reaching the destination.
+    #
+    def print_paths(self, s, d):
+        visited = [False]*(self.v+1)
+        path = []
+        self.print_paths_util(s, d, path, visited)
+
 
 def main():
     v, e = list(map(int, raw_input().split()))
@@ -51,7 +80,8 @@ def main():
     for i in range(e):
         a, b = list(map(int, raw_input().split()))
         g.insert(a, b)
-    print g.celeb()
+    s, d = list(map(int, raw_input().split()))
+    g.print_paths(s, d)
 
 
 if __name__ == "__main__":
