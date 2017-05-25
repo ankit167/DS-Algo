@@ -3,6 +3,7 @@ class Graph:
     def __init__(self, v, e):
         self.v = v
         self.e = e
+        # Note: The vertices are numbered starting from 1
         self.d = {k: [] for k in range(1, v+1)}
 
     def insert(self, u, v):
@@ -57,7 +58,7 @@ class Graph:
             for i in self.d[s]:  # DFS on all adjacent nodes
                 if not visited[i]:
                     self.print_paths_util(i, d, path, visited)
-        
+
         # Remove current element from the path on completion of recursion
         # and reset its visited state
         path.pop()
