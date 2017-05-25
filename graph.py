@@ -6,7 +6,7 @@ class Graph:
         # Note: The vertices are numbered starting from 1
         self.d = {k: [] for k in range(1, v+1)}
 
-    def insert(self, u, v):
+    def add_edge(self, u, v):
         l = self.d.get(u)
         l.append(v)
         self.d[u] = l
@@ -76,12 +76,12 @@ class Graph:
 
 
 def main():
-    v, e = list(map(int, raw_input().split()))
+    v, e = map(int, raw_input().split())
     g = Graph(v, e)
     for i in range(e):
-        a, b = list(map(int, raw_input().split()))
-        g.insert(a, b)
-    s, d = list(map(int, raw_input().split()))
+        a, b = map(int, raw_input().split())
+        g.add_edge(a, b)
+    s, d = map(int, raw_input().split())
     g.print_paths(s, d)
 
 
