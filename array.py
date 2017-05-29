@@ -545,6 +545,25 @@ def triplets_sum_zero(a):
                 k -= 1
 
 
+#
+# Given an array of positive integers
+# Find the maximum sum subsequence of the array, such that the subsequence
+# contains alternate even and odd integers.
+# Input: 4 6 7 3 2 9
+# Output: 24 [6, 7, 2, 9]
+#
+# TO DO: Display the subsequence as well.
+#
+def max_sum_subsequence_alt(a):
+    max_even, max_odd, n = 0, 0, len(a)
+    for i in range(n):
+        if a[i] % 2 == 0:
+            max_even = max(max_even, max_odd+a[i])
+        else:
+            max_odd = max(max_odd, max_even+a[i])
+    print max(max_even, max_odd)
+
+
 def main():
     a = list(map(int, raw_input().split()))
     triplets_sum_zero(a)
