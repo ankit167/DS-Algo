@@ -31,6 +31,28 @@ class Graph:
         visited = [False]*(self.v+1)
         self.dfs_util(s, visited)
 
+    #
+    # Utility function to do BFS
+    #
+    def bfs_util(self, s, visited):
+        q = [s]
+        while len(q) > 0:
+            node = q.pop(0)
+            visited[node] = True
+            print node,
+
+            for adj in self.d[node]:
+                if visited[adj] is False:
+                    q.append(adj)
+
+    #
+    # BFS Traversal of a graph
+    # T(n)- O(V+E)
+    #
+    def bfs(self, s):
+        visited = [False]*(self.v+1)
+        self.bfs_util(s, visited)
+
     # If there is directed edge from vertex a to vertex b --> a knows b
     def knows(self, a, b):
         l = self.d[a]
@@ -103,7 +125,7 @@ def main():
         a, b = map(int, raw_input().split())
         g.add_edge(a, b)
     s = int(raw_input())
-    g.dfs(s)
+    g.bfs(s)
 
 
 if __name__ == "__main__":
