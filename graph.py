@@ -11,6 +11,25 @@ class Graph:
         l.append(v)
         self.d[u] = l
 
+    #
+    # Utility function to do DFS
+    #
+    def dfs_util(self, s, visited):
+        visited[s] = True
+        print s,
+
+        for i in self.d[s]:
+            if visited[i] is False:
+                self.dfs_util(i, visited)
+
+    #
+    # DFS Traversal of a graph
+    #
+    def dfs(self, s):
+        # The vertices are numbered starting from 1
+        visited = [False]*(self.v+1)
+        self.dfs_util(s, visited)
+
     # If there is directed edge from vertex a to vertex b --> a knows b
     def knows(self, a, b):
         l = self.d[a]
@@ -82,8 +101,8 @@ def main():
     for i in range(e):
         a, b = map(int, raw_input().split())
         g.add_edge(a, b)
-    s, d = map(int, raw_input().split())
-    g.print_paths(s, d)
+    s = int(raw_input())
+    g.dfs(s)
 
 
 if __name__ == "__main__":
