@@ -24,6 +24,7 @@ class Graph:
 
     #
     # DFS Traversal of a graph
+    # T(n)- O(V+E)
     #
     def dfs(self, s):
         # The vertices are numbered starting from 1
