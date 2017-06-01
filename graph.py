@@ -18,9 +18,9 @@ class Graph:
         visited[s] = True
         print s,
 
-        for i in self.d[s]:
-            if visited[i] is False:
-                self.dfs_util(i, visited)
+        for adj in self.d[s]:
+            if visited[adj] is False:
+                self.dfs_util(adj, visited)
 
     #
     # DFS Traversal of a graph
@@ -125,7 +125,7 @@ def main():
         a, b = map(int, raw_input().split())
         g.add_edge(a, b)
     s = int(raw_input())
-    g.bfs(s)
+    g.dfs(s)
 
 
 if __name__ == "__main__":
