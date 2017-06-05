@@ -3,7 +3,7 @@ class Stack:
     def __init__(self):
         self.st = []
 
-    def push(self,data):
+    def push(self, data):
         self.st.append(data)
 
     def pop(self):
@@ -59,7 +59,7 @@ class Stack:
     # in a sorted stack (The smallest element is at
     # the bottom of the stack).
     #
-    def sortedInsert(self,data):
+    def sortedInsert(self, data):
         if self.isEmpty() or data > self.top():
             self.push(data)
             return
@@ -83,7 +83,7 @@ class Stack:
 
 def main():
     s = Stack()
-    l = list(map(int,raw_input().split()))
+    l = list(map(int, raw_input().split()))
     for i in l:
         s.push(i)
     s.sortStack()
