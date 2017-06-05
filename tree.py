@@ -1,16 +1,17 @@
 import sys
 
+
 class node:
-    def __init__(self,data):
+    def __init__(self, data):
         self.data = data
         self.left = None
         self.right = None
 
+
 class qnode:
-    def __init__(self,node,hd):
+    def __init__(self, node, hd):
         self.node = node
         self.hd = hd
-
 
 
 class Height:
@@ -22,7 +23,7 @@ class Tree:
     def __init__(self):
         self.root = None
 
-    def insert(self,data):
+    def insert(self, data):
         newnode = node(data)
         if self.root is None:
             self.root = newnode
@@ -45,7 +46,7 @@ class Tree:
     #
     # Level order traversal of a tree
     #
-    def display(self,root):
+    def display(self, root):
         if root is None:
             return
         q = []
@@ -61,7 +62,7 @@ class Tree:
     #
     # Checks if a binary tree is a BST. (Inorder way)
     #
-    def isBst(self,root,prev=[-sys.maxint-1]):
+    def isBst(self, root, prev=[-sys.maxint-1]):
         if root is None:
             return True
         l = self.isBst(root.left)
@@ -83,21 +84,21 @@ class Tree:
         return (self.checkBst(root.left, minr, root.data) and
                 self.checkBst(root.right, root.data, maxr))
 
-    def leftView(self,root,level,maxlevel=[-1]):
+    def leftView(self, root, level, maxlevel=[-1]):
         if root is None:
             return
         if level > maxlevel[0]:
             maxlevel[0] = level
             print root.data,
-        self.leftView(root.left,level+1)
-        self.leftView(root.right,level+1)
+        self.leftView(root.left, level+1)
+        self.leftView(root.right, level+1)
 
     def topView(self):
         if self.root is None:
             return
         q = []
         hashset = set([])
-        q.append(qnode(self.root,0))
+        q.append(qnode(self.root, 0))
         while len(q) > 0:
             temp = q.pop(0)
             n = temp.node
@@ -106,32 +107,32 @@ class Tree:
                 print n.data,
                 hashset.add(h)
             if n.left is not None:
-                q.append(qnode(n.left,h-1))
+                q.append(qnode(n.left, h-1))
             if n.right is not None:
-                q.append(qnode(n.right,h+1))
+                q.append(qnode(n.right, h+1))
 
     def bottomView(self):
         if self.root is None:
             return
         q = []
         hashmap = {}
-        q.append(qnode(self.root,0))
+        q.append(qnode(self.root, 0))
         while len(q) > 0:
             temp = q.pop(0)
             n = temp.node
             h = temp.hd
             hashmap[h] = n.data
             if n.left is not None:
-                q.append(qnode(n.left,h-1))
+                q.append(qnode(n.left, h-1))
             if n.right is not None:
-                q.append(qnode(n.right,h+1))
-        print [value for (key,value) in sorted(hashmap.items())]
+                q.append(qnode(n.right, h+1))
+        print [value for (key, value) in sorted(hashmap.items())]
 
     # prints maximum element in each level
     def maxLevel(self):
         if self.root is None:
             return None
-        q = [self.root,None]
+        q = [self.root, None]
         m = -sys.maxint - 1
         while len(q) > 0:
             temp = q.pop(0)
@@ -148,16 +149,16 @@ class Tree:
                 if temp.right is not None:
                     q.append(temp.right)
 
-    def height(self,root):
+    def height(self, root):
         if root is None:
             return 0
         lheight = self.height(root.left)
         rheight = self.height(root.right)
-        return max(lheight,rheight) + 1
+        return max(lheight, rheight) + 1
 
     # Diameter is the longest path between two nodes of a tree
     # which may/may not pass through the root of the tree. O(n^2)
-    def diameter(self,root):
+    def diameter(self, root):
         if root is None:
             return 0
         lheight = self.height(root.left)
@@ -165,28 +166,28 @@ class Tree:
         ldiameter = self.diameter(root.left)
         rdiameter = self.diameter(root.right)
 
-        return max(lheight+rheight+1,max(ldiameter,rdiameter))
+        return max(lheight+rheight+1, max(ldiameter, rdiameter))
 
     # O(n) solution. Calculate height along the way as we
     # calculate diameter
-    def diameter2(self,root,height):
-        lh,rh = Height(),Height()
+    def diameter2(self, root, height):
+        lh, rh = Height(), Height()
         if root is None:
             height.h = 0
             return 0
-        lh.h+=1
-        rh.h+=1
-        ldiameter = self.diameter2(root.left,lh)
-        rdiameter = self.diameter2(root.right,rh)
-        height.h = max(lh.h,rh.h) + 1
-        return max(lh.h+rh.h+1,max(ldiameter,rdiameter))
+        lh.h += 1
+        rh.h += 1
+        ldiameter = self.diameter2(root.left, lh)
+        rdiameter = self.diameter2(root.right, rh)
+        height.h = max(lh.h, rh.h) + 1
+        return max(lh.h+rh.h+1, max(ldiameter, rdiameter))
 
     def diameterOpt(self):
         height = Height()
-        return self.diameter2(self.root,height)
+        return self.diameter2(self.root, height)
 
     # convert a Binary tree to DLL
-    def toDLLUtil(self,root,start=[],prev=[]):
+    def toDLLUtil(self, root, start=[], prev=[]):
         if root is None:
             return None
         l = self.toDLLUtil(root.left)
@@ -202,7 +203,7 @@ class Tree:
         self.toDLLUtil(root.right)
         return start
 
-    def toDLL(self,root):
+    def toDLL(self, root):
         head = self.toDLLUtil(root)
         print head[0].data
         curr = head[0]
@@ -212,44 +213,44 @@ class Tree:
             print curr.data,
             curr = curr.left
 
-    def lca(self,root,n1,n2):
+    def lca(self, root, n1, n2):
         if root is None:
             return None
         if root.data == n1 or root.data == n2:
             return root
-        l = self.lca(root.left,n1,n2)
-        r = self.lca(root.right,n1,n2)
+        l = self.lca(root.left, n1, n2)
+        r = self.lca(root.right, n1, n2)
         if l is not None and r is not None:
             return root
         elif l is not None:
             return l
         return r
 
-    def printVertical(self,root,h,map):
+    def printVertical(self, root, h, map):
         if root is None:
             return
-        self.printVertical(root.left,h-1,m)
-        l = map.get(h,[])
+        self.printVertical(root.left, h-1, m)
+        l = map.get(h, [])
         l.append(root.data)
         map[h] = l
-        self.printVertical(root.right,h+1,m)
+        self.printVertical(root.right, h+1, m)
 
-    def inorderSave(self,root,a):
+    def inorderSave(self, root, a):
         if root is None:
             return
-        self.inorderSave(root.left,a)
+        self.inorderSave(root.left, a)
         a.append(root.data)
-        self.inorderSave(root.right,a)
+        self.inorderSave(root.right, a)
 
-    def treeToBstUtil(self,root,a):
+    def treeToBstUtil(self, root, a):
         if root is None:
             return
-        self.treeToBstUtil(root.left,a)
+        self.treeToBstUtil(root.left, a)
         root.data = a[0]
         a.pop(0)
-        self.treeToBstUtil(root.right,a)
+        self.treeToBstUtil(root.right, a)
 
-    def displayInorder(self,root):
+    def displayInorder(self, root):
         if root is None:
             return
         self.displayInorder(root.left)
@@ -258,26 +259,26 @@ class Tree:
 
     def treeToBst(self):
         l = []
-        self.inorderSave(self.root,l)
+        self.inorderSave(self.root, l)
         l.sort()
-        self.treeToBstUtil(self.root,l)
+        self.treeToBstUtil(self.root, l)
         self.displayInorder(self.root)
 
-    def levelOrderTraversalWithoutQueue(self,root):
+    def levelOrderTraversalWithoutQueue(self, root):
         h = self.height(root)
         for i in range(h):
-            self.displayLevelOrderWithoutQueue(root,i)
+            self.displayLevelOrderWithoutQueue(root, i)
 
-    def displayLevelOrderWithoutQueue(self,root,level):
+    def displayLevelOrderWithoutQueue(self, root, level):
         if root is None:
             return
         if level == 0:
             print root.data,
             return
-        self.displayLevelOrderWithoutQueue(root.left,level-1)
-        self.displayLevelOrderWithoutQueue(root.right,level-1)
+        self.displayLevelOrderWithoutQueue(root.left, level-1)
+        self.displayLevelOrderWithoutQueue(root.right, level-1)
 
-    def mirror(self,root):
+    def mirror(self, root):
         if root is None:
             return
         self.mirror(root.left)
@@ -323,8 +324,8 @@ class Tree:
     def isCousin(self, root, a, b):
         if root is None:
             return None
-        if (self.level(root,a,1) == self.level(root,b,1)) and not (self.isSibling(root, a, b)):
-           return True
+        if (self.level(root, a, 1) == self.level(root, b, 1)) and not (self.isSibling(root, a, b)):
+            return True
         return False
 
     #
@@ -421,11 +422,11 @@ class Tree:
         if root is None:
             height.h = 0
             return True
-        lh,rh = Height(), Height()
+        lh, rh = Height(), Height()
         l = self.checkBalanced(root.left, lh)
         r = self.checkBalanced(root.right, rh)
         height.h = max(lh.h, rh.h) + 1
-        if l == False or r == False:
+        if l is False or r is False:
             return False
         if abs(lh.h - rh.h) >= 2:
             return False
@@ -433,39 +434,41 @@ class Tree:
 
 
 preindex = 0
-def build(preorder,inorder,instart,inend):
+
+
+def build(preorder, inorder, instart, inend):
     global preindex
     if instart > inend:
-        return  None
+        return None
     newnode = node(preorder[preindex])
-    preindex+=1
+    preindex += 1
     if instart == inend:
         return newnode
-    index = search(inorder,instart,inend,newnode.data)
-    newnode.left = build(preorder,inorder,instart,index-1)
-    newnode.right = build(preorder,inorder,index+1,inend)
+    index = search(inorder, instart, inend, newnode.data)
+    newnode.left = build(preorder, inorder, instart, index-1)
+    newnode.right = build(preorder, inorder, index+1, inend)
     return newnode
 
 
-def search(inorder,instart,inend,data):
-    for i in range(instart,inend+1):
+def search(inorder, instart, inend, data):
+    for i in range(instart, inend+1):
         if inorder[i] == data:
             return i
 
 
-def toBst(a,start,end):
+def toBst(a, start, end):
     if start > end:
         return None
     mid = start+(end-start)/2
     newnode = node(a[mid])
-    newnode.left = toBst(a,start,mid-1)
-    newnode.right = toBst(a,mid+1,end)
+    newnode.left = toBst(a, start, mid-1)
+    newnode.right = toBst(a, mid+1, end)
     return newnode
 
-if __name__=="__main__":
-    a = list(map(int,raw_input().split()))
+if __name__ == "__main__":
+    a = list(map(int, raw_input().split()))
     t = Tree()
     for i in a:
         t.insert(i)
-    #t.xyz()
+    # t.xyz()
     t.inorderIterative(t.root)
