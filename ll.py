@@ -1,17 +1,19 @@
 class node:
-    def __init__(self,data):
+    def __init__(self, data):
         self.data = data
         self.next = None
 
+
 class LinkedList:
     carry = 0
+
     def __init__(self):
         self.head = None
 
     #
     # Insert data at the end.
     #
-    def insert(self,data):
+    def insert(self, data):
         if self.head is None:
             self.head = node(data)
             return
@@ -25,8 +27,8 @@ class LinkedList:
     # Input: 1->2->3->4->5, k = 2
     # Output: 2->1->4->3->5
     #
-    def reverseKNodes(self,head,k):
-        curr,prev,nextnode = head,None,None
+    def reverseKNodes(self, head, k):
+        curr, prev, nextnode = head, None, None
         i = 0
         while curr is not None and i < k:
             nextnode = curr.next
@@ -35,13 +37,13 @@ class LinkedList:
             curr = nextnode
             i += 1
         if head is not None:
-            head.next = self.reverseKNodes(curr,k)
+            head.next = self.reverseKNodes(curr, k)
         return prev
 
     #
     # Display elements from left to right
     #
-    def display(self,head):
+    def display(self, head):
         curr = head
         while curr is not None:
             print curr.data,
@@ -52,7 +54,7 @@ class LinkedList:
     # Input: 1->2->3
     # Output: 3->2->1
     #
-    def reverse(self,head):
+    def reverse(self, head):
         if head is None or head.next is None:
             return head
         p = head.next
@@ -67,14 +69,14 @@ class LinkedList:
     # Reverse each list-->Add-->Reverse the resultant list.
     # Note: The original lists are being modified.
     #
-    def sumOfLL(self,first,second):
+    def sumOfLL(self, first, second):
         first = self.reverse(first)
         second = self.reverse(second)
-        res,carry = None,0
+        res, carry = None, 0
         while first is not None or second is not None:
             sum = (first.data if first else 0) + (second.data if second else 0) + carry
             carry = sum/10
-            temp = node(sum%10)
+            temp = node(sum % 10)
             if res is None:
                 res = temp
             else:
@@ -94,17 +96,17 @@ class LinkedList:
     # Consolidate the first list to a number-->Reverse second list-->Multiply-->Reverse resultant list
     # Note: One the Linked List gets modified.
     #
-    def multiplyLL(self,first,second):
-        curr,sum = first,0
+    def multiplyLL(self, first, second):
+        curr, sum = first, 0
         while curr is not None:
             sum = sum*10 + curr.data
             curr = curr.next
         second = self.reverse(second)
-        res,curr,carry = None,second,0
+        res, curr, carry = None, second, 0
         while curr is not None:
             product = sum * curr.data + carry
             carry = product/10
-            temp = node(product%10)
+            temp = node(product % 10)
             if res is None:
                 res = temp
             else:
@@ -112,7 +114,7 @@ class LinkedList:
             prev = temp
             curr = curr.next
         while carry != 0:
-            temp = node(carry%10)
+            temp = node(carry % 10)
             prev.next = temp
             prev = temp
             carry = carry/10
@@ -125,14 +127,14 @@ class LinkedList:
     # Consolidate the first list to a number-->Multiply with second list recursively.
     # Note: This solution works WITHOUT any modification to any of the Linked Lists.
     #
-    def multiplyLLRecursive(self,first,second):
-        curr,sum = first,0
+    def multiplyLLRecursive(self, first, second):
+        curr, sum = first, 0
         while curr is not None:
             sum = sum*10 + curr.data
             curr = curr.next
-        res = self.mul(sum,second)
+        res = self.mul(sum, second)
         while self.carry != 0:
-            temp = node(self.carry%10)
+            temp = node(self.carry % 10)
             temp.next = res
             res = temp
             self.carry = self.carry/10
@@ -141,13 +143,13 @@ class LinkedList:
     #
     # Utility function to multiply a number with a linked list recursively.
     #
-    def mul(self,n,second):
+    def mul(self, n, second):
         if second is None:
             return None
-        res = self.mul(n,second.next)
+        res = self.mul(n, second.next)
         product = n*second.data + self.carry
         self.carry = product/10
-        temp = node(product%10)
+        temp = node(product % 10)
         temp.next = res
         res = temp
         return res
@@ -155,42 +157,42 @@ class LinkedList:
     #
     # Return total number of nodes present.
     #
-    def findLength(self,head):
+    def findLength(self, head):
         if head is None:
             return 0
-        curr,n = head,0
+        curr, n = head, 0
         while curr is not None:
             curr = curr.next
             n += 1
         return n
 
-    def sumSameSize(self,first,second):
+    def sumSameSize(self, first, second):
         res = None
         if first is None:
             return None
-        res = self.sumSameSize(first.next,second.next)
+        res = self.sumSameSize(first.next, second.next)
         sum = first.data + second.data + self.carry
         self.carry = sum/10
-        temp = node(sum%10)
+        temp = node(sum % 10)
         temp.next = res
         res = temp
         return res
 
-    def sumSameList(self,first,cur):
+    def sumSameList(self, first, cur):
         if first is None:
             return None
         if first != cur:
-            res = self.sumSameList(first.next,cur)
+            res = self.sumSameList(first.next, cur)
             sum = first.data + self.carry
             self.carry = sum/10
-            temp = node(sum%10)
+            temp = node(sum % 10)
             temp.next = res
             res = temp
             return res
         return None
 
     # Find sum of two numbers, represented as Linked List- without modifying the lists. T(n)- O(m+n)
-    def sumUtil(self,first,second):
+    def sumUtil(self, first, second):
         n1 = self.findLength(first)
         n2 = self.findLength(second)
         if n1 >= n2:
@@ -204,8 +206,8 @@ class LinkedList:
         while diff > 0:
             cur = cur.next
             diff -= 1
-        res = self.sumSameSize(cur,second)
-        res2 = self.sumSameList(first,cur)
+        res = self.sumSameSize(cur, second)
+        res2 = self.sumSameList(first, cur)
         t = res2
         while res2 is not None and res2.next is not None:
             res2 = res2.next
@@ -221,7 +223,7 @@ class LinkedList:
     #
     # Swap the kth element from the beginning and the end of a linked list
     #
-    def swap_kth(self,head,k):
+    def swap_kth(self, head, k):
         n = self.findLength(head)
         if k > n:
             print 'Less Number of nodes'
@@ -230,16 +232,16 @@ class LinkedList:
         if 2*k - 1 == n:
             return head
 
-        curr,temp = head, None
-        for i in range(1,k):
+        curr, temp = head, None
+        for i in range(1, k):
             temp = curr
             curr = curr.next
 
         kthStart = curr
         kthStartPrev = temp
 
-        curr,temp = head, None
-        for i in range(1,n-k+1):
+        curr, temp = head, None
+        for i in range(1, n-k+1):
             temp = curr
             curr = curr.next
 
@@ -300,10 +302,10 @@ class LinkedList:
             return a
         if turn == 0:
             res = a
-            res.next = self.mergeAlt(a.next,b,1-turn)
+            res.next = self.mergeAlt(a.next, b, 1-turn)
         else:
             res = b
-            res.next = self.mergeAlt(a,b.next,1-turn)
+            res.next = self.mergeAlt(a, b.next, 1-turn)
         return res
 
     #
@@ -327,12 +329,12 @@ class LinkedList:
             slow = slow.next
         prev.next = None
         res = self.reverse(slow)
-        head = self.mergeAlt(head,res)
+        head = self.mergeAlt(head, res)
         return head
 
 
 def main():
-    first = list(map(int,raw_input().split()))
+    first = list(map(int, raw_input().split()))
     f = LinkedList()
     for i in first:
         f.insert(i)
@@ -341,4 +343,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
