@@ -14,11 +14,14 @@ required. Keep the linked list as is. So, skip writing the adjust().
 
 T(n)- O(n), n is number of queries.
 '''
+
+
 class node:
     def __init__(self, data):
         self.data = data
         self.prev = None
         self.next = None
+
 
 class DLL:
     head = None
@@ -70,6 +73,7 @@ class DLL:
             curr = curr.next
         print
 
+
 class LRU:
     def __init__(self, maxsize, dll):
         self.currsize = 0
@@ -95,6 +99,7 @@ class LRU:
         self.hmap[data] = newnode
         self.currsize += 1
         self.dll.display()
+
 
 def main():
     maxsize = int(raw_input())
