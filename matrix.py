@@ -15,35 +15,36 @@ def countPaths(m, n):
         return -1
     count = [[None for j in range(n)] for i in range(m)]
 
-    #Taking care of the edge cases- matrix of size 1xn or mx1
+    # Taking care of the edge cases- matrix of size 1xn or mx1
     for i in range(n):
         count[0][i] = 1
     for j in range(m):
         count[j][0] = 1
 
-    for i in range(1,m):
-        for j in range(1,n):
+    for i in range(1, m):
+        for j in range(1, n):
             # Number of ways to reach a[i][j] = number of ways to reach
             #                                   a[i-1][j] + a[i][j-1]
             count[i][j] = count[i-1][j] + count[i][j-1]
 
     return count[m-1][n-1]
 
-'''
-Rotate a n*n matrix clockwise by 90 degree (inplace)
-Approach: (a) Layer by Layer rotation (Discussed below)
-          (b) Find transpose of the matrix and reverse all rows
-T(n)- O(n^2)
 
-Note: To rotate anti-clockwise, find transpose and reverse all columns
-      To rotate a matrix by 180 degree (clockwise/anticlockwise),
-          (a) swap ith row with n-i-1th row
-          (b) reverse each row of the matrix
-'''
+#
+# Rotate a n*n matrix clockwise by 90 degree (inplace)
+# Approach: (a) Layer by Layer rotation (Discussed below)
+#           (b) Find transpose of the matrix and reverse all rows
+# T(n)- O(n^2)
+#
+# Note: To rotate anti-clockwise, find transpose and reverse all columns
+#       To rotate a matrix by 180 degree (clockwise/anticlockwise),
+#          (a) swap ith row with n-i-1th row
+#          (b) reverse each row of the matrix
+#
 def rotateClockwise(a, n):
-    for layer in range(0,n//2):
-        first,last = layer, n-layer-1
-        for i in range(first,last):
+    for layer in range(0, n//2):
+        first, last = layer, n-layer-1
+        for i in range(first, last):
             offset = i-first
             top = a[first][i]
             # rotate left to top
@@ -56,12 +57,13 @@ def rotateClockwise(a, n):
             a[i][last] = top
     return a
 
-'''
-Find transpose of a matrix.
-First row becomes first column and so on.
 
-T(n)- O(row*col)
-'''
+#
+# Find transpose of a matrix.
+# First row becomes first column and so on.
+#
+# T(n)- O(row*col)
+#
 def transpose(a, row, col):
     for i in range(row):
         for j in range(i, col):
@@ -69,6 +71,7 @@ def transpose(a, row, col):
             a[i][j] = a[j][i]
             a[j][i] = temp
     return a
+
 
 # Print a matrix
 def display(a, row, col):
@@ -102,23 +105,23 @@ def search_word_util(a, s, visited, i, j, k, m, n):
     return False
 
 
-'''
-Given a matrix of characters. Check if a given word is present in the matrix.
-For a given cell, We are allowed to move in any of the 8 directions.
-
-Approach: DFS
-          T(n)- O(m*n)
-
-Variation:
-In case of multiple input words, use trie approach. Create a trie with the
-input words. Start from the root, Match current character with root and
-neighbouring characters with root's children, and traverse trie according.
-If we reach a leaf node of the trie successfully, it means we current processed
-string in present in the matrix.
-(Refer gfg)
-'''
+#
+# Given a matrix of characters. Check if a given word is present in the matrix.
+# For a given cell, We are allowed to move in any of the 8 directions.
+#
+# Approach: DFS
+#           T(n)- O(m*n)
+#
+# Variation:
+# In case of multiple input words, use trie approach. Create a trie with the
+# input words. Start from the root, Match current character with root and
+# neighbouring characters with root's children, and traverse trie according.
+# If we reach a leaf node of the trie successfully, it means we current processed
+# string in present in the matrix.
+# (Refer gfg)
+#
 def search_word(a, s):
-    m,n = len(a), len(a[0])
+    m, n = len(a), len(a[0])
     visited = [[False for j in range(n)] for i in range(m)]
     k = 0
 
@@ -132,11 +135,11 @@ def search_word(a, s):
 
 
 def main():
-    row,col = map(int, raw_input().split())
+    row, col = map(int, raw_input().split())
     a = []
     for i in range(row):
         l = raw_input().split()
-        #l = list(map(int, raw_input().split()))
+        # l = list(map(int, raw_input().split()))
         a.append(l)
     s = raw_input()
     print search_word(a, s)
