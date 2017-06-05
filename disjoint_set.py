@@ -5,6 +5,7 @@ class node:
         self.parent = None
         self.child = []
 
+
 class DisjointSet:
     # map integer to node
     d = {}
@@ -96,15 +97,16 @@ class DisjointSet:
                     print child.data,
                 print
 
+
 def main():
     l = list(map(int, raw_input().split()))
     ds = DisjointSet()
     ds.createSet(l)
     m = int(raw_input())
     for i in range(m):
-        a,b = map(int, raw_input().split())
-        ds.union(a,b)
-    print ds.checkSameSet(2,7)
+        a, b = map(int, raw_input().split())
+        ds.union(a, b)
+    print ds.checkSameSet(2, 7)
     ds.printSets()
 
 if __name__ == '__main__':
