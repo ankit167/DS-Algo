@@ -1,11 +1,13 @@
 #!/usr/bin/python
 
+
 class TN:
 	def __init__(self):
 		self.isLeaf = False
 		self.branch = {}
-		for i in range(0,26):
+		for i in range(0, 26):
 			self.branch[chr(i+97)] = None
+
 
 class T:
 	def __init__(self):
@@ -25,7 +27,7 @@ class T:
     #
     # Search for a word in Trie
     #
-	def search(self,word):
+	def search(self, word):
 		pcrawl = self.root
 		for ch in word:
 			if pcrawl.branch[ch] is None:
@@ -34,10 +36,11 @@ class T:
 		return pcrawl is not None and pcrawl.isLeaf
 
 	#
-	# Generic function to print all words of a Trie. prefix is '', by default (to print all words).
+	# Generic function to print all words of a Trie. prefix is '',
+	# by default (to print all words).
 	# Set prefix paramter to print all words starting from a particular prefix
 	#
-	def printWords(self,prefix=''):
+	def printWords(self, prefix=''):
 		pcrawl = self.root
 		w = ''
 		for ch in prefix:
@@ -45,19 +48,19 @@ class T:
 				return False
 			w += ch
 			pcrawl = pcrawl.branch[ch]
-		self.printAll(pcrawl,w)
+		self.printAll(pcrawl, w)
 
     #
     # Utility function to print all the words in Trie with a given prefix 'w'
     #
-	def printAll(self,pcrawl,w):
+	def printAll(self, pcrawl, w):
 		if pcrawl is None:
 			return
 		if pcrawl.isLeaf:
 			print w
 		for ch in pcrawl.branch:
 			if pcrawl.branch[ch] is not None:
-				self.printAll(pcrawl.branch[ch],w+ch)
+				self.printAll(pcrawl.branch[ch], w+ch)
 
     #
     # Longest prefix in a string, which is also a word in Trie
@@ -65,8 +68,8 @@ class T:
     # Query: basemen
     # Output: base
     #
-	def longestPrefixWord(self,word):
-		prefix,w = '',''
+	def longestPrefixWord(self, word):
+		prefix, w = '', ''
 		if self.root is None:
 			return w
 		pcrawl = self.root
@@ -91,6 +94,5 @@ def main():
 		tr.insert(word)
 	s = raw_input()
 
-if __name__=='__main__':
+if __name__ == '__main__':
 	main()
-
