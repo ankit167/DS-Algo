@@ -1,14 +1,15 @@
 class node:
-    def __init__(self,data):
+    def __init__(self, data):
         self.data = data
         self.prev = None
         self.next = None
+
 
 class DoublyLinkedList:
     def __init__(self, *args):
         self.head = None if args is None else args[0]
 
-    def insert(self,data):
+    def insert(self, data):
         if self.head is None:
             self.head = node(data)
             return
@@ -19,7 +20,7 @@ class DoublyLinkedList:
         curr.next = newnode
         newnode.prev = curr
 
-    def reverse(self,head):
+    def reverse(self, head):
         if head is None:
             return head
         if head.next is None:
@@ -55,7 +56,7 @@ class DoublyLinkedList:
         tail = head
         while tail.right is not None:
             tail = tail.right
-        i,j = head,tail
+        i, j = head, tail
         while i and j and i.data < j.data:
             temp = i.data + j.data
             if temp == k:
@@ -68,7 +69,7 @@ class DoublyLinkedList:
 
 
 def main():
-    first = list(map(int,raw_input().split()))
+    first = list(map(int, raw_input().split()))
     dll = DoublyLinkedList()
     for i in first:
         dll.insert(i)
@@ -78,6 +79,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
