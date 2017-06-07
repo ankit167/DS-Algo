@@ -30,6 +30,7 @@ def count_ones(n):
         n >>= 1
     print c
 
+
 #
 # Implementing strip() in python through regex,
 # By default, white spaces are striped from left
@@ -107,7 +108,7 @@ def print_primes(n):
 
 def main():
     n = int(raw_input())
-    count_ones(n) 
+    count_ones(n)
 
 if __name__ == '__main__':
     main()
