@@ -16,6 +16,21 @@ def add_without_operator(x, y):
 
 
 #
+# Count the number of 1's in the bit representation of an unsigned integer
+# T(n)- O(log n)
+#
+def count_ones(n):
+    if n < 0:
+        return  # Avoid negative integers
+    c = 0
+    while n:
+        # Check the right most bit and right shift
+        # the number by 1 bit
+        c += n & 1
+        n >>= 1
+    print c
+
+#
 # Implementing strip() in python through regex,
 # By default, white spaces are striped from left
 # and right end of the string.
@@ -92,7 +107,7 @@ def print_primes(n):
 
 def main():
     n = int(raw_input())
-    print_primes(n)
+    count_ones(n) 
 
 if __name__ == '__main__':
     main()
