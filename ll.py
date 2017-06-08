@@ -317,19 +317,16 @@ class LinkedList:
     # T(n)- O(n)
     #
     def fold_list(self, head):
-        if head is None or head.next is None or head.next.next is None:
+        if head is None or head.next is None:
             return head
         slow, fast = head, head
-        while fast and fast.next:
-            prev = slow
+        while fast.next and fast.next.next:
             slow = slow.next
             fast = fast.next.next
-        if fast:
-            prev = slow
-            slow = slow.next
-        prev.next = None
-        res = self.reverse(slow)
-        head = self.mergeAlt(head, res)
+        p = slow.next
+        slow.next = None
+        p = self.reverse(p)
+        head = self.mergeAlt(head, p)
         return head
 
 
@@ -338,7 +335,7 @@ def main():
     f = LinkedList()
     for i in first:
         f.insert(i)
-    f.head = f.rearrangeStartEnd(f.head)
+    f.head = f.fold_list(f.head)
     f.display(f.head)
 
 if __name__ == '__main__':
