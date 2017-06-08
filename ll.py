@@ -316,7 +316,7 @@ class LinkedList:
     #           (iii) Merge the two lists alternately
     # T(n)- O(n)
     #
-    def rearrangeStartEnd(self, head):
+    def fold_list(self, head):
         if head is None or head.next is None or head.next.next is None:
             return head
         slow, fast = head, head
