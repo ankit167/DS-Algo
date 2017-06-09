@@ -1,8 +1,18 @@
 #!/usr/bin/python
 
 
+#
 # Design a special stack where push(), pop(), getMin(), isEmpty(), isFull()
 # take T(n)- O(1)
+#
+# Approach: Use two stacks. One stores the element at an index, and the other
+#           stores the minimum number upto that index.
+#
+# Exercise: Solve this problem using one stack only.
+#           Hint: A single entry in stack would contain a pair of two numbers.
+#                 The first number denotes the element at that index, and the
+#                 second number denotes the minimum element upto that index.
+#   
 class SpecialStack:
     realStack = []
     auxStack = []
@@ -22,6 +32,19 @@ class SpecialStack:
             print 'Stack is Empty'
             return True
         return False
+    
+    ########
+    ## Push using a single stack approach. Using tuple to denote the pair
+    ## of numbers.
+    ########
+    #def push(self, data):
+    #    if self.isFull():
+    #        return
+    #    if len(self.realStack) == 0 or data <= self.realStack[-1][1]:
+    #        self.realStack.append((data,data))
+    #    else:
+    #        self.realStack.append((data,self.realStack[-1][1]))
+    #    self.top += 1
 
     def push(self, data):
         if self.isFull():
