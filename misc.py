@@ -119,9 +119,10 @@ def print_primes(n):
 #
 # T(n)- O(n)
 #
-# Note: The hashmap approach (to hash a visited song and check whether
-#       it has been played before) might not work, since the random function
-#       might return the same song again and again, leading to infinite loop.
+# Note: The hashmap approach (to check whether a song has been played before,
+#       if not, hash it) might not work, since the random function might
+#       might return an already played song again and again, leading to 
+#       infinite loop.
 #
 def music_player(a):
     n = len(a)
