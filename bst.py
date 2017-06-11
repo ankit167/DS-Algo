@@ -1,4 +1,5 @@
 from dll import DoublyLinkedList as dll
+from tree import Tree as tree
 
 
 class node:
@@ -112,12 +113,57 @@ class Bst:
             elif val1+val2 > k:
                 flag2 = True
 
+    #
+    # Utility function to find the inconsistent nodes to be swapped.
+    #
+    def correct_bst_util(self, root, first, mid, last, prev):
+        if root is None:
+            return
+        self.correct_bst_util(root.left, first, mid, last, prev)
+        if prev[0] and root.data < prev[0].data:
+            if not first[0]:
+                first[0] = prev[0]
+                mid[0] = root
+            else:
+                last[0] = root  # It is sure that the nodes are non-adjacent
+        prev[0] = root
+        self.correct_bst_util(root.right, first, mid, last, prev)
+
+    #
+    # Two nodes in a BSt are swapped. Fix and correct the BST
+    # Approach 1: Create and auxilliary array. Store inorder traversal.
+    #             Sort the array. Recreate the BST from the sorted array.
+    #             T(n)- O(nlogn) + O(n) ~ O(nlogn)   S(n)- O(n)
+    #
+    # Approach 2: Do inorder traversal of the BST. In a correct BST, every
+    #             node will be greater than the previous node. Using this idea,
+    #             find the inconsistent nodes and store their addresses. In the
+    #             end, swap the data of the nodes.
+    #             T(n)- O(n)
+    #
+    def correct_bst(self, root):
+        t = tree()
+        t.displayInorder(root)  # using this method from tree.py
+        print
+        first, mid, last, prev = [None], [None], [None], [None]
+        self.correct_bst_util(root, first, mid, last, prev)
+        # There can be two cases.
+        # Case 1: The two nodes are non-adjacent to each other in the traversal
+        # In this case, we would swap first and last
+        if first[0] and last[0]:
+            first[0].data, last[0].data = last[0].data, first[0].data
+        # Case 2: The two nodes are adjacent to each other in the traversal
+        # In this case, last[0] is None, and we would swap first and mid
+        elif first[0] and mid[0]:
+            first[0].data, mid[0].data = mid[0].data, first[0].data
+        t.displayInorder(root)
+
 
 def main():
     a = list(map(int, raw_input().split()))
     t = Bst()
     for i in a:
-        t.root = t.insert(t.root,i)
+        t.root = t.insert(t.root, i)
     k = int(raw_input())
     print t.sumK(t.root, k)
 
