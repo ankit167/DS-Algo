@@ -96,11 +96,15 @@ def findMax(a):
 
 #
 # In an array of positive integers (>= 1),
-# find the minimum integer which is not present
+# find the minimum postive integer which is not present
 # in the array. T(n)- O(n)
-# Assume the elements are stored starting from index 1,
+# Assume the elements are stored starting from index 1
 # Input: 6 4 1 5 12
 # Output: 2
+#
+# Exercise: Solve the same problem, where the array contains
+#           both positive and negative integers
+# (https://leetcode.com/problems/first-missing-positive/#/submissions/1)
 #
 def minMissing(a):
     a.insert(0, 0)
