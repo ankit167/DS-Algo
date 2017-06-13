@@ -568,9 +568,40 @@ def max_sum_subsequence_alt(a):
     print max(max_even, max_odd)
 
 
+#
+# Given 'n' non-negative integers denoting height of
+# blocks having width '1'. Compute the amount water, that
+# can be trapped after raining.
+# Input: [0,1,0,2,1,0,1,3,2,1,2,1]              _
+# Output: 6                             _      | |_   _
+#                                   _  | |_   _| | |_| |_
+# T(n)- O(n), S(n)- O(n)          _| |_| | |_| | | | | | |
+# Exercise- Compute in O(n) time, without using extra space.
+#
+def trap_rain_water(height):
+    n = len(height)
+    if n == 0:
+        return 0
+
+    left, right, w = [-1]*n, [-1]*n, 0
+
+    left[0] = height[0]
+    for i in range(1, n):
+        left[i] = max(left[i-1], height[i])
+
+    right[n-1] = height[n-1]
+    for i in range(n-2, -1, -1):
+        right[i] = max(right[i+1], height[i])
+
+    for i in range(n):
+        w += min(left[i], right[i]) - height[i]
+
+    return w
+
+
 def main():
     a = list(map(int, raw_input().split()))
-    triplets_sum_zero(a)
+    print trap_rain_water(a)
 
 if __name__ == '__main__':
     main()
