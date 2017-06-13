@@ -117,6 +117,44 @@ class Graph:
         path = []
         self.print_paths_util(s, d, path, visited)
 
+    #
+    # Utility function to detect cycle in a directed graph
+    #
+    def cycle_detection_util(self, v, visited, recursion_stack):
+        visited[v] = True
+        recursion_stack[v] = True
+
+        for node in self.d[v]:
+            if not visited[node]:
+                if self.cycle_detection_util(node, visited, recursion_stack):
+                    return True
+            # If the node is visited and present in the recursion stack,
+            # it confirms a cycle in the graph.
+            elif recursion_stack[node]:
+                return True
+
+        recursion_stack[v] = False
+        return False
+
+    #
+    # Detect a cycle in a directed graph.
+    # Approach: Use DFS and maintain a recursion stack, to keep detect cycle
+    # T(n)- O(V+E)
+    #
+    # Application: To detect a deadlock between processes.
+    #
+    # Exercise: Detect cycle in undirected graph.
+    #           (http://www.geeksforgeeks.org/detect-cycle-undirected-graph/)
+    def cycle_detection(self):
+        visited = [False]*(self.v+1)
+        recursion_stack = [False]*(self.v+1)
+
+        for i in range(1, self.v+1):
+            if not visited[i]:
+                if self.cycle_detection_util(i, visited, recursion_stack):
+                    return True
+        return False
+
 
 def main():
     v, e = map(int, raw_input().split())
@@ -124,8 +162,7 @@ def main():
     for i in range(e):
         a, b = map(int, raw_input().split())
         g.add_edge(a, b)
-    s = int(raw_input())
-    g.dfs(s)
+    print g.cycle_detection()
 
 
 if __name__ == "__main__":
