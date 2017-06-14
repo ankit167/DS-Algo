@@ -186,14 +186,16 @@ def replace_character_count(s):
 
 #
 # Given a list of strings. Group all the anagrams together.
-# The order of the strings in the group of anagrams may not be
-# important.
+# The order of the group of anagrams may not be important.
 #
 # Input: ["eat", "ant", "tea", "bat", "nat", "tan"]
-# Output: [["tea", "eat"], ["nat", "ant", "tan"], ["bat"]]
+# Output: [["ant", "nat", "tan"], ["bat"], ["eat", "tea"]]
 #
 # T(n)- O(nmlogm) (n- length of the list. m- length of each string)
 # S(n)- O(n)
+#
+# Also refer to:
+# http://www.geeksforgeeks.org/given-a-sequence-of-words-print-all-anagrams-together/
 #
 def group_anagrams(strs):
     d = {}
