@@ -184,10 +184,33 @@ def replace_character_count(s):
     print s
 
 
+#
+# Given a list of strings. Group all the anagrams together.
+# The order of the strings in the group of anagrams may not be
+# important.
+#
+# Input: ["eat", "ant", "tea", "bat", "nat", "tan"]
+# Output: [["tea", "eat"], ["nat", "ant", "tan"], ["bat"]]
+#
+# T(n)- O(nmlogm) (n- length of the list. m- length of each string)
+# S(n)- O(n)
+#
+def group_anagrams(strs):
+    d = {}
+    for s in strs:
+        # Sort each string and map the original string to the
+        # sorted string
+        p = ''.join(sorted(s))
+        if p not in d:
+            d[p] = [s]
+        else:
+            d[p].append(s)
+    return [d[k] for k in d]
+
+
 def main():
-    s = raw_input()
-    all_palindromic_substrings(s)
-    # replace_character_count(s)
+    s = raw_input().split()
+    print group_anagrams(s)
 
 if __name__ == "__main__":
     main()
