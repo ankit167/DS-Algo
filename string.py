@@ -58,6 +58,33 @@ def all_palindromic_substrings(s):
 
 
 #
+# Find the longest palindromic subsequence in a given string
+# Input: "BBABCBCAB"
+# Output: 7 ("BABCBAB")
+#
+# T(n)- O(n^2), S(n)- O(n^2)
+#
+def longest_palindromic_subsequence(s):
+    n = len(s)
+    l = [[0 for j in range(n)] for i in range(n)]
+
+    for i in range(n):
+        l[i][i] = 1
+
+    for k in range(2, n+1):
+        for i in range(n-k+1):
+            j = i+k-1
+            if s[i] == s[j] and k == 2:
+                l[i][j] = 2
+            elif s[i] == s[j]:
+                l[i][j] = l[i+1][j-1] + 2
+            else:
+                l[i][j] = max(l[i+1][j], l[i][j-1])
+
+    return l[0][n-1]
+
+
+#
 # Computes prefix array for KMP
 #
 def prefixCompute(f, patt, m):
@@ -211,8 +238,8 @@ def group_anagrams(strs):
 
 
 def main():
-    s = raw_input().split()
-    print group_anagrams(s)
+    s = raw_input()
+    print longest_palindromic_subsequence(s)
 
 if __name__ == "__main__":
     main()
