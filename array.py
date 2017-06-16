@@ -599,9 +599,103 @@ def trap_rain_water(height):
     return w
 
 
+#
+# Search an element in a sorted array (increasing)
+#
+# T(n)- O(log n)
+#
+def binary_search(arr, start, end, key):
+    if start > end:
+        return -1
+    mid = start + (end-start)/2
+    if arr[mid] == key:
+        return mid
+    if key < arr[mid]:
+        return binary_search(arr, start, mid-1, key)
+    return binary_search(arr, mid+1, end, key)
+
+
+#
+# Search an element in a sorted and rotated array.
+# Approach: First, find the pivot element, such that the subarrays on both
+#           side of the pivot are sorted. Then search for the key in the sorted
+#           subarrays using binary search. If there is no such pivot, it would
+#           mean that the array is sorted but not rotated. In this case, we
+#           perform binary search over the entire array.
+#
+# T(n)- O(log n)
+#
+# Note: This approach requires more than one pass of binary search to find an
+#       element. Refer to optimized solution that finds and element in a single
+#       pass of binary search.
+#
+def search_in_sorted_rotated_array(arr, key):
+    n = len(arr)
+    pivot = find_pivot(arr, 0, n-1)
+    print pivot
+
+    # If we do not get a valid pivot, it means that the array is not
+    # rotated at all
+    if pivot == -1:
+        return binary_search(arr, 0, n-1, key)
+
+    if arr[pivot] == key:
+        return pivot
+    if arr[0] <= key:
+        return binary_search(arr, 0, pivot-1, key)
+    return binary_search(arr, pivot+1, n-1, key)
+
+
+#
+# Find the pivot element in a sorted and rotated array, such that the
+# subarrays on both sides pivot element are sorted.
+#
+# T(n)- O(log n)
+#
+def find_pivot(arr, start, end):
+    if start > end:
+        return -1
+    if start == end:
+        return start
+    mid = start + (end-start)/2
+    if mid > start and arr[mid-1] > arr[mid]:
+        return mid
+    if mid < end and arr[mid+1] < arr[mid]:
+        return mid + 1
+    if arr[start] >= arr[mid]:
+        return find_pivot(arr, start, mid-1)
+    return find_pivot(arr, mid+1, end)
+
+
+#
+# Optimized solution to find an element in a sorted and rotated array.
+# Requires only one pass of binary search
+#
+# T(n)- O(log n)
+#
+def search_in_sorted_rotated_array_optimized(arr, start, end, key):
+    if start > end:
+        return -1
+
+    mid = start + (end-start)/2
+    if arr[mid] == key:
+        return mid
+
+    if arr[start] <= arr[mid]:
+        if key >= arr[start] and key <= arr[mid]:
+            return search_in_sorted_rotated_array_optimized(arr,
+                                                            start, mid-1, key)
+        return search_in_sorted_rotated_array_optimized(arr, mid+1, end, key)
+
+    if key >= arr[mid] and key <= arr[end]:
+        return search_in_sorted_rotated_array_optimized(arr, mid+1, end, key)
+    return search_in_sorted_rotated_array_optimized(arr, start, mid-1, key)
+
+
 def main():
     a = list(map(int, raw_input().split()))
-    print trap_rain_water(a)
+    k = int(raw_input())
+    print search_in_sorted_rotated_array_optimized(a, 0, len(a)-1, k)
 
 if __name__ == '__main__':
     main()
