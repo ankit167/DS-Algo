@@ -193,7 +193,61 @@ def merge_overlapping_intervals_optimized(l):
         del l[i-1]
         i -= 1
         n = len(l)
-    print l
+    return l
+
+
+#
+# Given a set of intervals, and a range. Find the intervals within the range,
+# that are not present in the set of intervals
+# Input: [(4,10),(3,8),(12,20)]
+#        Range: 0-25
+# Output: [(0,3),(10,12),(20,25)]
+#
+# Approach: Merge the given intervals. Iterate over the merged intervals, to
+#           print the missing intervals between the range.
+#
+# T(n)- O(nlogn)
+#
+# XXX We should run more test cases to verify the code.
+#
+def find_missing_intervals(l, start, end):
+    l = merge_overlapping_intervals_optimized(l)
+    # Sort the merged intervals in increasing order of start time, since the
+    # above function returns the intervals in decreasing order of start time.
+    l.sort(key=lambda x: x[0])
+    lt = []
+
+    if start < l[0][0]:
+        if end <= l[0][0]:
+            print [(start, end)]
+            return
+        lt.append((start, l[0][0]))
+
+    i = 1
+    while i < len(l):
+        prev_end = l[i-1][1]
+        next_start = l[i][0]
+
+        if end > next_start:
+            if start <= prev_end:
+                lt.append((prev_end, next_start))
+            elif start > prev_end and start < next_start:
+                lt.append((start, next_start))
+
+        elif end >= prev_end and end <= next_start:
+            if start <= prev_end:
+                lt.append((prev_end, end))
+            elif start >= prev_end:
+                lt.append((start, end))
+        i += 1
+
+    if end > l[-1][1]:
+        if start > l[-1][1]:
+            lt.append((start, end))
+        else:
+            lt.append((l[-1][1], end))
+
+    print lt
 
 
 #
@@ -693,9 +747,13 @@ def search_in_sorted_rotated_array_optimized(arr, start, end, key):
 
 
 def main():
-    a = list(map(int, raw_input().split()))
-    k = int(raw_input())
-    print search_in_sorted_rotated_array_optimized(a, 0, len(a)-1, k)
+    n = int(raw_input())
+    a = []
+    for i in range(n):
+        start, end = map(int, raw_input().split())
+        a.append((start, end))
+    start, end = map(int, raw_input().split())
+    find_missing_intervals(a, start, end)
 
 if __name__ == '__main__':
     main()
