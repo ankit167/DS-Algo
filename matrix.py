@@ -134,15 +134,45 @@ def search_word(a, s):
     return False
 
 
+#
+# Print a matrix in spiral order (clockwise)
+# Input: [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+# Output: 1 2 3 6 9 8 7 4 5
+#
+# T(n)- O(row*col)
+#
+def print_spiral(arr):
+    row_length, col_length = len(arr), len(arr[0])
+    row_index, col_index = 0, 0
+    i, j = 0, 0
+
+    while row_index < row_length and col_index < col_length:
+        for i in range(col_index, col_length):
+            print arr[row_index][i],
+        row_index += 1
+
+        for i in range(row_index, row_length):
+            print arr[i][col_length-1],
+        col_length -= 1
+
+        if row_index < row_length:
+            for i in range(col_length-1, col_index-1, -1):
+                print arr[row_length-1][i],
+            row_length -= 1
+
+        if col_index < col_length:
+            for i in range(row_length-1, row_index-1, -1):
+                print arr[i][col_index],
+            col_index += 1
+
+
 def main():
     row, col = map(int, raw_input().split())
     a = []
     for i in range(row):
-        l = raw_input().split()
-        # l = list(map(int, raw_input().split()))
+        l = list(map(int, raw_input().split()))
         a.append(l)
-    s = raw_input()
-    print search_word(a, s)
+    print_spiral(a)
 
 if __name__ == "__main__":
     main()
