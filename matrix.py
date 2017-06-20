@@ -166,6 +166,22 @@ def print_spiral(arr):
             col_index += 1
 
 
+#
+# Search a key in a row wise and column wise sorted matrix.
+# T(n)- O(m+n)
+#
+def searchInaSortedMatrix(mat, m, n, key):
+    i, j = m-1, 0
+    while i >= 0 and j < n:
+        if key == mat[i][j]:
+            return True
+        if key < mat[i][j]:
+            i -= 1
+        else:
+            j += 1
+    return False
+
+
 def main():
     row, col = map(int, raw_input().split())
     a = []
