@@ -190,7 +190,7 @@ def merge_overlapping_intervals_optimized(l):
 # Approach: Merge the given intervals. Iterate over the merged intervals, to
 #           print the missing intervals between the range.
 #
-# T(n)- O(nlogn)
+# T(n)- O(nlogn) S(n)- O(n)
 #
 # XXX We should run more test cases to verify the code.
 #
