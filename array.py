@@ -201,7 +201,7 @@ def find_missing_intervals(l, start, end):
     l.sort(key=lambda x: x[0])
     lt = []
 
-    if start < l[0][0]:
+    if start < l[0][0]:  # Edge cases
         if end <= l[0][0]:
             print [(start, end)]
             return
@@ -225,7 +225,7 @@ def find_missing_intervals(l, start, end):
                 lt.append((start, end))
         i += 1
 
-    if end > l[-1][1]:
+    if end > l[-1][1]:  # Edge cases
         if start > l[-1][1]:
             lt.append((start, end))
         else:
@@ -302,9 +302,12 @@ def subarrayWithGivenSum(a, s):
 
 
 #
+# Given an array of integers, find the subarray with largest sum.
+#
 # Approach: Kadane's Algorithm
 # Note: if 'sumsofar' is initialized to 0, the algo won't work for the case
 #       where all elements in the array are negative.
+#
 # T(n)- O(n)
 #
 def largestSumContiguousSubarray(a):
