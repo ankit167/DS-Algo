@@ -86,6 +86,26 @@ def print_dir(s_path):
 
 
 #
+# Print all prime factors of a given number.
+# Input: 12
+# Output: 2 2 3
+#
+def prime_factors(n):
+    while n % 2 == 0:  # Print this number of 2's that divide n
+        print 2,
+        n = n/2
+
+    # n is odd at this point of time. Only odd factors left to consider.
+    for i in range(3, int(math.sqrt(n))+1, 2):
+        while n % i == 0:
+            print i,
+            n = n/i
+
+    if n > 2:  # Handles the case where n is a prime number greater than 2.
+        print n
+
+
+#
 # Print all prime numbers upto a given number using Sieve of Eratosthenes.
 # Input: 5
 # Output: 2,3,5
@@ -121,7 +141,7 @@ def print_primes(n):
 #
 # Note: The hashmap approach (to check whether a song has been played before,
 #       if not, hash it) might not work, since the random function might
-#       might return an already played song again and again, leading to 
+#       might return an already played song again and again, leading to
 #       infinite loop.
 #
 def music_player(a):
@@ -135,8 +155,8 @@ def music_player(a):
 
 
 def main():
-    l = raw_input().split()
-    music_player(l)
+    n = int(raw_input())
+    prime_factors(n)
 
 if __name__ == '__main__':
     main()
