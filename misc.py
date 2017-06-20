@@ -90,6 +90,8 @@ def print_dir(s_path):
 # Input: 12
 # Output: 2 2 3
 #
+# T(n)- O(sqrt(n))
+#
 def prime_factors(n):
     while n % 2 == 0:  # Print this number of 2's that divide n
         print 2,
