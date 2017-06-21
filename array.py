@@ -517,7 +517,7 @@ def lis_optimized(a):
 # Approach: Start with the last element of the second array iterating
 #           backwards. For each element a2i, iterate first array backwards,
 #           until an element a1j is found, such that a1j > a2i. Swap a1j and
-#           a2i. Use insertion sort appreoach on a1 to find the correct
+#           a2i. Use insertion sort approach on a1 to find the correct
 #           position of a1j.
 #           T(n)- O(m*n) (m and n are the length of a1 and a2)
 #
@@ -685,6 +685,8 @@ def search_in_sorted_rotated_array(arr, key):
 #
 # Find the pivot element in a sorted and rotated array, such that the
 # subarrays on both sides pivot element are sorted.
+#
+# Input: [3, 4, 5, 1, 2], Pivot: 1
 #
 # T(n)- O(log n)
 #
