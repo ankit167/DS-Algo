@@ -730,14 +730,43 @@ def search_in_sorted_rotated_array_optimized(arr, start, end, key):
     return search_in_sorted_rotated_array_optimized(arr, start, mid-1, key)
 
 
+#
+# Given an array of 'n' elements. Update all the elements of the array to
+# some minimum element 'x', such that the product of all elements in the
+# new array is strictly greater than the product of all elements in the
+# original array.
+#
+# Input: [4, 2, 1 10, 6]
+# Output: 4 (4*4*4*4*4 > 4*2*1*10*6)
+#
+# Approach: Sort the array and use binary search approach
+# T(n)- O(nlogn)
+#
+# XXX For larger numbers in the array, we need to make sure that the value
+#     of the product of numbers does not overflow.
+#
+def min_value_for_greater_product(a):
+    a.sort()
+    n = len(a)
+    pro, ans = 1, 0
+    for num in a:
+        pro = pro*num
+    left, right = 0, n-1
+
+    while left <= right:
+        mid = left + (right-left)/2
+        if int(pow(a[mid], n)) > pro:
+            ans = a[mid]
+            right = mid-1
+        else:
+            left = mid+1
+
+    return ans
+
+
 def main():
-    n = int(raw_input())
-    a = []
-    for i in range(n):
-        start, end = map(int, raw_input().split())
-        a.append((start, end))
-    start, end = map(int, raw_input().split())
-    find_missing_intervals(a, start, end)
+    a = list(map(int, raw_input().split()))
+    print min_value_for_greater_product(a)
 
 if __name__ == '__main__':
     main()
