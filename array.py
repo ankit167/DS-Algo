@@ -331,7 +331,7 @@ def largestSumContiguousSubarray(a):
 # are adjacent.
 #
 # Approach- Use two variables- incl (include an element),
-#                             excl (exclude an element) and work along
+#                              excl (exclude an element) and work along
 #
 # T(n)- O(n)
 #
@@ -399,7 +399,6 @@ def zerosFlipped(a, m):
 #           (ii) xor operation (discussed below)
 # T(n)- O(n)
 #
-#
 def findTwoNonRepeatedNumbers(a):
     xor, x, y = 0, 0, 0
     for item in a:
@@ -454,15 +453,11 @@ def findSingleNonRepeatedNumber(a):
 def lis(a):
     n = len(a)
     l = [1]*n
-    m = 0
     for i in range(1, n):
         for j in range(i):
             if a[i] > a[j] and l[i] < l[j] + 1:
                 l[i] = l[j] + 1
-    for i in range(n):
-        m = max(m, l[i])
-    # prints length of the LIS
-    print m
+    print max(l)
 
 
 #
