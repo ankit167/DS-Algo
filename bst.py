@@ -24,6 +24,7 @@ class Bst:
         return root
 
     #
+    # Find the least common ancestor of two nodes in a BST
     # T(n)- O(h). (Also refer to finding lca using parent pointers in gfg)
     #
     def lca(self, root, n1, n2):
