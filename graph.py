@@ -58,13 +58,19 @@ class Graph:
             return True
         return False
 
+    #
     # Find the celebrity from a group of people.
     # A celebrity is a person who everyone knows, but he does not know anyone.
     # From a graph perspective, a celebrity vertex is a vertex with n-1
     # incoming edges and 0 outgoing edges.
-    # T(n)- O(n). The other methods include- (i) Traversing the adjacency
-    # list/matrix to  check indegree and outdegree values of all vertices
-    # (ii) Divide and conquer (iii) Use stack. Refer gfg for these methods
+    # T(n)- O(n)
+    #
+    # Other approaches- (i) Traversing the adjacency list/matrix to  check
+    #                       indegree and outdegree values of all vertices
+    #                   (ii) Divide and conquer
+    #                   (iii) Use stack
+    #                   Refer gfg for these methods
+    #
     def celeb(self):
         l = self.d.keys()
         i, j = 0, len(l)-1
@@ -110,6 +116,8 @@ class Graph:
     # Approach: Apply DFS and keep storing path nodes in a list.
     #           Display the list on reaching the destination.
     #
+    # T(n)- O(V+E)
+    #
     def print_paths(self, s, d):
         visited = [False]*(self.v+1)
         path = []
@@ -136,13 +144,14 @@ class Graph:
 
     #
     # Detect a cycle in a directed graph.
-    # Approach: Use DFS and maintain a recursion stack, to keep detect cycle
+    # Approach: Use DFS and maintain a recursion stack, to detect cycle
     # T(n)- O(V+E)
     #
     # Application: To detect a deadlock between processes.
     #
     # Exercise: Detect cycle in undirected graph.
     #           (http://www.geeksforgeeks.org/detect-cycle-undirected-graph/)
+    #
     def cycle_detection(self):
         visited = [False]*(self.v+1)
         recursion_stack = [False]*(self.v+1)
