@@ -329,13 +329,36 @@ class LinkedList:
         head = self.mergeAlt(head, p)
         return head
 
+    #
+    # Given a linked list, and only a pointer to a node. Delete the node.
+    # Approach: Copy the next node's data to the current node. Delete the
+    #           the next node, by adjusting pointers.
+    # Input: 1->2->3->4, p- pointer to 3
+    # Output: 1->2->4
+    #
+    # T(n)- O(1)
+    #
+    # Note: The solution would not work if the node is the last node of the
+    #       linked list. For the solution to work, we need to modify the
+    #       structure of the linked list, and make the last node as dummy node
+    #
+    def delete_with_a_single_pointer(self, p):
+        if p is None or p.next is None:
+            return
+        t = p.next
+        p.data = t.data  # Copying next node's data to given node
+        p.next = t.next  # Adjusting pointers
+        t.next = None
+        del t  # Deleting the next node.
+
 
 def main():
-    first = list(map(int, raw_input().split()))
     f = LinkedList()
-    for i in first:
-        f.insert(i)
-    f.head = f.fold_list(f.head)
+    f.insert(1)
+    f.insert(2)
+    p = f.insert(3)
+    f.insert(4)
+    f.delete_with_a_single_pointer(p)
     f.display(f.head)
 
 if __name__ == '__main__':
