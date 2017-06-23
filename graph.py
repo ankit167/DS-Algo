@@ -7,9 +7,7 @@ class Graph:
         self.d = {k: [] for k in range(1, v+1)}
 
     def add_edge(self, u, v):
-        l = self.d.get(u)
-        l.append(v)
-        self.d[u] = l
+        self.d[u].append(v)  # Directed graph
 
     #
     # Utility function to do DFS
