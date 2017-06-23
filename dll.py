@@ -24,9 +24,7 @@ class DoublyLinkedList:
         if head is None:
             return head
         if head.next is None:
-            temp = head.next
-            head.next = head.prev
-            head.prev = temp
+            head.next, head.prev = head.prev, head.next
             return head
         p = head.next
         head.next = None
@@ -37,12 +35,12 @@ class DoublyLinkedList:
 
     def display(self):
         curr = self.head
-        while curr is not None:
+        while curr is not None:  # Display forwards
             temp = curr
             print curr.data,
             curr = curr.next
         print
-        while temp is not None:
+        while temp is not None:  # Display backwards
             print temp.data,
             temp = temp.prev
 
@@ -57,7 +55,7 @@ class DoublyLinkedList:
         while tail.right is not None:
             tail = tail.right
         i, j = head, tail
-        while i and j and i.data < j.data:
+        while i and j and i.data <= j.data:
             temp = i.data + j.data
             if temp == k:
                 return True
@@ -70,7 +68,7 @@ class DoublyLinkedList:
 
 def main():
     first = list(map(int, raw_input().split()))
-    dll = DoublyLinkedList()
+    dll = DoublyLinkedList(None)
     for i in first:
         dll.insert(i)
     dll.head = dll.reverse(dll.head)
