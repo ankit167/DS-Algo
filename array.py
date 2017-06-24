@@ -764,9 +764,32 @@ def min_value_for_greater_product(a):
     return ans
 
 
+#
+# Given an array of 0s and 1s. Rearrange all the 0s to the left side, and all
+# the 1s to the right side of the array
+#
+# T(n)- O(n)
+#
+def segregate(a):
+    n = len(a)
+    x, y = 0, n-1
+
+    while x < y:
+        if a[x] == 1 and a[y] == 0:
+            a[x], a[y] = a[y], a[x]
+        elif a[x] == 0 and a[y] == 0:
+            x += 1
+        elif a[x] == 1 and a[y] == 1:
+            y -= 1
+        else:
+            x += 1
+            y -= 1
+    print a
+
+
 def main():
     a = list(map(int, raw_input().split()))
-    print min_value_for_greater_product(a)
+    segregate(a)
 
 if __name__ == '__main__':
     main()
