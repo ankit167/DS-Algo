@@ -237,9 +237,61 @@ def group_anagrams(strs):
     return [d[k] for k in d]
 
 
+#
+# Given a string, find the first non-repeating character in the string
+# Input: "abaacbdadea"
+# Output: c
+#
+# Approaches: (i) Scan the string and maintain the count of each character.
+#                 Again, scan the array and keep track of the min index, such
+#                 that the count is 1. Return the character at the min index.
+#                 T(n)- O(n), S(n)- O(n)
+#                 Drawback: Requires two scans of the entire string.
+#
+#            (ii) Instead of count, keep track of the occurance index. The
+#                 next scan would be on the auxilliary array (of length 26)
+#                 rather than the entire string. (Discussed below)
+#                 T(n)- O(n), S(n)- O(n)
+#                 Drawback: Still requires multiple scans
+#
+#           (iii) Maintain a doubly linked list along with auxilliary array.
+#                 The array would store the addresses of the elements in the
+#                 DLL. Update the array and the DLL in such a way that, at the
+#                 end of the string scan, the head of the DLL returns the output
+#                 ( O(1) time to fetch the output )
+#                 T(n)- O(n), S(n)- O(n)
+#
+def first_non_repeating_character(s):
+    #
+    # Values at occ[i]
+    # -1: The character is not present in the string at all
+    # -2: The character has occurred multiple times
+    # > -1: The index of the first occurance of the character.
+    #
+    occ = [-1]*26  # Assuming the string contains only alphabets
+    n = len(s)
+
+    for i in range(n):
+        ch = s[i]
+        index = ord(ch)-97
+        if occ[index] == -1:
+            occ[index] = i
+        elif occ[index] > -1:
+            occ[index] = -2
+
+    min_index = n
+    for i in range(26):
+        # Finding the min index for the first occurance of a character
+        if occ[i] >= 0 and occ[i] < min_index:
+            min_index = occ[i]
+
+    if min_index < n:  # There is atleast one character that occurs only once
+        return s[min_index]
+
+
 def main():
     s = raw_input()
-    print longest_palindromic_subsequence(s)
+    print first_non_repeating_character(s)
 
 if __name__ == "__main__":
     main()
