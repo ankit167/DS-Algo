@@ -787,9 +787,44 @@ def segregate(a):
     print a
 
 
+#
+# Given an unsorted array of integers, sort the array into a wave like array.
+# An array a[0..n-1] is sorted in wave form if
+# a[0] >= a[1] <= a[2] >= a[3] <= a[4] >= ....
+#
+# Input: [3, 6, 5, 10, 7, 20]
+# Output: [5, 3, 7, 6, 20, 10] (One of the possible solutions)
+#
+# Approach: (i) Sort the array, and swap adjacent elements
+#               Input: [3, 6, 5, 10, 7, 20]
+#               Sorted: [3, 5, 6, 7, 10, 20]
+#               Output: [5, 3, 7, 6, 20, 10]
+#               T(n)- o(nlogn)
+#
+#          (ii) We just need to make sure that all even indexed elements are
+#               greater than their adjacent odd indexed elements. Traverse all
+#               the even indexed elements and do the following:
+#               (a) If current element is smaller than previous odd indexed
+#                   element, swap the previous and the current element.
+#               (b) If current element is smaller than next odd indexed
+#                   element, swap the current and the next element.
+#               T(n)- O(n) [Discussed below]
+#
+def wave_form(a):
+    n = len(a)
+
+    for i in range(0, n, 2):  # Traversing even indexed elements
+        if i > 0 and a[i] < a[i-1]:
+            a[i], a[i-1] = a[i-1], a[i]
+        if i < n-1 and a[i] < a[i+1]:
+            a[i], a[i+1] = a[i+1], a[i]
+
+    print a
+
+
 def main():
     a = list(map(int, raw_input().split()))
-    segregate(a)
+    wave_form(a)
 
 if __name__ == '__main__':
     main()
