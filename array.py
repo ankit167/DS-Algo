@@ -567,6 +567,13 @@ def count_decodings(s):
 # Approach: Sorting and traversing the array from left and right
 # T(n)- O(n^2)
 #
+# Exercise- Find all the pythagorean triplets in an array (a^2 + b^2 = c^2)
+#           (i) Square all elements in the array
+#           (ii) Sort the array
+#           (iii) Traverse the array from left and right to check if triplets
+#                 exist, based on the above condition.
+#           T(n)- O(n^2)
+#
 def triplets_sum_zero(a):
     n = len(a)
     a.sort()
