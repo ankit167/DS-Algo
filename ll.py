@@ -24,8 +24,8 @@ class LinkedList:
 
     #
     # Reverse every k nodes
-    # Input: 1->2->3->4->5, k = 2
-    # Output: 2->1->4->3->5
+    # Input: 1->2->3->4->5->6->7, k = 3
+    # Output: 3->2->1->6->5->4->7
     #
     def reverseKNodes(self, head, k):
         curr, prev, nextnode = head, None, None
@@ -39,6 +39,21 @@ class LinkedList:
         if head is not None:
             head.next = self.reverseKNodes(curr, k)
         return prev
+
+    #
+    # Reverse elements in blocks of 2
+    # Input: 1->2->3->4->5
+    # Output: 2->1->4->3->5
+    #
+    def reverse_two_nodes(self, head):
+        if not head or not head.next:
+            return head
+
+        n = head.next
+        p = n.next
+        n.next = head
+        head.next = self.reverse_two_nodes(p)
+        return n
 
     #
     # Display elements from left to right
@@ -353,12 +368,11 @@ class LinkedList:
 
 
 def main():
+    l = list(map(int, raw_input().split()))
     f = LinkedList()
-    f.insert(1)
-    f.insert(2)
-    p = f.insert(3)
-    f.insert(4)
-    f.delete_with_a_single_pointer(p)
+    for i in l:
+        f.insert(i)
+    f.head = f.reverse_two_nodes(f.head)
     f.display(f.head)
 
 if __name__ == '__main__':
