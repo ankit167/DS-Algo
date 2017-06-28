@@ -829,9 +829,49 @@ def wave_form(a):
     print a
 
 
+#
+# Given a set of integers, the task is to divide it into two sets S1 and S2
+# such that the absolute difference between their sums is minimum.
+#
+# Input: [1, 6, 11, 5]
+# Output: 1
+# Explanation: subset1- [1, 6, 5], sum1- 12
+#              subset2- [11], sum2- 11
+#
+# Approaches: Recursion. Generate all possible sums from all the values of
+#             the array, and check which solution is most optimal.
+#             T(n)- O(2^n)
+#
+#             Dynamic Programming. T(n)- O(n*k), k- sum of all elements in array
+#
+# http://www.geeksforgeeks.org/partition-a-set-into-two-subsets-such-that-the-difference-of-subset-sums-is-minimum/
+#
+def partition_for_min_difference(a):
+    n, s = len(a), sum(a)  # sum of all elements in the array
+    dp = [[False for j in range(s+1)] for i in range(n+1)]
+    for i in range(n+1):
+        dp[i][0] = True
+    for i in range(1, s+1):
+        dp[0][i] = False
+
+    for i in range(1, n+1):
+        for j in range(1, s+1):
+            dp[i][j] = dp[i-1][j]  # If ith element is excluded
+            if j-a[i-1] >= 0:  # If ith element is included
+                dp[i][j] = dp[i][j] | dp[i-1][j-a[i-1]]
+
+    diff = sys.maxint-1  # Initialize difference of the two sums
+    for j in range(s/2, -1, -1):
+        if dp[n][j] is True:
+            diff = s-2*j
+            break
+
+    print diff
+
+
 def main():
     a = list(map(int, raw_input().split()))
-    wave_form(a)
+    partition_for_min_difference(a)
 
 if __name__ == '__main__':
     main()
