@@ -386,6 +386,33 @@ class Tree:
             root = root.right
 
     #
+    # Zigzag traversal using two stacks
+    # T(n)- O(n), S(n)- O(n)
+    #
+    def zigzag_traversal(self, root):
+        if root is None:
+            return
+        curr_stack, next_stack = [root], []
+        turn = 0
+
+        while len(curr_stack) > 0:
+            t = curr_stack.pop()
+            print t.data,
+            if turn == 0:
+                if t.left:
+                    next_stack.append(t.left)
+                if t.right:
+                    next_stack.append(t.right)
+            else:
+                if t.right:
+                    next_stack.append(t.right)
+                if t.left:
+                    next_stack.append(t.left)
+            if len(curr_stack) == 0:
+                curr_stack, next_stack = next_stack, curr_stack
+                turn = 1-turn
+
+    #
     # Remove Half nodes from a tree. Half nodes are nodes that have only
     # one child.
     # T(n)- O(n)
@@ -470,5 +497,4 @@ if __name__ == "__main__":
     t = Tree()
     for i in a:
         t.insert(i)
-    # t.xyz()
-    t.inorderIterative(t.root)
+    t.zigzag_traversal(t.root)
