@@ -165,6 +165,26 @@ def music_player(a):
         n -= 1
 
 
+#
+# Given the top left and bottom right coordinates of two rectangles, check if
+# the rectangles overlap.
+#
+def rectangle_intersect(l1, r1, l2, r2):
+    '''
+    l1 = {'x':0, 'y':10}, r1 = {'x':10, 'y':0}
+    l2 = {'x':5, 'y':5}, r2 = {'x':15, 'y':0}
+    '''
+
+    # if one rectangle is on the left side of the other
+    if l1['x'] > r2['x'] or l2['x'] > r1['x']:
+        return False
+
+    # if one rectangle is above the other
+    if l1['y'] < r2['y'] or l2['y'] < r1['y']:
+        return False
+    return True
+
+
 def main():
     n = int(raw_input())
     print check_power_of_two(n)
