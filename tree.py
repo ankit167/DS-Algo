@@ -278,14 +278,16 @@ class Tree:
         self.displayLevelOrderWithoutQueue(root.left, level-1)
         self.displayLevelOrderWithoutQueue(root.right, level-1)
 
+    #
+    # Convert a tree into its mirror image
+    #
     def mirror(self, root):
         if root is None:
             return
         self.mirror(root.left)
         self.mirror(root.right)
-        temp = root.left
-        root.left = root.right
-        root.right = temp
+        # Swap left and right subtree
+        root.left, root.right = root.right, root.left
 
     #
     # Checks whether two nodes are siblings of each other.
