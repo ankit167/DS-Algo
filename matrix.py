@@ -182,13 +182,50 @@ def searchInaSortedMatrix(mat, m, n, key):
     return False
 
 
+#
+# Given a nxn matrix, return a saddle point in the matrix.
+# A saddle point is an element which is minimum in its row and maximum
+# in its column
+#
+# T(n)- O(n^2)
+# Note: There can be more than one saddle points. Here, we are just
+#       printing the first saddle point.
+#
+def saddle_point(mat, n):
+    for i in range(n):
+        min_row_element = mat[i][0]
+        col_index = 0
+        flag = 0
+
+        # Finding the minimum element of the row
+        for j in range(1, n):
+            if mat[i][j] < min_row_element:
+                min_row_element = mat[i][j]
+                col_index = j
+
+        # Check if the min_row_element, is the maximum element
+        # in the corresponding column.
+        for k in range(n):
+            # If there is a single element in the column greater than
+            # the min_row_element, break from the loop
+            if min_row_element < mat[k][col_index]:
+                flag = 1
+                break
+
+        if flag == 0:  # print the min_row_element if it is greatest in the column
+            print min_row_element
+            return True
+
+    return False
+
+
 def main():
     row, col = map(int, raw_input().split())
     a = []
     for i in range(row):
         l = list(map(int, raw_input().split()))
         a.append(l)
-    print_spiral(a)
+    saddle_point(a, row)
 
 if __name__ == "__main__":
     main()
