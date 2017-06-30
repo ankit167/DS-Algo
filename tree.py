@@ -461,6 +461,72 @@ class Tree:
             return False
         return True
 
+    #
+    # Print all nodes at a distance 'k' in the tree/subtree, rooted
+    # with the given root.
+    #
+    def nodes_at_k_distance_down(self, root, k):
+        if root is None or k < 0:
+            return
+        if k == 0:
+            print root.data,
+            return
+        self.nodes_at_k_distance_down(root.left, k-1)
+        self.nodes_at_k_distance_down(root.right, k-1)
+
+    #
+    # Given a target node in the binary tree, and an integer 'k'.
+    # Print all the nodes, that are at a distance 'k' from the target node.
+    #
+    # Approach: There are two types of nodes to be considered
+    #           (i)  Nodes in the subtree rooted with the target node.
+    #           (ii) Other nodes, may be an ancestor of the target, or nodes
+    #                in other subtrees.
+    # T(n)- O(n)
+    #
+    def nodes_at_k_distance(self, root, target, k):
+        if root is None:
+            return -1
+
+        # If root is same as target, use downward function to print all nodes
+        # at a distance 'k' in subtree rooted with root/target.
+        if root == target:
+            self.nodes_at_k_distance_down(root, k)
+            return 0
+
+        # Recur for left subtree
+        # 'dl' is the distance of root's left child from target.
+        dl = self.nodes_at_k_distance(root.left, target, k)
+
+        # Check if target node was found in left subtree
+        if dl != -1:
+            # Check if root is at a distance 'k' from target.
+            if dl+1 == k:
+                print root.data,
+            # Else go to the right subtree and print all k-dl-2 distance
+            # nodes. The right child is only 2 edges away from the left child.
+            else:
+                self.nodes_at_k_distance_down(root.right, k-dl-2)
+
+            # Add 1 to the distance, and return value for parent calls.
+            return dl+1
+
+        # Mirror the same logic for right subtree.
+        # Note: We reach here only when the node has not been found in
+        #       in the left subtree
+        dr = self.nodes_at_k_distance(root.right, target, k)
+
+        if dr != -1:
+            if dr+1 == k:
+                print root.data,
+            else:
+                self.nodes_at_k_distance_down(root.left, k-dr-2)
+            return dr+1
+
+        # If target is neither present in the left subtree, nor in the right
+        # subtree.
+        return -1
+
 
 preindex = 0
 
@@ -499,4 +565,4 @@ if __name__ == "__main__":
     t = Tree()
     for i in a:
         t.insert(i)
-    t.zigzag_traversal(t.root)
+    t.nodes_at_k_distance(t.root, t.root.left, 1)
