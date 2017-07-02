@@ -869,9 +869,37 @@ def partition_for_min_difference(a):
     print diff
 
 
+#
+# Find maximum j-i, such that a[j] > a[i]
+#
+def max_difference_indexes(a):
+    n = len(a)
+    lmin = [None for i in range(n)]
+    rmax = [None for i in range(n)]
+
+    lmin[0] = a[0]
+    for i in range(1, n):
+        lmin[i] = min(lmin[i-1], a[i])
+
+    rmax[n-1] = a[n-1]
+    for i in range(n-2, -1, -1):
+        rmax[i] = max(rmax[i+1], a[i])
+
+    # Traverse both arrays from left to right for optimum j-i
+    i, j, max_diff = 0, 0, -1
+    while i < n and j < n:
+        if lmin[i] < rmax[j]:
+            max_diff = max(max_diff, j-i)
+            j += 1
+        else:
+            i += 1
+
+    return max_diff
+
+
 def main():
     a = list(map(int, raw_input().split()))
-    partition_for_min_difference(a)
+    print max_difference_indexes(a)
 
 if __name__ == '__main__':
     main()
