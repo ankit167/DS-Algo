@@ -791,7 +791,7 @@ def segregate(a):
         else:
             x += 1
             y -= 1
-    print a
+    return a
 
 
 #
