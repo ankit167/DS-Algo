@@ -279,6 +279,11 @@ def largestSubarrayWithZeroSum(a):
 # T(n)- O(n), S(n)- O(n)
 # Note: We are modifying the contents of the array here.
 #
+# If the constraint is not to modify the array, then in
+# largestSubarrayWithZeroSum(), modify s += a[i] to:
+#     s = s+1 if a[i] == 1 else s-1
+# The rest of the algorithm remains as is, and code should work correctly.
+#
 def largestSubarrayWithEqualZerosAndOnes(a):
     for i in range(len(a)):
         if a[i] == 0:
