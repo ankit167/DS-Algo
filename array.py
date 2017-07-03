@@ -333,7 +333,7 @@ def largestSumContiguousSubarray(a):
             maxendinghere = 0
             s = i+1
     # print sum, start and end index of the max contiguous sum subarray.
-    print sumsofar, start, end
+    return (sumsofar, start, end)
 
 
 #

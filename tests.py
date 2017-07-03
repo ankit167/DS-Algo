@@ -14,5 +14,8 @@ class TestArray(unittest.TestCase):
         self.assertEqual(segregate([1, 0]), [0, 1])
         self.assertEqual(segregate([0]), [0])
 
+    def test_largest_sum_contiguous_subarray(self):
+        self.assertEqual(largestSumContiguousSubarray([-2, -3, -1, -5, -4]), (-1, 2, 2))
+
 if __name__ == "__main__":
     unittest.main()
