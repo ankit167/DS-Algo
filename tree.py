@@ -527,6 +527,45 @@ class Tree:
         # subtree.
         return -1
 
+    def left_boundary_traversal(self, root):
+        if root:
+            if root.left:
+                print root.data,
+                self.left_boundary_traversal(root.left)
+            elif root.right:
+                print root.data,
+                self.right_boundary_traversal(root.right)
+
+    def right_boundary_traversal(self, root):
+        if root:
+            if root.right:
+                print root.data,
+                self.right_boundary_traversal(root.right)
+            elif root.left:
+                print root.data,
+                self.left_boundary_traversal(root.left)
+
+    def print_leaves(self, root):
+        if root is None:
+            return
+
+        self.print_leaves(root.left)
+        if root.left is None and root.right is None:
+            print root.data,
+        self.print_leaves(root.right)
+
+    def boundary_traversal(self, root):
+        if root is None:
+            return
+
+        print root.data,
+        self.left_boundary_traversal(root.left)
+
+        self.print_leaves(root.left)
+        self.print_leaves(root.right)
+
+        self.right_boundary_traversal(root.right)
+
 
 preindex = 0
 
@@ -565,4 +604,4 @@ if __name__ == "__main__":
     t = Tree()
     for i in a:
         t.insert(i)
-    t.nodes_at_k_distance(t.root, t.root.left, 1)
+    t.boundary_traversal(t.root)
