@@ -36,6 +36,33 @@ class Bst:
         return self.get_max(root.right)
 
     #
+    # Delete a node in the BST
+    # T(n)- O(log n)
+    #
+    def delete_node(self, root, data):
+        if root is None:
+            return None
+
+        if data < root.data:
+            root.left = self.delete_node(root.left, data)
+
+        elif data > root.data:
+            root.right = self.delete_node(root.right, data)
+        else:
+            if root.left and root.right:
+                temp = self.get_max(root.left)
+                root.data = temp.data
+                root.left = self.delete_node(root.left, temp.data)
+            else:
+                temp = root
+                if not temp.left:
+                    root = temp.right
+                if not temp.right:
+                    root = temp.left
+                del(temp)
+        return root
+
+    #
     # Find the least common ancestor of two nodes in a BST
     # T(n)- O(h). (Also refer to finding lca using parent pointers in gfg)
     #
@@ -177,8 +204,10 @@ def main():
     t = Bst()
     for i in a:
         t.root = t.insert(t.root, i)
-    m = t.get_max(t.root)
-    print m.data
+    data = int(raw_input())
+    t.root = t.delete_node(t.root, data)
+    tr = tree()
+    tr.displayInorder(t.root)
 
 if __name__ == '__main__':
     main()
