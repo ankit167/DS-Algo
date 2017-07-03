@@ -24,6 +24,18 @@ class Bst:
         return root
 
     #
+    # Return maximum element of the BST.
+    #
+    def get_max(self, root):
+        if root is None:
+            return None
+
+        if root.right is None:
+            return root
+
+        return self.get_max(root.right)
+
+    #
     # Find the least common ancestor of two nodes in a BST
     # T(n)- O(h). (Also refer to finding lca using parent pointers in gfg)
     #
@@ -165,8 +177,8 @@ def main():
     t = Bst()
     for i in a:
         t.root = t.insert(t.root, i)
-    k = int(raw_input())
-    print t.sumK(t.root, k)
+    m = t.get_max(t.root)
+    print m.data
 
 if __name__ == '__main__':
     main()
