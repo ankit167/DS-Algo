@@ -566,6 +566,21 @@ class Tree:
 
         self.right_boundary_traversal(root.right)
 
+    #
+    # Convert a binary tree into a sum tree, where each node contains
+    # the sum of the left and the right subtrees in the original tree.
+    # The values of the leaf nodes are changed to 0
+    # Input:  10 -2 6 8 -4 7 5 (Level order traversal)
+    # Output: 20 4 12 0 0 0 0
+    #
+    def sum_tree(self, root):
+        if root is None:
+            return 0
+
+        old_value = root.data
+        root.data = self.sum_tree(root.left) + self.sum_tree(root.right)
+        return root.data + old_value
+
 
 preindex = 0
 
@@ -604,4 +619,5 @@ if __name__ == "__main__":
     t = Tree()
     for i in a:
         t.insert(i)
-    t.boundary_traversal(t.root)
+    t.sum_tree(t.root)
+    t.display(t.root)
