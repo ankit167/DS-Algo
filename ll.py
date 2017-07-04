@@ -366,13 +366,53 @@ class LinkedList:
         t.next = None
         del t  # Deleting the next node.
 
+    #
+    # Given a linked list of 0s and 1s. Sort the linked list
+    # (by rearranging the pointers), such that all 0s are at
+    # the beginning and all 1s are at the end.
+    #
+    def sort_list_of_0s_and_1s(self):
+        if not self.head or not self.head.next:
+            return
+
+        curr = self.head
+        first_zero, first_one = None, None
+        curr_zero, curr_one = None, None
+
+        while curr:
+            if curr.data == 0:
+                if not first_zero:
+                    first_zero = curr
+                else:
+                    curr_zero.next = curr
+                curr_zero = curr
+
+            else:
+                if not first_one:
+                    first_one = curr
+                else:
+                    curr_one.next = curr
+                curr_one = curr
+
+            curr = curr.next
+
+        if curr_zero:
+            curr_zero.next = first_one
+        if curr_one:
+            curr_one.next = None
+
+        if first_zero:
+            self.head = first_zero
+        else:
+            self.head = first_one
+
 
 def main():
     l = list(map(int, raw_input().split()))
     f = LinkedList()
     for i in l:
         f.insert(i)
-    f.head = f.reverse_two_nodes(f.head)
+    f.sort_list_of_0s_and_1s()
     f.display(f.head)
 
 if __name__ == '__main__':
