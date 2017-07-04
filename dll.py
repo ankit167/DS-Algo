@@ -20,6 +20,21 @@ class DoublyLinkedList:
         curr.next = newnode
         newnode.prev = curr
 
+    def remove(self, node):
+        if node is None:
+            return
+        p = node.prev
+        n = node.next
+        node.prev = None
+        node.next = None
+        if p:
+            p.next = n
+        if n:
+            n.prev = p
+
+        if node is self.head:
+            self.head = n
+
     def reverse(self, head):
         if head is None:
             return head
@@ -71,7 +86,7 @@ def main():
     dll = DoublyLinkedList(None)
     for i in first:
         dll.insert(i)
-    dll.head = dll.reverse(dll.head)
+    dll.remove(dll.head)
     dll.display()
 
 
