@@ -1,5 +1,6 @@
 import unittest
 from array import *
+from string import *
 
 #
 # Example to run test cases individually:
@@ -16,6 +17,11 @@ class TestArray(unittest.TestCase):
 
     def test_largest_sum_contiguous_subarray(self):
         self.assertEqual(largestSumContiguousSubarray([-2, -3, -1, -5, -4]), (-1, 2, 2))
+
+
+class TestString(unittest.TestCase):
+    def test_longest_palindromic_subsequence(self):
+        self.assertEqual(longest_palindromic_subsequence("GEEKS FOR GEEKS"), 7)
 
 if __name__ == "__main__":
     unittest.main()
