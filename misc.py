@@ -184,6 +184,28 @@ def rectangle_intersect(l1, r1, l2, r2):
     return True
 
 
+#
+# Check if a given number is a palindrome (without using extra space)
+#
+def is_palindrome(x):
+    d = len(str(x))  # Number of digits in the number
+
+    while d > 0:
+        right_digit = x % 10
+        left_digit = x/int(pow(10, d-1))
+
+        if left_digit != right_digit:
+            break
+
+        x = x % int(pow(10, d-1))  # Trim one digit from left
+        x = x/10  # Trim one digit from right
+        d -= 2
+
+    if d > 0:
+        return False
+    return True
+
+
 def main():
     n = int(raw_input())
     print check_power_of_two(n)
