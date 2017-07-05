@@ -157,7 +157,6 @@ def print_primes(n):
 #
 def music_player(a):
     n = len(a)
-    s = set()
     while n > 0:
         num = randint(0, n-1)
         print "Playing song %s" % a[num]
