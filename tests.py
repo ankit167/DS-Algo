@@ -22,6 +22,7 @@ class TestArray(unittest.TestCase):
 class TestString(unittest.TestCase):
     def test_longest_palindromic_subsequence(self):
         self.assertEqual(longest_palindromic_subsequence("GEEKS FOR GEEKS"), 7)
+        self.assertEqual(longest_palindromic_subsequence("aaaaa"), 5)
 
 if __name__ == "__main__":
     unittest.main()
