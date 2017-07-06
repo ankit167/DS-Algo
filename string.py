@@ -177,12 +177,16 @@ def reverse_words(s):
 # S(n)- O(NO_OF_CHARS)
 #
 def longest_substring_without_duplicates(str):
+    n = len(str)
+    if n == 0:
+        return
+
     NO_OF_CHARS = 256
     # stores last visited index of a character
     visited = [-1] * NO_OF_CHARS
     visited[ord(str[0])] = 0
-    curlen, maxlen, start, end = 1, 1, 0, 0
-    for i in range(1, len(str)):
+    curlen, maxlen, start, end, st, en = 1, 1, 0, 0, 0, 0
+    for i in range(1, n):
         prev_index = visited[ord(str[i])]
         if prev_index == -1 or prev_index < i - curlen:
             curlen += 1
@@ -194,6 +198,10 @@ def longest_substring_without_duplicates(str):
             curlen = i - prev_index
             start, end = prev_index+1, i
         visited[ord(str[i])] = i
+
+    if curlen > maxlen:
+        maxlen = curlen
+        st, en = start, end
     print maxlen, st, en
 
 
@@ -296,7 +304,7 @@ def first_non_repeating_character(s):
 
 def main():
     s = raw_input()
-    print first_non_repeating_character(s)
+    longest_substring_without_duplicates(s)
 
 if __name__ == "__main__":
     main()
