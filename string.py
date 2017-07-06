@@ -64,6 +64,10 @@ def all_palindromic_substrings(s):
 #
 # T(n)- O(n^2), S(n)- O(n^2)
 #
+# Exercise: Print the desired longest palindromic subsequence
+# (https://stackoverflow.com/questions/12892912/
+#  how-to-find-the-longest-palindromic-subsequence-not-its-length)
+#
 def longest_palindromic_subsequence(s):
     n = len(s)
     l = [[0 for j in range(n)] for i in range(n)]
@@ -105,6 +109,7 @@ def prefixCompute(f, patt, m):
 #
 # Searches a pattern in a string using KMP algorithm.
 # Compute prefix array -> Compare string and pattern
+#
 # T(n)- O(n), S(n)- O(m)
 # n- length of string, m- length of pattern
 #
