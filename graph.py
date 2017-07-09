@@ -162,6 +162,38 @@ class Graph:
                     return True
         return False
 
+    #
+    # Utility function for topological sort
+    #
+    def topological_sort_util(self, node, visited, st):
+        visited[node] = True
+
+        for adj in self.d[node]:
+            if not visited[adj]:
+                self.topological_sort_util(adj, visited, st)
+
+        st.append(node)
+
+    #
+    # Topological sorting for Directed Acyclic Graph (DAG) is a linear
+    # ordering of vertices such that for every directed edge uv, vertex
+    # u comes before v in the ordering. Topological Sorting for a graph
+    # is not possible if the graph is not a DAG.
+    #
+    # T(n)- O(V+E)
+    #
+    def topological_sort(self):
+        visited = [False]*(self.v+1)
+        st = []
+
+        for i in range(1, self.v+1):
+            if not visited[i]:
+                self.topological_sort_util(i, visited, st)
+
+        while len(st) > 0:
+            print st[-1],
+            st.pop()
+
 
 def main():
     v, e = map(int, raw_input().split())
@@ -169,7 +201,7 @@ def main():
     for i in range(e):
         a, b = map(int, raw_input().split())
         g.add_edge(a, b)
-    print g.cycle_detection()
+    g.topological_sort()
 
 
 if __name__ == "__main__":
