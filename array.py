@@ -501,7 +501,7 @@ def lis_optimized(a):
     for i in range(1, n):
         if a[i] < tail_table[0]:
             # new smallest value
-            tail_table[0] = a[0]
+            tail_table[0] = a[i]
 
         elif a[i] > tail_table[l-1]:
             tail_table[l] = a[i]
