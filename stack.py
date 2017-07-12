@@ -129,6 +129,36 @@ class Stack:
             return -1
 
 
+#
+# Check if a sequence of parenthesis is balanced.
+# Input- {[()]}
+# Output- True
+#
+# Input- {[(])}
+# Output- False
+#
+def balanced_parenthesis(expression):
+    st = []
+
+    for ch in expression:
+        if ch == '[' or ch == '{' or ch == '(':
+            st.append(ch)
+        else:
+            if len(st) <= 0:
+                return False
+            if (ch == ']' and st[-1] == '[') or \
+               (ch == '}' and st[-1] == '{') or \
+               (ch == ')' and st[-1] == '('):
+                st.pop()  # Pop if a matching pair is found
+            else:
+                return False
+
+    # If the expression is balanced, in the end the stack should be empty
+    if len(st) == 0:
+        return True
+    return False
+
+
 def main():
     s = Stack()
     l = list(map(int, raw_input().split()))
@@ -136,7 +166,6 @@ def main():
         s.push(i)
     s.sortStack()
     s.printStack()
-
 
 if __name__ == "__main__":
     main()
