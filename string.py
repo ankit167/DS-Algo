@@ -302,9 +302,38 @@ def first_non_repeating_character(s):
         return s[min_index]
 
 
+#
+# Given two strings, find the longest common substring.
+# Print both the length of the string and the substring.
+#
+# T(n)- O(m*n)
+# S(n)- O(m*n)
+#
+def longest_common_substring(s1, s2):
+    m, n = len(s1), len(s2)
+
+    lcs = [[None for j in range(n+1)] for i in range(m+1)]
+    start, res = 0, 0
+
+    for i in range(m+1):
+        for j in range(n+1):
+            if i == 0 or j == 0:
+                lcs[i][j] = 0
+            elif s1[i-1] == s2[j-1]:
+                lcs[i][j] = lcs[i-1][j-1] + 1
+                if res < lcs[i][j]:
+                    res = lcs[i][j]
+                    end = j-1
+            else:
+                lcs[i][j] = 0
+
+    print res, s1[end-res+1:end+1]
+
+
 def main():
-    s = raw_input()
-    longest_substring_without_duplicates(s)
+    s1 = raw_input()
+    s2 = raw_input()
+    longest_common_substring(s1, s2)
 
 if __name__ == "__main__":
     main()
