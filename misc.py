@@ -206,9 +206,31 @@ def is_palindrome(x):
     return True
 
 
+#
+# Given an infinite number line. We can start from '0', and can go either left
+# or right in each step. In the ith step, we can move +i steps or -i steps.
+# Find out the most optimal number of steps to reach a destination.
+#
+# The 'source' and 'step' variables are '0' by default.
+#
+def min_steps_to_a_destination(source, step, dest):
+    if abs(source) > dest:
+        return sys.maxint
+
+    if source == dest:
+        return step
+
+    # if we go on the positive side
+    pos = min_steps_to_a_destination(source+step+1, step+1, dest)
+    # if we go on the negative side
+    neg = min_steps_to_a_destination(source-step-1, step+1, dest)
+
+    return min(pos, neg)  # return minimum of both cases
+
+
 def main():
     n = int(raw_input())
-    print check_power_of_two(n)
+    print min_steps_to_a_destination(0, 0, n)
 
 if __name__ == '__main__':
     main()
