@@ -160,28 +160,28 @@ def merge_overlapping_intervals(l):
 #             T(n)- O(nlogn)
 #
 def merge_overlapping_intervals_optimized(l):
-    # sorting in non-increasing order of start time
-    l.sort(key=lambda x: x[0], reverse=True)
+    l.sort(key=lambda x: x[0])
     i, n = 1, len(l)
+
     while i < n:
-        # if end time of current interval is less than start time of
+        # if start time of current interval is greater then end time of
         # previous interval, it means there is no overlap.
-        if i == 0 or l[i][1] < l[i-1][0]:
+        if l[i][0] > l[i-1][1]:
             i += 1
             continue
-        # overlap. In case of partial overlap (below), create a merged
-        # interval, insert it in the current position, and delete the previous
-        # interval. In case of complete overlap (the previous interval is a
-        # complete subset of current interval), delete the previous interval.
-        # The current interval stays as is, and is the merged interval.
-        if l[i][1] < l[i-1][1]:
-            nt = (l[i][0], l[i-1][1])
-            l[i] = nt
-        # deleting previous index, reducing the current index by 1, and
-        # recalculating the length of the list.
-        del l[i-1]
-        i -= 1
-        n = len(l)
+        # Overlap. Current interval is either partially or completely
+        # overlapping with previous interval.
+        # In case of partial overlap, create a new merged interval, update the
+        # previous interval with the merged interval, delete the current
+        # interval.
+        # In case of complete overlap (current interval is complete subset
+        # of previous interval), simply delete the current interval
+        if l[i][1] > l[i-1][1]:
+            nt = (l[i-1][0], l[i][1])
+            l[i-1] = nt
+        del l[i]  # delete current interval and decrement length of the list
+        n -= 1
+
     return l
 
 
@@ -201,9 +201,6 @@ def merge_overlapping_intervals_optimized(l):
 #
 def find_missing_intervals(l, start, end):
     l = merge_overlapping_intervals_optimized(l)
-    # Sort the merged intervals in increasing order of start time, since the
-    # above function returns the intervals in decreasing order of start time.
-    l.sort(key=lambda x: x[0])
     lt = []
 
     if start < l[0][0]:  # Edge cases
@@ -908,8 +905,10 @@ def max_difference_indexes(a):
 
 
 def main():
-    a = list(map(int, raw_input().split()))
-    print max_difference_indexes(a)
+    l = [(1, 3), (4, 10), (20, 25), (21, 29), (2, 5)]
+    print merge_overlapping_intervals_optimized(l)
+    # a = list(map(int, raw_input().split()))
+    # print max_difference_indexes(a)
 
 if __name__ == '__main__':
     main()
