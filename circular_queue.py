@@ -31,10 +31,11 @@ class Circular_Queue:
         if self.size == 0:
             print 'Queue size should be more than 0'
             return
+
         if self.front == -1 or self.a[self.front] == -1:
             print "Can't pop. Queue is empty."
             return
-        print 'Popped %s' % self.a[self.front]
+        print 'Popping %s' % self.a[self.front]
 
         self.a[self.front] = -1
         if self.front == self.rear:
