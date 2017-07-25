@@ -584,7 +584,9 @@ class Tree:
 
 preindex = 0
 
-
+#
+# Build binary tree from given preorder and inorder traversal
+#
 def build(preorder, inorder, instart, inend):
     global preindex
     if instart > inend:
