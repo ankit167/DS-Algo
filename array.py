@@ -903,12 +903,49 @@ def max_difference_indexes(a):
 
     return max_diff
 
+#
+# For each element, print the first element to the right,
+# which is greater than the current element. If there is no
+# such element, print -1
+#
+# Input: [4, 1, 5, 7, 3, 8, 2]
+# Output: [5, 5, 7, 8, -1, -1]
+#
+# Approach: For each element, we are popping the previous processed
+#           elements from the stack and deciding on whether the current
+#           element is the next greater element for a popped element
+# T(n)- O(n)
+# S(n)- O(n)
+#
+# Note: The worst case occurs when the numbers are sorted in
+#       decreasing order. Each element is processed at most 4 times.
+#
+def next_greater_element(a):
+    st = []
+    st.append(a[0])
+
+    for i in range(1, len(a)):
+        next_ele = a[i]
+        if len(st) > 0:
+            ele = st.pop()
+            while ele < next_ele:  # check for next greater element
+                print(str(ele) + "-->" + str(next_ele))
+                if len(st) == 0:
+                    break
+                ele = st.pop()
+            if ele > next_ele:
+                st.append(ele)  # push back if the check is false
+        st.append(next_ele)  # push the current element after processing
+    while len(st) > 0:
+        # All elements remaining in the stack do not have any next greater
+        # element.
+        ele = st.pop()
+        print(str(ele) + "--> -1")
+
 
 def main():
-    l = [(1, 3), (4, 10), (20, 25), (21, 29), (2, 5)]
-    print merge_overlapping_intervals_optimized(l)
-    # a = list(map(int, raw_input().split()))
-    # print max_difference_indexes(a)
+    a = list(map(int, raw_input().split()))
+    next_greater_element(a)
 
 if __name__ == '__main__':
     main()
