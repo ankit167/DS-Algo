@@ -18,7 +18,7 @@ def findMinInWindow(a, k):
     n = len(a)
     l = deque()
 
-    if n == 0 || k <= 0:
+    if n == 0 or k <= 0:
         return
 
     for i in range(k):
@@ -309,6 +309,28 @@ def subarrayWithGivenSum(a, s):
             break
         hmap[currsum] = i
     print start, end
+
+
+#
+# Find the number of subarrays with a given sum.
+# Input: [1,1,1]  k = 2
+# Output: 2
+#
+def num_of_subarrays_with_given_sum(nums, k):
+    d = {}
+    currsum, res, n = 0, 0, len(nums)
+
+    for i in range(n):
+        currsum += nums[i]
+        if currsum == k:
+            res += 1
+        if currsum-k in d:
+            res += d[currsum-k]
+        if currsum in d:
+            d[currsum] = d[currsum] + 1
+        else:
+            d[currsum] = 1
+    return res
 
 
 #
@@ -948,7 +970,8 @@ def next_greater_element(a):
 
 def main():
     a = list(map(int, raw_input().split()))
-    next_greater_element(a)
+    k = int(raw_input())
+    print num_of_subarrays_with_given_sum(a, k)
 
 if __name__ == '__main__':
     main()
