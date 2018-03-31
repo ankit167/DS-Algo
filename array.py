@@ -18,6 +18,9 @@ def findMinInWindow(a, k):
     n = len(a)
     l = deque()
 
+    if n == 0 || k <= 0:
+        return
+
     for i in range(k):
         while len(l) > 0 and a[i] <= a[l[-1]]:
             l.pop()
