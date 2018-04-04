@@ -968,10 +968,35 @@ def next_greater_element(a):
         print(str(ele) + "--> -1")
 
 
+#
+# Given an array consisting of 0s, 1s and 2s. Arrange them in such a way that
+# all 0s are followed by 1s, followed by 2s.
+#
+# Input: [0, 1, 2, 0, 1, 2]
+# Output: [0, 0, 1, 1, 2, 2]
+#
+# T(n)- O(n)
+#
+def dutch_national_flag(a):
+    n = len(a)
+    low, mid, high = 0, 0, n-1
+
+    while mid <= high:
+        if a[mid] == 0:
+            a[low], a[mid] = a[mid], a[low]
+            low += 1
+            mid += 1
+        elif a[mid] == 1:
+            mid += 1
+        else:
+            a[mid], a[high] = a[high], a[mid]
+            high -= 1
+    return a
+
+
 def main():
     a = list(map(int, raw_input().split()))
-    k = int(raw_input())
-    print num_of_subarrays_with_given_sum(a, k)
+    print dutch_national_flag(a)
 
 if __name__ == '__main__':
     main()
