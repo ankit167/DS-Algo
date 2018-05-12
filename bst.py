@@ -198,15 +198,27 @@ class Bst:
             first[0].data, mid[0].data = mid[0].data, first[0].data
         t.displayInorder(root)
 
+    #
+    # Modify a BST in such a way that each node stores the sum of all nodes
+    # greater than the current node
+    #
+    def store_sum_of_larger_nodes(self, root, sumK=[0]):
+        if root is None:
+            return
+        self.store_sum_of_larger_nodes(root.right)
+        temp = root.data
+        root.data = sumK[0]
+        sumK[0] += temp
+        self.store_sum_of_larger_nodes(root.left)
+
 
 def main():
     a = list(map(int, raw_input().split()))
     t = Bst()
     for i in a:
         t.root = t.insert(t.root, i)
-    data = int(raw_input())
-    t.root = t.delete_node(t.root, data)
     tr = tree()
+    t.store_sum_of_larger_nodes(t.root)
     tr.displayInorder(t.root)
 
 if __name__ == '__main__':
