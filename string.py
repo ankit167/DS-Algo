@@ -330,6 +330,41 @@ def longest_common_substring(s1, s2):
     print res, s1[end-res+1:end+1]
 
 
+#
+# Given a string, find the length of the longest palindrome that
+# can be formed using the characters of the string
+#
+# Link: https://leetcode.com/problems/longest-palindrome/
+# T(n): O(n)
+# S(n): O(n)
+#
+def longest_palindrome_length(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        d, c, flag = {}, 0, 0
+
+        # Store the count of each character in a dictionary
+        for ch in s:
+            if ch not in d:
+                d[ch] = 0
+            d[ch] = d[ch] + 1
+
+        for ch in d:
+            # If count is even, add count. If count is odd, add count-1
+            if d[ch] % 2 == 0:
+                c += d[ch]
+            else:
+                flag = 1
+                c += d[ch] - 1
+
+        # Add 1 to the total count, if any of the characters has odd count
+        if flag == 1:
+            c += 1
+        return c
+
+
 def main():
     s1 = raw_input()
     s2 = raw_input()
