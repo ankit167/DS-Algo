@@ -175,8 +175,6 @@ class Tree:
         if root is None:
             height.h = 0
             return 0
-        lh.h += 1
-        rh.h += 1
         ldiameter = self.diameter2(root.left, lh)
         rdiameter = self.diameter2(root.right, rh)
         height.h = max(lh.h, rh.h) + 1
