@@ -24,6 +24,18 @@ def check_power_of_two(n):
         return True
     return False
 
+#
+# Check if a number is power of three
+# T(n)- O(log n) (Base 3)
+#
+# Check other methods- https://leetcode.com/articles/power-of-three/
+#
+def check_power_of_three(n):
+    if n < 1:
+        return False
+    while n % 3 == 0:
+        n = n/3
+    return n == 1
 
 #
 # Count the number of 1's in the bit representation of an unsigned integer
