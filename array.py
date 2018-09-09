@@ -994,6 +994,31 @@ def dutch_national_flag(a):
     return a
 
 
+#
+# Given an array of consecutive integers [1,2 ... n], where we are allowed
+# to swap any two elements. Find the minimum number of swaps required to make
+# the array sorted in ascending order
+#
+# Input: [2, 3, 4, 1, 5]
+# Output: 3
+#
+# T(n) = O(n)
+#
+def minimumSwaps(arr):
+    i, c, n = 0, 0, len(arr)
+    while i < n:
+        if arr[i] == i+1:
+            i += 1
+            continue
+        b = arr[i] - 1
+        if b > 0 and b < n:
+            arr[i], arr[b] = arr[b], arr[i]
+            c += 1
+        else:
+            i += 1
+    return c
+
+
 def main():
     a = list(map(int, raw_input().split()))
     print dutch_national_flag(a)
