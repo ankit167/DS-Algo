@@ -1019,9 +1019,29 @@ def minimumSwaps(arr):
     return c
 
 
+#
+# Given an array represented as a number, where each
+# element of the array is a digit. Add 1 to the number.
+#
+# Input: [9, 9, 9]
+# Output: [1, 0, 0, 0]
+#
+# T(n)- O(n)
+#
+def plus_one(digits):
+    carry = 1
+    for i in range(len(digits)-1,-1,-1):
+        s = digits[i] + carry
+        digits[i] = s%10
+        carry = s/10
+    if carry > 0:
+        digits.insert(0, carry)
+    return digits
+
+
 def main():
     a = list(map(int, raw_input().split()))
-    print dutch_national_flag(a)
+    print plus_one(a)
 
 if __name__ == '__main__':
     main()
