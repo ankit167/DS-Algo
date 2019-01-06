@@ -1,2 +1,2 @@
 # DS-Algo
-This repository contains collection of Data Structures and Algorithms related code written in Python
+This is a collection of Data Structures and Algorithms problems/solutions for interview preparation, written in Python.
