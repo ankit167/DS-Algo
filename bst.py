@@ -146,11 +146,11 @@ class Bst:
                         flag2 = False
             if val1 >= val2:
                 return False
-            if val1+val2 == k:
+            if val1 + val2 == k:
                 return True
-            elif val1+val2 < k:
+            elif val1 + val2 < k:
                 flag1 = True
-            elif val1+val2 > k:
+            elif val1 + val2 > k:
                 flag2 = True
 
     #
@@ -211,6 +211,33 @@ class Bst:
         sumK[0] += temp
         self.store_sum_of_larger_nodes(root.left)
 
+    #
+    # Find minimum absolute difference between any two nodes of a BST
+    # Approach: The minimum absolute difference possible can only be found
+    #           between two adjacent nodes, in an inorder traversal of the BST.
+    #
+    # T(n)- O(n)
+    #
+    def min_absolute_difference(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        def find_min_abs_diff(root, prev, min_diff):
+            if not root:
+                return None
+            find_min_abs_diff(root.left, prev, min_diff)
+            if prev[0] is not None:
+                diff = root.val - prev[0].val
+                if not min_diff[0] or diff < min_diff[0]:
+                    min_diff[0] = diff
+            prev[0] = root
+            find_min_abs_diff(root.right, prev, min_diff)
+
+        prev, min_diff = [None], [None]
+        find_min_abs_diff(root, prev, min_diff)
+        return min_diff[0]
+
 
 def main():
     a = list(map(int, raw_input().split()))
@@ -220,6 +247,7 @@ def main():
     tr = tree()
     t.store_sum_of_larger_nodes(t.root)
     tr.displayInorder(t.root)
+
 
 if __name__ == '__main__':
     main()
