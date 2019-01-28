@@ -76,17 +76,6 @@ def findStartOne(a, start, end):
 
 
 #
-# Returns the maximum element in the array
-#
-def findMax(a):
-    m = a[0]
-    for i in a:
-        if i > m:
-            m = i
-    return m
-
-
-#
 # In an array of positive integers (>= 1),
 # find the minimum postive integer which is not present
 # in the array. T(n)- O(n)
@@ -100,7 +89,7 @@ def findMax(a):
 #
 def minMissing(a):
     a.insert(0, 0)
-    m = findMax(a)
+    m = max(a)
     d = len(str(m))
     y = int(math.pow(10, d))
     n = len(a)
