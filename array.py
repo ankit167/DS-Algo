@@ -1028,9 +1028,56 @@ def plus_one(digits):
     return digits
 
 
+#
+# Given an array of integers. Find the minimum length subarray
+# required to be sorted, such that the whole array becomes sorted.
+#
+# Input: [2, 4, 7, 5, 3, 9, 11]
+# Output: [4, 7, 5, 3]
+#
+# T(n)- O(n)
+#
+def minimum_subarray_sort(a):
+    n = len(a)
+    s, e = 0, n-1
+
+    # Find first index from left where array is becoming unsorted
+    while s < n-1:
+        if a[s] > a[s+1]:
+            break
+        s += 1
+
+    if s == n-1:  # Array is completely sorted
+        return
+
+    # Find first index from right where array is becoming unsorted
+    while e > 0:
+        if a[e] < a[e-1]:
+            break
+        e -= 1
+
+    # At this point, s = 2 and e = 4
+    max_sub = max(a[s:e+1])  # max element of subarray- 7
+    min_sub = min(a[s:e+1])  # min element of subarray- 3
+
+    # Find first index from left greater than min_sub
+    for i in range(s):
+        if a[i] > min_sub:
+            s = i
+            break
+
+    # Find first index from right smaller than max_sub
+    for i in range(n-1, e, -1):
+        if a[i] < max_sub:
+            e = i
+            break
+
+    return a[s:e+1]
+
+
 def main():
     a = list(map(int, raw_input().split()))
-    print plus_one(a)
+    print minimum_subarray_sort(a)
 
 if __name__ == '__main__':
     main()
