@@ -85,7 +85,8 @@ def findStartOne(a, start, end):
 #
 # Exercise: Solve the same problem, where the array contains
 #           both positive and negative integers
-# (https://leetcode.com/problems/first-missing-positive/#/submissions/1)
+# Link:     https://leetcode.com/problems/first-missing-positive
+# Solution: https://pastebin.com/TqUCn65i
 #
 def minMissing(a):
     a.insert(0, 0)
