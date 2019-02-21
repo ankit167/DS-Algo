@@ -90,7 +90,7 @@ class LinkedList:
         res, carry = None, 0
         while first is not None or second is not None:
             sum = (first.data if first else 0) + (second.data if second else 0) + carry
-            carry = sum/10
+            carry = sum / 10
             temp = node(sum % 10)
             if res is None:
                 res = temp
@@ -114,13 +114,13 @@ class LinkedList:
     def multiplyLL(self, first, second):
         curr, sum = first, 0
         while curr is not None:
-            sum = sum*10 + curr.data
+            sum = sum * 10 + curr.data
             curr = curr.next
         second = self.reverse(second)
         res, curr, carry = None, second, 0
         while curr is not None:
             product = sum * curr.data + carry
-            carry = product/10
+            carry = product / 10
             temp = node(product % 10)
             if res is None:
                 res = temp
@@ -132,7 +132,7 @@ class LinkedList:
             temp = node(carry % 10)
             prev.next = temp
             prev = temp
-            carry = carry/10
+            carry = carry / 10
 
         res = self.reverse(res)
         return res
@@ -145,14 +145,14 @@ class LinkedList:
     def multiplyLLRecursive(self, first, second):
         curr, sum = first, 0
         while curr is not None:
-            sum = sum*10 + curr.data
+            sum = sum * 10 + curr.data
             curr = curr.next
         res = self.mul(sum, second)
         while self.carry != 0:
             temp = node(self.carry % 10)
             temp.next = res
             res = temp
-            self.carry = self.carry/10
+            self.carry = self.carry / 10
         return res
 
     #
@@ -162,8 +162,8 @@ class LinkedList:
         if second is None:
             return None
         res = self.mul(n, second.next)
-        product = n*second.data + self.carry
-        self.carry = product/10
+        product = n * second.data + self.carry
+        self.carry = product / 10
         temp = node(product % 10)
         temp.next = res
         res = temp
@@ -187,7 +187,7 @@ class LinkedList:
             return None
         res = self.sumSameSize(first.next, second.next)
         sum = first.data + second.data + self.carry
-        self.carry = sum/10
+        self.carry = sum / 10
         temp = node(sum % 10)
         temp.next = res
         res = temp
@@ -199,7 +199,7 @@ class LinkedList:
         if first != cur:
             res = self.sumSameList(first.next, cur)
             sum = first.data + self.carry
-            self.carry = sum/10
+            self.carry = sum / 10
             temp = node(sum % 10)
             temp.next = res
             res = temp
@@ -244,7 +244,7 @@ class LinkedList:
             print 'Less Number of nodes'
             return head
 
-        if 2*k - 1 == n:
+        if 2 * k - 1 == n:
             return head
 
         curr, temp = head, None
@@ -256,7 +256,7 @@ class LinkedList:
         kthStartPrev = temp
 
         curr, temp = head, None
-        for i in range(1, n-k+1):
+        for i in range(1, n - k + 1):
             temp = curr
             curr = curr.next
 
@@ -305,6 +305,32 @@ class LinkedList:
         return head
 
     #
+    # Given a sorted linked list. Remove all occurances of duplicates elements,
+    # leaving only distict elements.
+    #
+    # Input: 1->2->3->3->3->4->4->5
+    # Output: 1->2->5
+    #
+    # T(n)- O(n)
+    #
+    def removeDuplicatesSortedList(self, head):
+        curr, prev = head, None
+        while curr:
+            temp, c = curr.next, 0
+            while temp and temp.val == curr.val:  # iterate while duplicates are present
+                temp = temp.next
+                c += 1
+            if c > 0:
+                if prev:
+                    prev.next = temp
+                else:
+                    head = temp  # Case where the first element itself has duplicates
+            else:
+                prev = curr  # No duplicates for current element
+            curr = temp
+        return head
+
+    #
     # Merge two linked lists alternately
     # a: 1->2->3, b: 4->5->6
     # Output: 1->4->2->5->3->6
@@ -317,10 +343,10 @@ class LinkedList:
             return a
         if turn == 0:
             res = a
-            res.next = self.mergeAlt(a.next, b, 1-turn)
+            res.next = self.mergeAlt(a.next, b, 1 - turn)
         else:
             res = b
-            res.next = self.mergeAlt(a, b.next, 1-turn)
+            res.next = self.mergeAlt(a, b.next, 1 - turn)
         return res
 
     #
@@ -414,6 +440,7 @@ def main():
         f.insert(i)
     f.sort_list_of_0s_and_1s()
     f.display(f.head)
+
 
 if __name__ == '__main__':
     main()
