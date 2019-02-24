@@ -79,6 +79,41 @@ class LinkedList:
         return revrest
 
     #
+    # Reverse a linked list from position m to n. Do it in one-pass.
+    # Input: 1->2->3->4->5->NULL, m = 2, n = 4
+    # Output: 1->4->3->2->5->NULL
+    #
+    # T(n)- O(n)
+    #
+    def reverseBetween(self, head):
+        if not head or not head.next:
+            return head
+        i = 1
+        curr, prev_poin, prev = head, None, None
+
+        while i < m:  # Reach the start point
+            prev_poin = curr
+            curr = curr.next
+            i += 1
+        curr_poin = curr  # curr_poin points to 2
+
+        while i <= n:  # Reverse the sub list
+            next_node = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next_node
+            i += 1
+
+        # Adjust pointers
+        if prev_poin:  # prev_poin points to 1
+            prev_poin.next = prev  # prev points to 4
+        else:
+            head = prev
+        curr_poin.next = curr  # curr points to 5
+
+        return head
+
+    #
     # Add two numbers, each being represented as a Singly Linked List.
     # T(n)- O(m+n)
     # Reverse each list-->Add-->Reverse the resultant list.
