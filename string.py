@@ -151,6 +151,8 @@ def reverse(s, start, end):
 # Input: the game is on
 # Output: on is game the
 #
+# Approach: Reverse each word, followed by reversing the entire string
+#
 # T(n)- O(n)
 #
 def reverse_words(s):
