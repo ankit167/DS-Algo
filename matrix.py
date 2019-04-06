@@ -141,6 +141,12 @@ def search_word(a, s):
 #
 # T(n)- O(row*col)
 #
+# One liner solution:
+# ```
+# return arr & list(arr.pop(0)) + self.print_spiral(zip(*arr)[::-1])
+# ```
+# zip(*arr)[::-1]: creates transpose of a matrix, and reverses the order of rows
+#
 def print_spiral(arr):
     row_length, col_length = len(arr), len(arr[0])
     row_index, col_index = 0, 0
