@@ -276,6 +276,12 @@ def group_anagrams(strs):
 #                 ( O(1) time to fetch the output )
 #                 T(n)- O(n), S(n)- O(n)
 #
+#                 For a fixed set of characters, all the above approaches would work.
+# 
+#                 For an incoming stream of characters, only approach (iii) would work
+#                 since we would have the output available at any point in time
+#                 (head of the DLL).
+# 
 def first_non_repeating_character(s):
     #
     # Values at occ[i]
