@@ -64,6 +64,9 @@ def rotateClockwise(a, n):
 #
 # T(n)- O(row*col)
 #
+# One liner solution:
+# ``` return zip(*a) ```
+#
 def transpose(a, row, col):
     for i in range(row):
         for j in range(i, col):
