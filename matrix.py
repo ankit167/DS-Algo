@@ -33,10 +33,10 @@ def countPaths(m, n):
 #
 # Rotate a n*n matrix clockwise by 90 degree (inplace)
 # Approach: (a) Layer by Layer rotation (Discussed below)
-#           (b) Find transpose of the matrix and reverse all rows
+#           (b) Find transpose of the matrix and reverse the order of columns
 # T(n)- O(n^2)
 #
-# Note: To rotate anti-clockwise, find transpose and reverse all columns
+# Note: To rotate anti-clockwise, find transpose and reverse the order of rows
 #       To rotate a matrix by 180 degree (clockwise/anticlockwise),
 #          (a) swap ith row with n-i-1th row
 #          (b) reverse each row of the matrix
