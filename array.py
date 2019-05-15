@@ -147,7 +147,7 @@ def merge_overlapping_intervals(l):
 # Input: [(1,3),(4,10),(20,25),(21,29),(2,5)]
 # Output: (1,10), (20,29)
 #
-# Approach  : Sort list in non-increasing order of start time. Keep
+# Approach  : Sort list in increasing order of start time. Keep
 #             merging current index with previous index, as long as
 #             there is an overlap, and then move to next index.
 #             T(n)- O(nlogn)
