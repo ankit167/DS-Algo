@@ -303,8 +303,8 @@ def subarrayWithGivenSum(a, s):
 
 #
 # Find the number of subarrays with a given sum.
-# Input: [1,1,1]  k = 2
-# Output: 2
+# Input: [1,1,4,2,3,1,2,4]  k = 6
+# Output: 5
 #
 def num_of_subarrays_with_given_sum(nums, k):
     d = {}
