@@ -36,6 +36,18 @@ class Bst:
         return self.get_max(root.right)
 
     #
+    # Return minimum element of the BST.
+    #
+    def get_min(self, root):
+        if root is None:
+            return None
+
+        if root.left is None:
+            return root
+
+        return self.get_min(root.left)
+
+    #
     # Delete a node in the BST
     # T(n)- O(log n)
     #
@@ -237,6 +249,32 @@ class Bst:
         prev, min_diff = [None], [None]
         find_min_abs_diff(root, prev, min_diff)
         return min_diff[0]
+
+    #
+    # Find inorder successor of a node in a BST
+    #
+    # T(n)- O(h) (height of the tree)
+    #
+    def inorder_successor(self, root, n):
+        
+        # If the node has a right subtree, return the minimum node
+        # of the right subtree
+        if n.right:
+            return self.get_min(n.right)
+
+        succ = None
+
+        # Start from root. Check if a node is a potential successor.
+        # Move downwards accordingly.
+        while root:
+            if n.data < root.data:
+                succ = root.data
+                root = root.left
+            elif n.data > root.data:
+                root = root.right
+            else:
+                break
+        return succ
 
 
 def main():
