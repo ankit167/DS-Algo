@@ -8,13 +8,16 @@ class TN:
 	for i in range(0, 26):
 	    self.branch[chr(i+97)] = None
 
-
+#
+# S(n)- O(ALPHABET_SIZE * word_length * number_of_words)
+#
 class T:
     def __init__(self):
         self.root = TN()
 
     #
     # Insert a word in Trie
+    # T(n)- O(word_length)
     #
     def insert(self, word):
         pcrawl = self.root
@@ -26,6 +29,7 @@ class T:
 
     #
     # Search for a word in Trie
+    # T(n)- O(word_length)
     #
     def search(self, word):
         pcrawl = self.root
@@ -39,6 +43,15 @@ class T:
     # Generic function to print all words of a Trie. prefix is '',
     # by default (to print all words).
     # Set prefix paramter to print all words starting from a particular prefix
+    #
+    # To implement auto suggestions, we might want to show only the most
+    # relevant strings. In order to do that, store another value for each node
+    # where isLeaf=True which contains the number of hits for that query search.
+    # For example if “hat” is searched 10 times, then we store this 10 at the last
+    # node for “hat”. We can think of hashing each word to the leaf node address, so
+    # that updating the count can happen in O(1) time. Now when we want to show the
+    # recommendations, we display the top k matches with the highest hits.
+    # (This can be done through heap data structure)
     #
     def printWords(self, prefix=''):
         pcrawl = self.root
