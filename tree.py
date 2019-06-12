@@ -262,6 +262,9 @@ class Tree:
         self.treeToBstUtil(self.root, l)
         self.displayInorder(self.root)
 
+    #
+    # T(n)- O(n^2)
+    #
     def levelOrderTraversalWithoutQueue(self, root):
         h = self.height(root)
         for i in range(h):
