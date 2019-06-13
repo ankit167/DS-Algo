@@ -535,7 +535,7 @@ class Tree:
                 self.left_boundary_traversal(root.left)
             elif root.right:
                 print root.data,
-                self.right_boundary_traversal(root.right)
+                self.left_boundary_traversal(root.right)
 
     def right_boundary_traversal(self, root):
         if root:
@@ -544,7 +544,7 @@ class Tree:
                 self.right_boundary_traversal(root.right)
             elif root.left:
                 print root.data,
-                self.left_boundary_traversal(root.left)
+                self.right_boundary_traversal(root.left)
 
     def print_leaves(self, root):
         if root is None:
