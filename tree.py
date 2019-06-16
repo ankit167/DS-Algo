@@ -608,15 +608,6 @@ def search(inorder, instart, inend, data):
             return i
 
 
-def toBst(a, start, end):
-    if start > end:
-        return None
-    mid = start+(end-start)/2
-    newnode = node(a[mid])
-    newnode.left = toBst(a, start, mid-1)
-    newnode.right = toBst(a, mid+1, end)
-    return newnode
-
 if __name__ == "__main__":
     a = list(map(int, raw_input().split()))
     t = Tree()

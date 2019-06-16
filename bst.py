@@ -256,7 +256,7 @@ class Bst:
     # T(n)- O(h) (height of the tree)
     #
     def inorder_successor(self, root, n):
-        
+
         # If the node has a right subtree, return the minimum node
         # of the right subtree
         if n.right:
@@ -275,6 +275,19 @@ class Bst:
             else:
                 break
         return succ
+
+    #
+    # Convert a sorted array to Binary Search Tree
+    # T(n)- O(n)
+    #
+    def convert_sorted_array_to_BST(self, a, start, end):
+        if start > end:
+            return None
+        mid = start + (end-start)/2
+        new_node = node(a[mid])
+        new_node.left = self.convert_sorted_array_to_BST(a, start, mid-1)
+        new_node.right = self.convert_sorted_array_to_BST(a, mid+1, end)
+        return new_node
 
 
 def main():
