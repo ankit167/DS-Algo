@@ -20,9 +20,7 @@ def add_without_operator(x, y):
 # Check if a number is power of two using bitwise operator
 #
 def check_power_of_two(n):
-    if n > 0 and n & (n-1) == 0:
-        return True
-    return False
+    return n > 0 and n & (n-1) == 0
 
 #
 # Check if a number is power of three
