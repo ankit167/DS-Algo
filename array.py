@@ -41,6 +41,11 @@ def findMinInWindow(a, k):
 # platforms required anytime, so that no arriving train is short of a platform.
 # T(n)- O(nlogn)
 #
+# The same question can be asked in a different way. Given the start and end time
+# of a set of meetings. Find the minimum number of meeting rooms needed.
+#
+# Companies: Google, Facebook, Snapchat
+#
 def minPlatforms(arr, dep):
     result, platform, n = 1, 1, len(arr)
     arr.sort()
