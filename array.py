@@ -575,6 +575,8 @@ def merge_without_extra_space(a1, a2):
 # Approach: Dynamic Programming
 #           T(n)- O(n), S(n)- O(n)
 #
+# Companies: Grab
+#
 def count_decodings(s):
     n = len(s)
     count = [0 for x in range(n+1)]
