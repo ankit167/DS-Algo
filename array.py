@@ -948,7 +948,7 @@ def max_difference_indexes(a):
 # S(n)- O(n)
 #
 # Note: The worst case occurs when the numbers are sorted in
-#       decreasing order. Each element is processed at most 4 times.
+#       decreasing order.
 #
 def next_greater_element(a):
     i, n = 1, len(a)
