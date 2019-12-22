@@ -939,7 +939,7 @@ def max_difference_indexes(a):
 # such element, print -1
 #
 # Input: [4, 1, 5, 7, 3, 8, 2]
-# Output: [5, 5, 7, 8, -1, -1]
+# Output: [5, 5, 7, 8, 8, -1, -1]
 #
 # Approach: For each element, we are popping the previous processed
 #           elements from the stack and deciding on whether the current
@@ -951,26 +951,18 @@ def max_difference_indexes(a):
 #       decreasing order. Each element is processed at most 4 times.
 #
 def next_greater_element(a):
-    st = []
-    st.append(a[0])
+    i, n = 1, len(a)
 
-    for i in range(1, len(a)):
-        next_ele = a[i]
-        if len(st) > 0:
-            ele = st.pop()
-            while ele < next_ele:  # check for next greater element
-                print(str(ele) + "-->" + str(next_ele))
-                if len(st) == 0:
-                    break
-                ele = st.pop()
-            if ele > next_ele:
-                st.append(ele)  # push back if the check is false
-        st.append(next_ele)  # push the current element after processing
-    while len(st) > 0:
-        # All elements remaining in the stack do not have any next greater
-        # element.
-        ele = st.pop()
-        print(str(ele) + "--> -1")
+    st, res = [], [-1]*n
+    st.append(0)
+
+    while (i < n):
+        while (len(st) > 0 and a[i] > a[st[-1]]):
+            res[st.pop()] = a[i]
+        st.append(i)
+        i += 1
+
+    return res
 
 
 #
@@ -1093,7 +1085,7 @@ def minimum_subarray_sort(a):
 
 def main():
     a = list(map(int, raw_input().split()))
-    print minimum_subarray_sort(a)
+    print next_greater_element(a)
 
 if __name__ == '__main__':
     main()
