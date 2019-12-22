@@ -776,9 +776,9 @@ def search_in_sorted_rotated_array_optimized(arr, start, end, key):
 
 #
 # Given an array of 'n' elements. Update all the elements of the array to
-# some minimum element 'x', such that the product of all elements in the
-# new array is strictly greater than the product of all elements in the
-# original array.
+# some minimum element 'x' (belonging to the array), such that the product 
+# of all elements in the new array is strictly greater than the product of all 
+# elements in the original array.
 #
 # Input: [4, 2, 1 10, 6]
 # Output: 4 (4*4*4*4*4 > 4*2*1*10*6)
@@ -786,8 +786,8 @@ def search_in_sorted_rotated_array_optimized(arr, start, end, key):
 # Approach: Sort the array and use binary search approach
 # T(n)- O(nlogn)
 #
-# XXX For larger numbers in the array, we need to make sure that the value
-#     of the product of numbers does not overflow.
+# Note: For larger numbers in the array, we need to make sure that the value
+#       of the product of numbers does not overflow.
 #
 def min_value_for_greater_product(a):
     a.sort()
