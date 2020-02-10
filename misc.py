@@ -131,7 +131,7 @@ def prime_factors(n):
 # Input: 5
 # Output: 2,3,5
 #
-# T(n)- O(nlog(logn)) (Refer to O(n) soln from gfg)
+# T(n)- O(sqrt(n)log(logn)) (Refer to O(n) soln from gfg)
 #
 def print_primes(n):
     p = [0 for i in range(n+1)]
