@@ -180,6 +180,9 @@ class Graph:
     # u comes before v in the ordering. Topological Sorting for a graph
     # is not possible if the graph is not a DAG.
     #
+    # Problem solved using TS
+    # https://www.geeksforgeeks.org/given-sorted-dictionary-find-precedence-characters/ 
+    #
     # T(n)- O(V+E)
     #
     def topological_sort(self):
