@@ -40,6 +40,19 @@ class T:
 	return pcrawl is not None and pcrawl.isLeaf
 
     #
+    # Checks if there is any word in the trie, that starts with the given prefix
+    # T(n)- O(prefix_length)
+    #
+    def starts_with(self, prefix):
+        pcrawl = self.root
+        for ch in word:
+            if pcrawl.branch[ch] is None:
+                return false;
+            pcrawl = pcrawl.branch[ch]
+        return true
+
+
+    #
     # Generic function to print all words of a Trie. prefix is '',
     # by default (to print all words).
     # Set prefix paramter to print all words starting from a particular prefix
