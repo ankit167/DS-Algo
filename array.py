@@ -10,7 +10,7 @@ from collections import deque
 # T(n)- O(n), S(n)- O(n)
 #
 # Other approaches- Create a BST of size 'k'. In each iteration, print the
-#                   max node value. Delete the i-kth node. Insert the next value.
+#                   min node value. Delete the i-kth node. Insert the next value.
 #                   T(n)- O(nlogk). Same can be done by creating a heap of
 #                   size 'k'.
 #
