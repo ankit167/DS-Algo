@@ -324,20 +324,17 @@ class LinkedList:
     #       (No extra space)
     #
     def removeDuplicates(self, head):
-        if head is None or head.next is None:
-            return head
-        curr = head
-        hset = set()
-        hset.add(curr.data)
-        while curr is not None:
-            temp = curr.next
-            while temp is not None and temp.data in hset:
-                temp = temp.next
-            if temp:
-                hset.add(temp.data)
-            curr.next = temp
-            curr = temp
-        return head
+        curr, prev = head, None
+	s = set()
+
+	while curr:
+	    if curr.data in s:
+	        prev.next = curr.next
+	    else:
+	        s.add(curr.data)
+		prev = curr
+	    curr = curr.next
+	return head    
 
     #
     # Given a sorted linked list. Remove all occurances of duplicates elements,
