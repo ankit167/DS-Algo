@@ -27,10 +27,7 @@ class Bst:
     # Return maximum element of the BST.
     #
     def get_max(self, root):
-        if root is None:
-            return None
-
-        if root.right is None:
+        if root is None or root.right is None:
             return root
 
         return self.get_max(root.right)
@@ -39,10 +36,7 @@ class Bst:
     # Return minimum element of the BST.
     #
     def get_min(self, root):
-        if root is None:
-            return None
-
-        if root.left is None:
+        if root is None or root.left is None:
             return root
 
         return self.get_min(root.left)
