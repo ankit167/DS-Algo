@@ -139,9 +139,7 @@ def reverse(s, start, end):
         return
     i, j = start, end
     while i < j:
-        temp = s[i]
-        s[i] = s[j]
-        s[j] = temp
+        s[i], s[j] = s[j], s[i]
         i += 1
         j -= 1
 
