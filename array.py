@@ -9,10 +9,10 @@ from collections import deque
 # Find minimum element in each 'k' sized window. (Deque approach)
 # T(n)- O(n), S(n)- O(n)
 #
-# Other approaches- Create a BST of size 'k'. In each iteration, print the
-#                   min node value. Delete the i-kth node. Insert the next value.
-#                   T(n)- O(nlogk). Same can be done by creating a heap of
-#                   size 'k'.
+# Alternate approaches- Create a BST of size 'k'. In each iteration, print the
+#                       min node value. Delete the i-kth node. Insert the next value.
+#                       T(n)- O(nlogk). Same can be done by creating a heap of
+#                       size 'k'.
 #
 def findMinInWindow(a, k):
     n = len(a)

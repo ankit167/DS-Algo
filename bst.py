@@ -24,7 +24,7 @@ class Bst:
         return root
 
     #
-    # Return maximum element of the BST.
+    # Return max element of the BST.
     #
     def get_max(self, root):
         if root is None or root.right is None:
