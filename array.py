@@ -679,7 +679,7 @@ def trap_rain_water(height):
 
 
 #
-# Search an element in a sorted array | recursive (increasing)
+# Search an element in a sorted array | Recursive (increasing)
 #
 # T(n)- O(log n)
 #
