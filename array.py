@@ -39,6 +39,10 @@ def findMinInWindow(a, k):
 #
 # Given arrival and departure times of trains. Find minimum number of
 # platforms required anytime, so that no arriving train is short of a platform.
+# arr = [900, 950, 1100, 1500, 940, 1800]
+# dep = [910, 1120, 1130, 1900, 1200, 2000];
+# output = 3
+#
 # T(n)- O(nlogn)
 #
 # The same question can be asked in a different way. Given the start and end time
