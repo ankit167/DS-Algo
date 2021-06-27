@@ -314,6 +314,10 @@ def subarrayWithGivenSum(a, s):
 # Input: [1,1,4,2,3,1,2,4]  k = 6
 # Output: 5
 #
+# Similar Q: 
+# Find the number of subarrays with a given xor
+# Link: https://www.geeksforgeeks.org/count-number-subarrays-given-xor/
+#
 def num_of_subarrays_with_given_sum(nums, k):
     d = {}
     currsum, res, n = 0, 0, len(nums)
