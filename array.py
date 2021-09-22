@@ -47,6 +47,7 @@ def findMinInWindow(a, k):
 #
 # The same question can be asked in a different way. Given the start and end time
 # of a set of meetings. Find the minimum number of meeting rooms needed.
+# O(n) solution: https://www.geeksforgeeks.org/minimum-halls-required-for-class-scheduling/
 #
 # Companies: Google, Facebook, Snapchat
 #
